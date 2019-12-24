@@ -29,7 +29,7 @@ import co.uk.cogitolearning.cogpar.tree.*;
 /**
  * A visitor that sets a variable with a specific name to a given value
  */
-public class SetVariable implements ExpressionNodeVisitor<Void> {
+public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
 
     private String name;
     private double value;
@@ -40,7 +40,7 @@ public class SetVariable implements ExpressionNodeVisitor<Void> {
      * @param name  the name of the variable
      * @param value the value of the variable
      */
-    public SetVariable(String name, double value) {
+    VariableSetterVisitor(String name, double value) {
         super();
         this.name = name;
         this.value = value;
