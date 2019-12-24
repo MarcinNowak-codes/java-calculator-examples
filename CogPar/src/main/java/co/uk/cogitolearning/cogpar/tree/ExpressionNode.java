@@ -73,13 +73,6 @@ public interface ExpressionNode extends Iterable {
     int getType();
 
     /**
-     * Method needed for the visitor design pattern
-     *
-     * @param visitor the visitor
-     */
-    void accept(ExpressionNodeVisitor visitor);
-
-    /**
      * Method needed for the visitor design pattern but not iterate on child node.
      *
      * @param visitor the visitor

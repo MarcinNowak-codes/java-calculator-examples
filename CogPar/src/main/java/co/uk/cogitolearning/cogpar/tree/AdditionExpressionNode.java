@@ -66,12 +66,6 @@ public class AdditionExpressionNode extends SequenceExpressionNode {
      *
      * @param visitor the visitor
      */
-    public void accept(ExpressionNodeVisitor visitor) {
-        visitor.visit(this);
-        for (Term t : terms)
-            t.expression.accept(visitor);
-    }
-
     @Override
     public void acceptOnce(ExpressionNodeVisitor visitor) {
         visitor.visit(this);
