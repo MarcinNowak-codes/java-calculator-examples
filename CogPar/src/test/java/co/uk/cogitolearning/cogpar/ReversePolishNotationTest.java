@@ -6,7 +6,7 @@ import org.junit.Test;
 
 public class ReversePolishNotationTest {
     @Test
-    public void test1(){
+    public void test1() {
         // (2+3)*4
         ConstantExpressionNode two = new ConstantExpressionNode(2);
         ConstantExpressionNode three = new ConstantExpressionNode(3);
@@ -22,9 +22,9 @@ public class ReversePolishNotationTest {
         Assert.assertEquals(20.0, CalculateValue.calculate(multi), 0.1);
         Assert.assertEquals(multi.getValue(), CalculateValue.calculate(multi), 0.1);
     }
-    
+
     @Test
-    public void extendedTest(){
+    public void extendedTest() {
         ExpressionNode root;
 
 
@@ -48,6 +48,20 @@ public class ReversePolishNotationTest {
         Algorithms.setVariable(root, "pi", Math.PI);
 
         Assert.assertEquals(6144.0, CalculateValue.calculate(root), 0.1);
+    }
+
+    @Test
+    public void shouldParse() {
+        // Given
+        Parser parser = new Parser();
+        // When
+        String exprstr = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
+        ExpressionNode expr = parser.parse(exprstr);
+        Algorithms.setVariable(expr, "pi", Math.PI);
+
+        // Then
+        Assert.assertEquals(8.0, CalculateValue.calculate(expr), 0.1);
+        Assert.assertEquals(8.0, expr.getValue(), 0.1);
     }
 
 }
