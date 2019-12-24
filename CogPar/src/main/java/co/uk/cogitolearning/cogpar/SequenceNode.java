@@ -34,7 +34,7 @@ import java.util.Iterator;
  * <p>
  * Holds an arbitrary number of ExpressionNodes together with boolean flags.
  */
-public abstract class SequenceExpressionNode implements ExpressionNode {
+public abstract class SequenceNode implements ExpressionNode {
     @Override
     public Iterator<ExpressionNode> iterator() {
         return null;
@@ -75,7 +75,7 @@ public abstract class SequenceExpressionNode implements ExpressionNode {
     /**
      * Default constructor.
      */
-    public SequenceExpressionNode() {
+    public SequenceNode() {
         this.terms = new ArrayList<>();
     }
 
@@ -85,7 +85,7 @@ public abstract class SequenceExpressionNode implements ExpressionNode {
      * @param node     the term to be added
      * @param positive a boolean flag
      */
-    public SequenceExpressionNode(ExpressionNode node, boolean positive) {
+    public SequenceNode(ExpressionNode node, boolean positive) {
         this.terms = new ArrayList<>();
         this.terms.add(new Term(positive, node));
     }

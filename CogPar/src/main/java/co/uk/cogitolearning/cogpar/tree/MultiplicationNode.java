@@ -24,77 +24,39 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
-import co.uk.cogitolearning.cogpar.EvaluationException;
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import co.uk.cogitolearning.cogpar.SequenceNode;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that stores a named variable
+ * An ExpressionNode that handles multiplications and divisions. The node can hold
+ * an arbitrary number of factors that are either multiplied or divided to the product.
  */
-public class VariableExpressionNode implements ExpressionNode {
-    /**
-     * The name of the variable
-     */
-    private String name;
-    /**
-     * The value of the variable
-     */
-    private double value;
-    /**
-     * indicates if the value has been set
-     */
-    private boolean valueSet;
+public class MultiplicationNode extends SequenceNode {
 
     /**
-     * Construct with the name of the variable.
+     * Constructor to create a multiplication with the first term already added.
      *
-     * @param name the name of the variable
+     * @param a        the term to be added
+     * @param positive a flag indicating whether the term is multiplied or divided
      */
-    public VariableExpressionNode(String name) {
-        this.name = name;
-        valueSet = false;
+    public MultiplicationNode(ExpressionNode a, boolean positive) {
+        super(a, positive);
     }
 
     /**
-     * @return the name of the variable
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Returns the type of the node, in this case ExpressionNode.VARIABLE_NODE
+     * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
      */
     public int getType() {
-        return ExpressionNode.VARIABLE_NODE;
-    }
-
-    /**
-     * Sets the value of the variable
-     *
-     * @param value the value of the variable
-     */
-    public void setValue(double value) {
-        this.value = value;
-        this.valueSet = true;
-    }
-
-    /**
-     * Returns the value of the variable but throws an exception if the value has
-     * not been set
-     */
-    public double getValue() {
-        if (!valueSet)
-            throw new EvaluationException("Variable '" + name + "' was not initialized.");
-
-        return value;
+        return ExpressionNode.MULTIPLICATION_NODE;
     }
 
     /**
      * Implementation of the visitor design pattern.
      * <p>
-     * Calls visit on the visitor.
+     * Calls visit on the visitor and then passes the visitor on to the accept
+     * method of all the terms in the product.
      *
      * @param visitor the visitor
      */
@@ -104,7 +66,7 @@ public class VariableExpressionNode implements ExpressionNode {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<ExpressionNode> iterator() {
         return new ExpressionNodeIterator(this);
     }
 

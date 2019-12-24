@@ -24,50 +24,71 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
+import co.uk.cogitolearning.cogpar.EvaluationException;
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that stores a constant value
+ * An ExpressionNode that stores a named variable
  */
-public class ConstantExpressionNode implements ExpressionNode {
+public class VariableNode implements ExpressionNode {
     /**
-     * The value of the constant
+     * The name of the variable
+     */
+    private String name;
+    /**
+     * The value of the variable
      */
     private double value;
+    /**
+     * indicates if the value has been set
+     */
+    private boolean valueSet;
 
     /**
-     * Construct with the fixed value.
+     * Construct with the name of the variable.
      *
-     * @param value the value of the constant
+     * @param name the name of the variable
      */
-    public ConstantExpressionNode(double value) {
-        this.value = value;
+    public VariableNode(String name) {
+        this.name = name;
+        valueSet = false;
     }
 
     /**
-     * Convenience constructor that takes a string and converts it to a double
-     * before storing the value.
-     *
-     * @param value the string representation of the value
+     * @return the name of the variable
      */
-    public ConstantExpressionNode(String value) {
-        this.value = Double.valueOf(value);
+    public String getName() {
+        return name;
     }
 
     /**
-     * Returns the value of the constant
-     */
-    public double getValue() {
-        return value;
-    }
-
-    /**
-     * Returns the type of the node, in this case ExpressionNode.CONSTANT_NODE
+     * Returns the type of the node, in this case ExpressionNode.VARIABLE_NODE
      */
     public int getType() {
-        return ExpressionNode.CONSTANT_NODE;
+        return ExpressionNode.VARIABLE_NODE;
+    }
+
+    /**
+     * Sets the value of the variable
+     *
+     * @param value the value of the variable
+     */
+    public void setValue(double value) {
+        this.value = value;
+        this.valueSet = true;
+    }
+
+    /**
+     * Returns the value of the variable but throws an exception if the value has
+     * not been set
+     */
+    public double getValue() {
+        if (!valueSet)
+            throw new EvaluationException("Variable '" + name + "' was not initialized.");
+
+        return value;
     }
 
     /**
@@ -86,4 +107,5 @@ public class ConstantExpressionNode implements ExpressionNode {
     public Iterator iterator() {
         return new ExpressionNodeIterator(this);
     }
+
 }

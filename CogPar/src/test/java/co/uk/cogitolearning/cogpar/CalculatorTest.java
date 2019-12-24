@@ -10,13 +10,13 @@ public class CalculatorTest {
     @Test
     public void shouldCalculateSimpleOperation() {
         // (2+3)*4
-        ConstantExpressionNode two = new ConstantExpressionNode(2);
-        ConstantExpressionNode three = new ConstantExpressionNode(3);
-        ConstantExpressionNode four = new ConstantExpressionNode(4);
+        ConstantNode two = new ConstantNode(2);
+        ConstantNode three = new ConstantNode(3);
+        ConstantNode four = new ConstantNode(4);
 
-        SequenceExpressionNode sum = new AdditionExpressionNode(two, true);
+        SequenceNode sum = new AdditionNode(two, true);
         sum.add(three, true);
-        SequenceExpressionNode multi = new MultiplicationExpressionNode(sum, true);
+        SequenceNode multi = new MultiplicationNode(sum, true);
         multi.add(four, true);
 
 
@@ -28,18 +28,18 @@ public class CalculatorTest {
         ExpressionNode root;
 
         // String exprstr = "6*(3+sin(pi/2))^5"; //=6144
-        ConstantExpressionNode five = new ConstantExpressionNode(6);
+        ConstantNode five = new ConstantNode(6);
 
-        DivExpressionNode halfPi = new DivExpressionNode();
-        VariableExpressionNode pi = new VariableExpressionNode("pi");
+        DivNode halfPi = new DivNode();
+        VariableNode pi = new VariableNode("pi");
         halfPi.add(pi, true);
-        halfPi.add(new ConstantExpressionNode(2), true);
+        halfPi.add(new ConstantNode(2), true);
 
-        FunctionExpressionNode sin = new FunctionExpressionNode(FunctionExpressionNode.SIN, halfPi);
-        AdditionExpressionNode braces = new AdditionExpressionNode(new ConstantExpressionNode(3), true);
+        FunctionNode sin = new FunctionNode(FunctionNode.SIN, halfPi);
+        AdditionNode braces = new AdditionNode(new ConstantNode(3), true);
         braces.add(sin, true);
-        ExponentiationExpressionNode exponent = new ExponentiationExpressionNode(braces, new ConstantExpressionNode(5));
-        MultiplicationExpressionNode multiplication = new MultiplicationExpressionNode(five, true);
+        ExponentiationNode exponent = new ExponentiationNode(braces, new ConstantNode(5));
+        MultiplicationNode multiplication = new MultiplicationNode(five, true);
         multiplication.add(exponent, true);
 
         root = multiplication;
@@ -54,8 +54,8 @@ public class CalculatorTest {
         // Given
         Parser parser = new Parser();
         // When
-        String exprstr = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
-        ExpressionNode expr = parser.parse(exprstr);
+        String expresion = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
+        ExpressionNode expr = parser.parse(expresion);
         Algorithms.setVariable(expr, "pi", Math.PI);
 
         // Then

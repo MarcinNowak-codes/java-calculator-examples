@@ -25,7 +25,7 @@
 package co.uk.cogitolearning.cogpar.parser;
 
 import co.uk.cogitolearning.cogpar.ParserException;
-import co.uk.cogitolearning.cogpar.tree.FunctionExpressionNode;
+import co.uk.cogitolearning.cogpar.tree.FunctionNode;
 
 import java.util.LinkedList;
 import java.util.regex.Matcher;
@@ -113,7 +113,7 @@ public class Tokenizer {
         tokenizer.add("[*/]", Token.MULTDIV);
         tokenizer.add("\\^", Token.RAISED);
 
-        String funcs = FunctionExpressionNode.getAllFunctions();
+        String funcs = FunctionNode.getAllFunctions();
         tokenizer.add("(" + funcs + ")(?!\\w)", Token.FUNCTION);
 
         tokenizer.add("\\(", Token.OPEN_BRACKET);

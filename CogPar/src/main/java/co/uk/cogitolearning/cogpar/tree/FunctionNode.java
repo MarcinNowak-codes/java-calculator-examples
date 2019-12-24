@@ -34,7 +34,7 @@ import java.util.Iterator;
  * <p>
  * Some pre-defined functions are handled, others can easily be added.
  */
-public class FunctionExpressionNode implements ExpressionNode {
+public class FunctionNode implements ExpressionNode {
     /**
      * function id for the sin function
      */
@@ -99,7 +99,7 @@ public class FunctionExpressionNode implements ExpressionNode {
      * @param function the id of the function to apply
      * @param argument the argument of the function
      */
-    public FunctionExpressionNode(int function, ExpressionNode argument) {
+    public FunctionNode(int function, ExpressionNode argument) {
         super();
         this.function = function;
         this.argument = argument;
@@ -122,30 +122,30 @@ public class FunctionExpressionNode implements ExpressionNode {
      */
     public static int stringToFunction(String str) {
         if (str.equals("sin"))
-            return FunctionExpressionNode.SIN;
+            return FunctionNode.SIN;
         if (str.equals("cos"))
-            return FunctionExpressionNode.COS;
+            return FunctionNode.COS;
         if (str.equals("tan"))
-            return FunctionExpressionNode.TAN;
+            return FunctionNode.TAN;
 
         if (str.equals("asin"))
-            return FunctionExpressionNode.ASIN;
+            return FunctionNode.ASIN;
         if (str.equals("acos"))
-            return FunctionExpressionNode.ACOS;
+            return FunctionNode.ACOS;
         if (str.equals("atan"))
-            return FunctionExpressionNode.ATAN;
+            return FunctionNode.ATAN;
 
         if (str.equals("sqrt"))
-            return FunctionExpressionNode.SQRT;
+            return FunctionNode.SQRT;
         if (str.equals("exp"))
-            return FunctionExpressionNode.EXP;
+            return FunctionNode.EXP;
 
         if (str.equals("ln"))
-            return FunctionExpressionNode.LN;
+            return FunctionNode.LN;
         if (str.equals("log"))
-            return FunctionExpressionNode.LOG;
+            return FunctionNode.LOG;
         if (str.equals("log2"))
-            return FunctionExpressionNode.LOG2;
+            return FunctionNode.LOG2;
 
         throw new ParserException("Unexpected Function " + str + " found");
     }

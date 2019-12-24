@@ -25,48 +25,38 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
-import co.uk.cogitolearning.cogpar.SequenceExpressionNode;
+import co.uk.cogitolearning.cogpar.SequenceNode;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that handles divisions. The node can hold
- * an two number of factors that are divided.
+ * An ExpressionNode that handles additions and subtractions. The node can hold
+ * an arbitrary number of terms that are either added or subtraced from the sum.
  */
-public class DivExpressionNode extends SequenceExpressionNode {
-    /**
-     * Default constructor.
-     */
-    public DivExpressionNode() {
-    }
+public class AdditionNode extends SequenceNode {
 
     /**
-     * Constructor to create a multiplication with the first term already added.
+     * Constructor to create an addition with the first term already added.
      *
-     * @param a        the term to be added
-     * @param positive a flag indicating whether the term is multiplied or divided
+     * @param node     the term to be added
+     * @param positive a flag indicating whether the term is added or subtracted
      */
-    public DivExpressionNode(ExpressionNode a, boolean positive) {
-        super(a, positive);
+    public AdditionNode(ExpressionNode node, boolean positive) {
+        super(node, positive);
     }
 
     /**
-     * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
+     * Returns the type of the node, in this case ExpressionNode.ADDITION_NODE
      */
     public int getType() {
-        return ExpressionNode.DIVISION_NODE;
-    }
-
-    public double getValue() {
-        // Not used
-        return 0;
+        return ADDITION_NODE;
     }
 
     /**
      * Implementation of the visitor design pattern.
      * <p>
      * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of all the terms in the product.
+     * method of all the terms in the sum.
      *
      * @param visitor the visitor
      */

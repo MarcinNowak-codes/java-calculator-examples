@@ -25,47 +25,33 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
-import co.uk.cogitolearning.cogpar.SequenceExpressionNode;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that handles additions and subtractions. The node can hold
- * an arbitrary number of terms that are either added or subtraced from the sum.
+ * An ExpressionNode that stores a constant value
  */
-public class AdditionExpressionNode extends SequenceExpressionNode {
+public class ConstantNode implements ExpressionNode {
+
+    public final double value;
 
     /**
-     * Default constructor.
-     */
-    public AdditionExpressionNode() {
-    }
-
-    /**
-     * Constructor to create an addition with the first term already added.
+     * Construct with the fixed value.
      *
-     * @param node     the term to be added
-     * @param positive a flag indicating whether the term is added or subtracted
+     * @param value the value of the constant
      */
-    public AdditionExpressionNode(ExpressionNode node, boolean positive) {
-        super(node, positive);
+    public ConstantNode(double value) {
+        this.value = value;
     }
 
     /**
-     * Returns the type of the node, in this case ExpressionNode.ADDITION_NODE
+     * Returns the type of the node, in this case ExpressionNode.CONSTANT_NODE
      */
+    @Override
     public int getType() {
-        return ADDITION_NODE;
+        return ExpressionNode.CONSTANT_NODE;
     }
 
-    /**
-     * Implementation of the visitor design pattern.
-     * <p>
-     * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of all the terms in the sum.
-     *
-     * @param visitor the visitor
-     */
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);
@@ -75,5 +61,4 @@ public class AdditionExpressionNode extends SequenceExpressionNode {
     public Iterator iterator() {
         return new ExpressionNodeIterator(this);
     }
-
 }

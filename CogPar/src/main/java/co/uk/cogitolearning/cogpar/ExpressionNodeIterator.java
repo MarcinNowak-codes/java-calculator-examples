@@ -30,46 +30,46 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
             this.list = stack;
         }
 
-        public Void visit(VariableExpressionNode node) {
+        public Void visit(VariableNode node) {
             list.add(node);
             return null;
         }
 
-        public Void visit(ConstantExpressionNode node) {
+        public Void visit(ConstantNode node) {
             list.add(node);
             return null;
         }
 
-        public Void visit(AdditionExpressionNode node) {
+        public Void visit(AdditionNode node) {
             list.add(node);
-            for (SequenceExpressionNode.Term t : node.terms)
+            for (SequenceNode.Term t : node.terms)
                 t.expression.accept(this);
             return null;
         }
 
-        public Void visit(MultiplicationExpressionNode node) {
+        public Void visit(MultiplicationNode node) {
             list.add(node);
-            for (SequenceExpressionNode.Term t : node.terms)
+            for (SequenceNode.Term t : node.terms)
                 t.expression.accept(this);
             return null;
         }
 
-        public Void visit(ExponentiationExpressionNode node) {
+        public Void visit(ExponentiationNode node) {
             list.add(node);
             node.getBase().accept(this);
             node.getExponent().accept(this);
             return null;
         }
 
-        public Void visit(FunctionExpressionNode node) {
+        public Void visit(FunctionNode node) {
             list.add(node);
             node.getArgument().accept(this);
             return null;
         }
 
-        public Void visit(DivExpressionNode node) {
+        public Void visit(DivNode node) {
             list.add(node);
-            for (SequenceExpressionNode.Term t : node.terms)
+            for (SequenceNode.Term t : node.terms)
                 t.expression.accept(this);
             return null;
         }

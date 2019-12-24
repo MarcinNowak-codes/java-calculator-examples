@@ -50,7 +50,7 @@ public class SetVariable implements ExpressionNodeVisitor<Void> {
      * Checks the nodes name against the name to set and sets the value if the two
      * strings match
      */
-    public Void visit(VariableExpressionNode node) {
+    public Void visit(VariableNode node) {
         if (node.getName().equals(name))
             node.setValue(value);
         return null;
@@ -59,42 +59,42 @@ public class SetVariable implements ExpressionNodeVisitor<Void> {
     /**
      * Do nothing
      */
-    public Void visit(ConstantExpressionNode node) {
+    public Void visit(ConstantNode node) {
         return null;
     }
 
     /**
      * Do nothing
      */
-    public Void visit(AdditionExpressionNode node) {
+    public Void visit(AdditionNode node) {
         return null;
     }
 
     /**
      * Do nothing
      */
-    public Void visit(MultiplicationExpressionNode node) {
+    public Void visit(MultiplicationNode node) {
         return null;
     }
 
     /**
      * Do nothing
      */
-    public Void visit(ExponentiationExpressionNode node) {
+    public Void visit(ExponentiationNode node) {
         return null;
     }
 
     /**
      * Do nothing
      */
-    public Void visit(FunctionExpressionNode node) {
+    public Void visit(FunctionNode node) {
         return null;
     }
 
     /**
      * Do nothing
      */
-    public Void visit(DivExpressionNode node) {
+    public Void visit(DivNode node) {
         return null;
     }
 

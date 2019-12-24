@@ -35,32 +35,32 @@ public interface ExpressionNodeVisitor<T> {
     /**
      * Visit a VariableExpressionNode
      */
-    T visit(VariableExpressionNode node);
+    T visit(VariableNode node);
 
     /**
      * Visit a ConstantExpressionNode
      */
-    T visit(ConstantExpressionNode node);
+    T visit(ConstantNode node);
 
     /**
      * Visit a AdditionExpressionNode
      */
-    T visit(AdditionExpressionNode node);
+    T visit(AdditionNode node);
 
     /**
      * Visit a MultiplicationExpressionNode
      */
-    T visit(MultiplicationExpressionNode node);
+    T visit(MultiplicationNode node);
 
     /**
      * Visit a ExponentiationExpressionNode
      */
-    T visit(ExponentiationExpressionNode node);
+    T visit(ExponentiationNode node);
 
     /**
      * Visit a FunctionExpressionNode
      */
-    T visit(FunctionExpressionNode node);
+    T visit(FunctionNode node);
 
-    T visit(DivExpressionNode node);
+    T visit(DivNode node);
 }

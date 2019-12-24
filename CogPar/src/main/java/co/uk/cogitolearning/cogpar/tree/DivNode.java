@@ -25,46 +25,48 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import co.uk.cogitolearning.cogpar.SequenceNode;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that handles exponentiation. The node holds
- * a base and an exponent and calulates base^exponent
+ * An ExpressionNode that handles divisions. The node can hold
+ * an two number of factors that are divided.
  */
-public class ExponentiationExpressionNode implements ExpressionNode {
+public class DivNode extends SequenceNode {
     /**
-     * the node containing the base
+     * Default constructor.
      */
-    private ExpressionNode base;
-    /**
-     * the node containing the exponent
-     */
-    private ExpressionNode exponent;
-
-    /**
-     * Construct the ExponentiationExpressionNode with base and exponent
-     *
-     * @param base     the node containing the base
-     * @param exponent the node containing the exponent
-     */
-    public ExponentiationExpressionNode(ExpressionNode base, ExpressionNode exponent) {
-        this.base = base;
-        this.exponent = exponent;
+    public DivNode() {
     }
 
     /**
-     * Returns the type of the node, in this case ExpressionNode.EXPONENTIATION_NODE
+     * Constructor to create a multiplication with the first term already added.
+     *
+     * @param a        the term to be added
+     * @param positive a flag indicating whether the term is multiplied or divided
+     */
+    public DivNode(ExpressionNode a, boolean positive) {
+        super(a, positive);
+    }
+
+    /**
+     * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
      */
     public int getType() {
-        return ExpressionNode.EXPONENTIATION_NODE;
+        return ExpressionNode.DIVISION_NODE;
+    }
+
+    public double getValue() {
+        // Not used
+        return 0;
     }
 
     /**
      * Implementation of the visitor design pattern.
      * <p>
      * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of the base and the exponent.
+     * method of all the terms in the product.
      *
      * @param visitor the visitor
      */
@@ -78,11 +80,4 @@ public class ExponentiationExpressionNode implements ExpressionNode {
         return new ExpressionNodeIterator(this);
     }
 
-    public ExpressionNode getBase() {
-        return base;
-    }
-
-    public ExpressionNode getExponent() {
-        return exponent;
-    }
 }
