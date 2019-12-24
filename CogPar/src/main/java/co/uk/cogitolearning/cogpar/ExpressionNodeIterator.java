@@ -10,7 +10,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
 
     public ExpressionNodeIterator(ExpressionNode expressionNode) {
         IteratorVisitor visitor = new IteratorVisitor(list);
-        expressionNode.acceptOnce(visitor);
+        expressionNode.accept(visitor);
     }
 
     @Override
@@ -43,34 +43,34 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         public Void visit(AdditionExpressionNode node) {
             list.add(node);
             for (SequenceExpressionNode.Term t : node.terms)
-                t.expression.acceptOnce(this);
+                t.expression.accept(this);
             return null;
         }
 
         public Void visit(MultiplicationExpressionNode node) {
             list.add(node);
             for (SequenceExpressionNode.Term t : node.terms)
-                t.expression.acceptOnce(this);
+                t.expression.accept(this);
             return null;
         }
 
         public Void visit(ExponentiationExpressionNode node) {
             list.add(node);
-            node.getBase().acceptOnce(this);
-            node.getExponent().acceptOnce(this);
+            node.getBase().accept(this);
+            node.getExponent().accept(this);
             return null;
         }
 
         public Void visit(FunctionExpressionNode node) {
             list.add(node);
-            node.getArgument().acceptOnce(this);
+            node.getArgument().accept(this);
             return null;
         }
 
         public Void visit(DivExpressionNode node) {
             list.add(node);
             for (SequenceExpressionNode.Term t : node.terms)
-                t.expression.acceptOnce(this);
+                t.expression.accept(this);
             return null;
         }
     }

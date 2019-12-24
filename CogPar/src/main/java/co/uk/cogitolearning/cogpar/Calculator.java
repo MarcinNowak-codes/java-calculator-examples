@@ -76,7 +76,7 @@ public class Calculator {
         CalculateVisitor calculateVisitor = new CalculateVisitor(stack);
 
         for (ExpressionNode node : list)
-            node.acceptOnce(calculateVisitor);
+            node.accept(calculateVisitor);
 
         return stack.pop();
     }

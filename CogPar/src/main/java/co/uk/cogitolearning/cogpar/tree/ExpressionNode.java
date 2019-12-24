@@ -77,7 +77,7 @@ public interface ExpressionNode extends Iterable {
      *
      * @param visitor the visitor
      */
-    void acceptOnce(ExpressionNodeVisitor visitor);
+    void accept(ExpressionNodeVisitor visitor);
 
     Iterator<ExpressionNode> iterator();
 }

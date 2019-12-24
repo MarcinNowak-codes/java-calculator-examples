@@ -9,6 +9,6 @@ public class Algorithms {
         SetVariable piVisitor = new SetVariable(name, value);
         Iterator<ExpressionNode> it = root.iterator();
         while (it.hasNext())
-            it.next().acceptOnce(piVisitor);
+            it.next().accept(piVisitor);
     }
 }
