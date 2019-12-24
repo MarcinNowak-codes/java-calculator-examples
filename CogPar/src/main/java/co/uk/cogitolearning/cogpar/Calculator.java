@@ -27,6 +27,10 @@ package co.uk.cogitolearning.cogpar;
 import co.uk.cogitolearning.cogpar.parser.Parser;
 import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Stack;
+
 /**
  * Test the Parser
  */
@@ -46,7 +50,7 @@ public class Calculator {
             ExpressionNode expr = parser.parse(exprstr);
             Algorithms.setVariable(expr, "pi", Math.PI);
 
-            System.out.println("The value of the expression is " + CalculateValue.calculate(expr));
+            System.out.println("The value of the expression is " + calculate(expr));
 
         } catch (ParserException e) {
             System.out.println(e.getMessage());
@@ -56,4 +60,24 @@ public class Calculator {
     }
 
 
+    static double calculate(ExpressionNode expr) {
+        ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
+
+        for (ExpressionNode node : (Iterable<ExpressionNode>) expr)
+            polishNotationList.add(node);
+
+        return calculatePolishNotation(polishNotationList);
+    }
+
+    static double calculatePolishNotation(ArrayList<ExpressionNode> list) {
+        // https://en.wikipedia.org/wiki/Polish_notation
+        Collections.reverse(list); // Scan the given prefix expression from right to left
+        Stack<Double> stack = new Stack<>();
+        CalculateVisitor calculateVisitor = new CalculateVisitor(stack);
+
+        for (ExpressionNode node : list)
+            node.acceptOnce(calculateVisitor);
+
+        return stack.pop();
+    }
 }

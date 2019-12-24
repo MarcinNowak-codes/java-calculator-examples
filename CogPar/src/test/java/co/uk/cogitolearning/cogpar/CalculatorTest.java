@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 
-public class ReversePolishNotationTest {
+public class CalculatorTest {
     @Test
-    public void test1() {
+    public void shouldCalculateSimpleOperation() {
         // (2+3)*4
         ConstantExpressionNode two = new ConstantExpressionNode(2);
         ConstantExpressionNode three = new ConstantExpressionNode(3);
@@ -20,13 +20,12 @@ public class ReversePolishNotationTest {
         multi.add(four, true);
 
 
-        Assert.assertEquals(20.0, CalculateValue.calculate(multi), 0.1);
+        Assert.assertEquals(20.0, Calculator.calculate(multi), 0.1);
     }
 
     @Test
-    public void extendedTest() {
+    public void shouldCalculateExtendedCalculation() {
         ExpressionNode root;
-
 
         // String exprstr = "6*(3+sin(pi/2))^5"; //=6144
         ConstantExpressionNode five = new ConstantExpressionNode(6);
@@ -47,7 +46,7 @@ public class ReversePolishNotationTest {
 
         Algorithms.setVariable(root, "pi", Math.PI);
 
-        Assert.assertEquals(6144.0, CalculateValue.calculate(root), 0.1);
+        Assert.assertEquals(6144.0, Calculator.calculate(root), 0.1);
     }
 
     @Test
@@ -60,7 +59,7 @@ public class ReversePolishNotationTest {
         Algorithms.setVariable(expr, "pi", Math.PI);
 
         // Then
-        Assert.assertEquals(8.0, CalculateValue.calculate(expr), 0.1);
+        Assert.assertEquals(8.0, Calculator.calculate(expr), 0.1);
     }
 
 }
