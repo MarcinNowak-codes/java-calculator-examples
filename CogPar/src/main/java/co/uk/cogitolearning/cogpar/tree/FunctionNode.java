@@ -162,14 +162,6 @@ public class FunctionNode implements ExpressionNode {
         return "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
     }
 
-    /**
-     * Implementation of the visitor design pattern.
-     * <p>
-     * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of the argument.
-     *
-     * @param visitor the visitor
-     */
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);

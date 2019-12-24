@@ -36,11 +36,11 @@ public class ExponentiationNode implements ExpressionNode {
     /**
      * the node containing the base
      */
-    private ExpressionNode base;
+    public final ExpressionNode base;
     /**
      * the node containing the exponent
      */
-    private ExpressionNode exponent;
+    public final ExpressionNode exponent;
 
     /**
      * Construct the ExponentiationExpressionNode with base and exponent
@@ -60,14 +60,6 @@ public class ExponentiationNode implements ExpressionNode {
         return ExpressionNode.EXPONENTIATION_NODE;
     }
 
-    /**
-     * Implementation of the visitor design pattern.
-     * <p>
-     * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of the base and the exponent.
-     *
-     * @param visitor the visitor
-     */
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);
@@ -78,11 +70,4 @@ public class ExponentiationNode implements ExpressionNode {
         return new ExpressionNodeIterator(this);
     }
 
-    public ExpressionNode getBase() {
-        return base;
-    }
-
-    public ExpressionNode getExponent() {
-        return exponent;
-    }
 }

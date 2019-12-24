@@ -52,14 +52,6 @@ public class AdditionNode extends SequenceNode {
         return ADDITION_NODE;
     }
 
-    /**
-     * Implementation of the visitor design pattern.
-     * <p>
-     * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of all the terms in the sum.
-     *
-     * @param visitor the visitor
-     */
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);

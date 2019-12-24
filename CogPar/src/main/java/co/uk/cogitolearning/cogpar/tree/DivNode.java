@@ -57,19 +57,6 @@ public class DivNode extends SequenceNode {
         return ExpressionNode.DIVISION_NODE;
     }
 
-    public double getValue() {
-        // Not used
-        return 0;
-    }
-
-    /**
-     * Implementation of the visitor design pattern.
-     * <p>
-     * Calls visit on the visitor and then passes the visitor on to the accept
-     * method of all the terms in the product.
-     *
-     * @param visitor the visitor
-     */
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);

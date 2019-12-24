@@ -56,8 +56,8 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
 
         public Void visit(ExponentiationNode node) {
             list.add(node);
-            node.getBase().accept(this);
-            node.getExponent().accept(this);
+            node.base.accept(this);
+            node.exponent.accept(this);
             return null;
         }
 

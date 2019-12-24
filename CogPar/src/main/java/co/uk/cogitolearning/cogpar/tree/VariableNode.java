@@ -91,13 +91,6 @@ public class VariableNode implements ExpressionNode {
         return value;
     }
 
-    /**
-     * Implementation of the visitor design pattern.
-     * <p>
-     * Calls visit on the visitor.
-     *
-     * @param visitor the visitor
-     */
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);
