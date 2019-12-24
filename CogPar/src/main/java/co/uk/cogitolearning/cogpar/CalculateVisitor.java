@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import static co.uk.cogitolearning.cogpar.tree.FunctionExpressionNode.*;
 
-public class CalculateVisitor implements ExpressionNodeVisitor<Void>{
+public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     private Stack<Double> stack;
 
     public CalculateVisitor(Stack<Double> stack) {
@@ -15,10 +15,8 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void>{
         this.stack = stack;
     }
 
-    static public double functionGetValue(int function, double argument)
-    {
-        switch (function)
-        {
+    static public double functionGetValue(int function, double argument) {
+        switch (function) {
             case SIN:
                 return Math.sin(argument);
             case COS:
@@ -43,7 +41,7 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void>{
                 return Math.log(argument) * 1.442695040888963407360;
         }
 
-        throw new EvaluationException("Invalid function id "+function+"!");
+        throw new EvaluationException("Invalid function id " + function + "!");
     }
 
     public Void visit(VariableExpressionNode node) {

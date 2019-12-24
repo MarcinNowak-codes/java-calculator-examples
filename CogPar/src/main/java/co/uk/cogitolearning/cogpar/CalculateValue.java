@@ -18,14 +18,14 @@ public class CalculateValue {
         Stack<Double> stack = new Stack<>();
         CalculateVisitor calculateVisitor = new CalculateVisitor(stack);
 
-        for(ExpressionNode node: list)
+        for (ExpressionNode node : list)
             node.acceptOnce(calculateVisitor);
 
         return stack.pop();
     }
 
 
-    static public double calculate(ExpressionNode expr){
+    static public double calculate(ExpressionNode expr) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
         for (ExpressionNode node : (Iterable<ExpressionNode>) expr)

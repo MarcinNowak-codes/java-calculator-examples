@@ -23,7 +23,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         return list.remove(0);
     }
 
-    private class IteratorVisitor implements ExpressionNodeVisitor<Void> {
+    private static class IteratorVisitor implements ExpressionNodeVisitor<Void> {
         private ArrayList<ExpressionNode> list;
 
         public IteratorVisitor(ArrayList<ExpressionNode> stack) {
