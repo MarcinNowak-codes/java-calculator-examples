@@ -22,77 +22,70 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
- * An ExpressionNode that handles multiplications and divisions. The node can hold
- * an arbitrary number of factors that are either multiplied or divided to the product.
- * 
+ * An ExpressionNode that stores a constant value
  */
-public class MultiplicationExpressionNode extends SequenceExpressionNode
+public class ConstantExpressionNode implements ExpressionNode
 {
-  /**
-   * Default constructor.
-   */
-  public MultiplicationExpressionNode()
-  {}
+  /** The value of the constant */
+  private double value;
 
   /**
-   * Constructor to create a multiplication with the first term already added.
+   * Construct with the fixed value.
    * 
-   * @param a
-   *          the term to be added
-   * @param positive
-   *          a flag indicating whether the term is multiplied or divided
+   * @param value
+   *          the value of the constant
    */
-  public MultiplicationExpressionNode(ExpressionNode a, boolean positive)
+  public ConstantExpressionNode(double value)
   {
-    super(a, positive);
+    this.value = value;
   }
 
   /**
-   * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
+   * Convenience constructor that takes a string and converts it to a double
+   * before storing the value.
+   * 
+   * @param value
+   *          the string representation of the value
    */
-  public int getType()
+  public ConstantExpressionNode(String value)
   {
-    return ExpressionNode.MULTIPLICATION_NODE;
+    this.value = Double.valueOf(value);
   }
 
   /**
-   * Returns the value of the sub-expression that is rooted at this node.
-   * 
-   * All the terms are evaluated and multiplied or divided to the product.
+   * Returns the value of the constant
    */
   public double getValue()
   {
-    double prod = 1.0;
-    for (Term t : terms)
-    {
-      if (t.positive)
-        prod *= t.expression.getValue();
-      else
-        prod /= t.expression.getValue();
-    }
-    return prod;
+    return value;
+  }
+
+  /**
+   * Returns the type of the node, in this case ExpressionNode.CONSTANT_NODE
+   */
+  public int getType()
+  {
+    return ExpressionNode.CONSTANT_NODE;
   }
 
   /**
    * Implementation of the visitor design pattern.
    * 
-   * Calls visit on the visitor and then passes the visitor on to the accept
-   * method of all the terms in the product.
+   * Calls visit on the visitor.
    * 
    * @param visitor
    *          the visitor
    */
   public void accept(ExpressionNodeVisitor visitor)
   {
-    visitor.visit(this);  
-    for (Term t: terms)
-      t.expression.accept(visitor);
+    visitor.visit(this);
   }
 
   @Override
@@ -101,8 +94,7 @@ public class MultiplicationExpressionNode extends SequenceExpressionNode
   }
 
   @Override
-  public Iterator<ExpressionNode> iterator() {
+  public Iterator iterator() {
     return new ExpressionNodeIterator(this);
   }
-
 }

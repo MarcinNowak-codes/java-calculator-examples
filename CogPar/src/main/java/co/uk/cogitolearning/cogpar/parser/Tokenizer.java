@@ -22,7 +22,10 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.parser;
+
+import co.uk.cogitolearning.cogpar.tree.FunctionExpressionNode;
+import co.uk.cogitolearning.cogpar.ParserException;
 
 import java.util.LinkedList;
 import java.util.regex.Matcher;

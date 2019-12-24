@@ -22,7 +22,10 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import co.uk.cogitolearning.cogpar.SequenceExpressionNode;
 
 import java.util.Iterator;
 

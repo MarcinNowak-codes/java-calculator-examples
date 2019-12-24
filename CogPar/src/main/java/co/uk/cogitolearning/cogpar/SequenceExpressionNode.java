@@ -24,6 +24,8 @@
 
 package co.uk.cogitolearning.cogpar;
 
+import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

@@ -24,6 +24,8 @@
 
 package co.uk.cogitolearning.cogpar;
 
+import co.uk.cogitolearning.cogpar.tree.*;
+
 /**
  * A visitor that sets a variable with a specific name to a given value
  */

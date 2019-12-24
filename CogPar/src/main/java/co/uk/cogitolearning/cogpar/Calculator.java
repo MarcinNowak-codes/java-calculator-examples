@@ -24,32 +24,45 @@
 
 package co.uk.cogitolearning.cogpar;
 
+import co.uk.cogitolearning.cogpar.parser.Parser;
+import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
+
 /**
- * An interface for the visitor design pattern.
- * 
- * Expression nodes can be visited by ExpressionNodeVisitor by calling their
- * accept methods. The expression nodes, in turn, call the appropriate visit
- * method of the expression node visitor.
+ * Test the Parser
  */
-public interface ExpressionNodeVisitor<T>
+public class Calculator
 {
-  /** Visit a VariableExpressionNode */
-  T visit(VariableExpressionNode node);
 
-  /**  Visit a ConstantExpressionNode */
-  T visit(ConstantExpressionNode node);
+  /**
+   * The main method to test the functionality of the parser
+   */
+  public static void main(String[] args)
+  {
+    
+    String exprstr = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
+//    String exprstr = "2*3";
+    if (args.length>0) exprstr = args[0];
+    
+    Parser parser = new Parser();
+    try
+    {
+        ExpressionNode expr = parser.parse(exprstr);
+        Algorithms.setVariable(expr, "pi", Math.PI);
 
-  /**  Visit a AdditionExpressionNode */
-  T visit(AdditionExpressionNode node);
+        System.out.println("The value of the expression is " + CalculateValue.calculate(expr));
+        System.out.println("The value of the expression is " + expr.getValue());
+        assert CalculateValue.calculate(expr) == expr.getValue();
 
-  /**  Visit a MultiplicationExpressionNode */
-  T visit(MultiplicationExpressionNode node);
+    }
+    catch (ParserException e)
+    {
+      System.out.println(e.getMessage());
+    }
+    catch (EvaluationException e)
+    {
+      System.out.println(e.getMessage());
+    }
+  }
 
-  /**  Visit a ExponentiationExpressionNode */
-  T visit(ExponentiationExpressionNode node);
 
-  /**  Visit a FunctionExpressionNode */
-  T visit(FunctionExpressionNode node);
-
-  T visit(DivExpressionNode node);
 }

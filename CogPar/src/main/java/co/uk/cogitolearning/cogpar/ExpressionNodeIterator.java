@@ -1,5 +1,7 @@
 package co.uk.cogitolearning.cogpar;
 
+import co.uk.cogitolearning.cogpar.tree.*;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 

@@ -22,78 +22,58 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that stores a named variable
+ * An ExpressionNode that handles exponentiation. The node holds
+ * a base and an exponent and calulates base^exponent 
+ * 
  */
-public class VariableExpressionNode implements ExpressionNode
+public class ExponentiationExpressionNode implements ExpressionNode
 {
-  /** The name of the variable */
-  private String name;
-  /** The value of the variable */
-  private double value;
-  /** indicates if the value has been set */
-  private boolean valueSet;
+  /** the node containing the base */
+  private ExpressionNode base;
+  /** the node containing the exponent */
+  private ExpressionNode exponent;
 
   /**
-   * Construct with the name of the variable.
-   * 
-   * @param name
-   *          the name of the variable
+   * Construct the ExponentiationExpressionNode with base and exponent
+   * @param base the node containing the base
+   * @param exponent the node containing the exponent
    */
-  public VariableExpressionNode(String name)
+  public ExponentiationExpressionNode(ExpressionNode base, ExpressionNode exponent)
   {
-    this.name = name;
-    valueSet = false;
+    this.base = base;
+    this.exponent = exponent;
   }
 
   /**
-   * @return the name of the variable
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * Returns the type of the node, in this case ExpressionNode.VARIABLE_NODE
+   * Returns the type of the node, in this case ExpressionNode.EXPONENTIATION_NODE
    */
   public int getType()
   {
-    return ExpressionNode.VARIABLE_NODE;
+    return ExpressionNode.EXPONENTIATION_NODE;
   }
-
+  
   /**
-   * Sets the value of the variable
+   * Returns the value of the sub-expression that is rooted at this node.
    * 
-   * @param value
-   *          the value of the variable
-   */
-  public void setValue(double value)
-  {
-    this.value = value;
-    this.valueSet = true;
-  }
-
-  /**
-   * Returns the value of the variable but throws an exception if the value has
-   * not been set
+   * Calculates base^exponent
    */
   public double getValue()
   {
-    if (!valueSet)
-      throw new EvaluationException("Variable '" + name + "' was not initialized.");
-
-    return value;
+    return Math.pow(base.getValue(), exponent.getValue());
   }
 
   /**
    * Implementation of the visitor design pattern.
    * 
-   * Calls visit on the visitor.
+   * Calls visit on the visitor and then passes the visitor on to the accept
+   * method of the base and the exponent.
    * 
    * @param visitor
    *          the visitor
@@ -101,6 +81,8 @@ public class VariableExpressionNode implements ExpressionNode
   public void accept(ExpressionNodeVisitor visitor)
   {
     visitor.visit(this);
+    base.accept(visitor);
+    exponent.accept(visitor);
   }
 
   @Override
@@ -113,4 +95,11 @@ public class VariableExpressionNode implements ExpressionNode
     return new ExpressionNodeIterator(this);
   }
 
+  public ExpressionNode getBase() {
+    return base;
+  }
+
+  public ExpressionNode getExponent() {
+    return exponent;
+  }
 }

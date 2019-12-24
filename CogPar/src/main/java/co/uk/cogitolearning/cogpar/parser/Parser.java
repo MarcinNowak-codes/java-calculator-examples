@@ -41,7 +41,10 @@
  * To download CogPar, <a href="" alt="Download CogPar">follow this link.</a>
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.parser;
+
+import co.uk.cogitolearning.cogpar.*;
+import co.uk.cogitolearning.cogpar.tree.*;
 
 import java.util.LinkedList;
 

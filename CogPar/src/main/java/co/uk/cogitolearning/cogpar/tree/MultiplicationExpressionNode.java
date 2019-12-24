@@ -22,65 +22,79 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import co.uk.cogitolearning.cogpar.SequenceExpressionNode;
 
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that handles exponentiation. The node holds
- * a base and an exponent and calulates base^exponent 
+ * An ExpressionNode that handles multiplications and divisions. The node can hold
+ * an arbitrary number of factors that are either multiplied or divided to the product.
  * 
  */
-public class ExponentiationExpressionNode implements ExpressionNode
+public class MultiplicationExpressionNode extends SequenceExpressionNode
 {
-  /** the node containing the base */
-  private ExpressionNode base;
-  /** the node containing the exponent */
-  private ExpressionNode exponent;
+  /**
+   * Default constructor.
+   */
+  public MultiplicationExpressionNode()
+  {}
 
   /**
-   * Construct the ExponentiationExpressionNode with base and exponent
-   * @param base the node containing the base
-   * @param exponent the node containing the exponent
+   * Constructor to create a multiplication with the first term already added.
+   * 
+   * @param a
+   *          the term to be added
+   * @param positive
+   *          a flag indicating whether the term is multiplied or divided
    */
-  public ExponentiationExpressionNode(ExpressionNode base, ExpressionNode exponent)
+  public MultiplicationExpressionNode(ExpressionNode a, boolean positive)
   {
-    this.base = base;
-    this.exponent = exponent;
+    super(a, positive);
   }
 
   /**
-   * Returns the type of the node, in this case ExpressionNode.EXPONENTIATION_NODE
+   * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
    */
   public int getType()
   {
-    return ExpressionNode.EXPONENTIATION_NODE;
+    return ExpressionNode.MULTIPLICATION_NODE;
   }
-  
+
   /**
    * Returns the value of the sub-expression that is rooted at this node.
    * 
-   * Calculates base^exponent
+   * All the terms are evaluated and multiplied or divided to the product.
    */
   public double getValue()
   {
-    return Math.pow(base.getValue(), exponent.getValue());
+    double prod = 1.0;
+    for (Term t : terms)
+    {
+      if (t.positive)
+        prod *= t.expression.getValue();
+      else
+        prod /= t.expression.getValue();
+    }
+    return prod;
   }
 
   /**
    * Implementation of the visitor design pattern.
    * 
    * Calls visit on the visitor and then passes the visitor on to the accept
-   * method of the base and the exponent.
+   * method of all the terms in the product.
    * 
    * @param visitor
    *          the visitor
    */
   public void accept(ExpressionNodeVisitor visitor)
   {
-    visitor.visit(this);
-    base.accept(visitor);
-    exponent.accept(visitor);
+    visitor.visit(this);  
+    for (Term t: terms)
+      t.expression.accept(visitor);
   }
 
   @Override
@@ -89,15 +103,8 @@ public class ExponentiationExpressionNode implements ExpressionNode
   }
 
   @Override
-  public Iterator iterator() {
+  public Iterator<ExpressionNode> iterator() {
     return new ExpressionNodeIterator(this);
   }
 
-  public ExpressionNode getBase() {
-    return base;
-  }
-
-  public ExpressionNode getExponent() {
-    return exponent;
-  }
 }
