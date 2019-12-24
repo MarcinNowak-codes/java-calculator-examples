@@ -22,9 +22,7 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
-
-import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
+package co.uk.cogitolearning.cogpar.tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -70,7 +68,7 @@ public abstract class SequenceNode implements ExpressionNode {
     /**
      * the list of terms in the sequence
      */
-    protected ArrayList<Term> terms;
+    public final ArrayList<Term> terms; //FIXME: Exposing internal representation.
 
     /**
      * Default constructor.

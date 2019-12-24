@@ -25,7 +25,6 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
-import co.uk.cogitolearning.cogpar.SequenceNode;
 
 import java.util.Iterator;
 
