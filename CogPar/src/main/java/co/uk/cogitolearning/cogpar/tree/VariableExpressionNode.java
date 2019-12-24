@@ -98,10 +98,6 @@ public class VariableExpressionNode implements ExpressionNode {
      *
      * @param visitor the visitor
      */
-    public void accept(ExpressionNodeVisitor visitor) {
-        visitor.visit(this);
-    }
-
     @Override
     public void acceptOnce(ExpressionNodeVisitor visitor) {
         visitor.visit(this);
