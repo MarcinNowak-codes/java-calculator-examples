@@ -59,22 +59,6 @@ public class AdditionExpressionNode extends SequenceExpressionNode {
     }
 
     /**
-     * Returns the value of the sub-expression that is rooted at this node.
-     * <p>
-     * All the terms are evaluated and added or subtracted from the total sum.
-     */
-    public double getValue() {
-        double sum = 0.0;
-        for (Term t : terms) {
-            if (t.positive)
-                sum += t.expression.getValue();
-            else
-                sum -= t.expression.getValue();
-        }
-        return sum;
-    }
-
-    /**
      * Implementation of the visitor design pattern.
      * <p>
      * Calls visit on the visitor and then passes the visitor on to the accept

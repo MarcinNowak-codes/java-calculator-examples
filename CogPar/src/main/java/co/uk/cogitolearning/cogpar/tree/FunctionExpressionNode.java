@@ -164,41 +164,6 @@ public class FunctionExpressionNode implements ExpressionNode {
     }
 
     /**
-     * Returns the value of the sub-expression that is rooted at this node.
-     * <p>
-     * The argument is evaluated and then the function is applied to the resulting
-     * value.
-     */
-    public double getValue() {
-        switch (function) {
-            case SIN:
-                return Math.sin(argument.getValue());
-            case COS:
-                return Math.cos(argument.getValue());
-            case TAN:
-                return Math.tan(argument.getValue());
-            case ASIN:
-                return Math.asin(argument.getValue());
-            case ACOS:
-                return Math.acos(argument.getValue());
-            case ATAN:
-                return Math.atan(argument.getValue());
-            case SQRT:
-                return Math.sqrt(argument.getValue());
-            case EXP:
-                return Math.exp(argument.getValue());
-            case LN:
-                return Math.log(argument.getValue());
-            case LOG:
-                return Math.log(argument.getValue()) * 0.43429448190325182765;
-            case LOG2:
-                return Math.log(argument.getValue()) * 1.442695040888963407360;
-        }
-
-        throw new EvaluationException("Invalid function id " + function + "!");
-    }
-
-    /**
      * Implementation of the visitor design pattern.
      * <p>
      * Calls visit on the visitor and then passes the visitor on to the accept

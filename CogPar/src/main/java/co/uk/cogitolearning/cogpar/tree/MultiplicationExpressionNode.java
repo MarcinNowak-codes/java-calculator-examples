@@ -58,22 +58,6 @@ public class MultiplicationExpressionNode extends SequenceExpressionNode {
     }
 
     /**
-     * Returns the value of the sub-expression that is rooted at this node.
-     * <p>
-     * All the terms are evaluated and multiplied or divided to the product.
-     */
-    public double getValue() {
-        double prod = 1.0;
-        for (Term t : terms) {
-            if (t.positive)
-                prod *= t.expression.getValue();
-            else
-                prod /= t.expression.getValue();
-        }
-        return prod;
-    }
-
-    /**
      * Implementation of the visitor design pattern.
      * <p>
      * Calls visit on the visitor and then passes the visitor on to the accept

@@ -35,31 +35,31 @@ public interface ExpressionNode extends Iterable {
     /**
      * Node id for variable nodes
      */
-    public static final int VARIABLE_NODE = 1;
+    int VARIABLE_NODE = 1;
     /**
      * Node id for constant nodes
      */
-    public static final int CONSTANT_NODE = 2;
+    int CONSTANT_NODE = 2;
     /**
      * Node id for addition nodes
      */
-    public static final int ADDITION_NODE = 3;
+    int ADDITION_NODE = 3;
     /**
      * Node id for multiplication nodes
      */
-    public static final int MULTIPLICATION_NODE = 4;
+    int MULTIPLICATION_NODE = 4;
     /**
      * Node id for exponentiation nodes
      */
-    public static final int EXPONENTIATION_NODE = 5;
+    int EXPONENTIATION_NODE = 5;
     /**
      * Node id for function nodes
      */
-    public static final int FUNCTION_NODE = 6;
+    int FUNCTION_NODE = 6;
     /**
      * Node id for division nodes
      */
-    public static final int DIVISION_NODE = 7;
+    int DIVISION_NODE = 7;
 
     /**
      * Returns the type of the node.ExpressionNode
@@ -70,29 +70,21 @@ public interface ExpressionNode extends Iterable {
      *
      * @return type of the node
      */
-    public int getType();
-
-    /**
-     * Calculates and returns the value of the sub-expression represented by
-     * the node.
-     *
-     * @return value of expression
-     */
-    public double getValue();
+    int getType();
 
     /**
      * Method needed for the visitor design pattern
      *
      * @param visitor the visitor
      */
-    public void accept(ExpressionNodeVisitor visitor);
+    void accept(ExpressionNodeVisitor visitor);
 
     /**
      * Method needed for the visitor design pattern but not iterate on child node.
      *
      * @param visitor the visitor
      */
-    public void acceptOnce(ExpressionNodeVisitor visitor);
+    void acceptOnce(ExpressionNodeVisitor visitor);
 
-    public Iterator<ExpressionNode> iterator();
+    Iterator<ExpressionNode> iterator();
 }

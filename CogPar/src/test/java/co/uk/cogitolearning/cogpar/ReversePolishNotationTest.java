@@ -20,9 +20,7 @@ public class ReversePolishNotationTest {
         multi.add(four, true);
 
 
-        Assert.assertEquals(20.0, multi.getValue(), 0.1);
         Assert.assertEquals(20.0, CalculateValue.calculate(multi), 0.1);
-        Assert.assertEquals(multi.getValue(), CalculateValue.calculate(multi), 0.1);
     }
 
     @Test
@@ -63,7 +61,6 @@ public class ReversePolishNotationTest {
 
         // Then
         Assert.assertEquals(8.0, CalculateValue.calculate(expr), 0.1);
-        Assert.assertEquals(8.0, expr.getValue(), 0.1);
     }
 
 }

@@ -47,8 +47,6 @@ public class Calculator {
             Algorithms.setVariable(expr, "pi", Math.PI);
 
             System.out.println("The value of the expression is " + CalculateValue.calculate(expr));
-            System.out.println("The value of the expression is " + expr.getValue());
-            assert CalculateValue.calculate(expr) == expr.getValue();
 
         } catch (ParserException e) {
             System.out.println(e.getMessage());

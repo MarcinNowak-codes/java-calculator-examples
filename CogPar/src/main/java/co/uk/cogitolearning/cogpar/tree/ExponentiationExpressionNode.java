@@ -61,15 +61,6 @@ public class ExponentiationExpressionNode implements ExpressionNode {
     }
 
     /**
-     * Returns the value of the sub-expression that is rooted at this node.
-     * <p>
-     * Calculates base^exponent
-     */
-    public double getValue() {
-        return Math.pow(base.getValue(), exponent.getValue());
-    }
-
-    /**
      * Implementation of the visitor design pattern.
      * <p>
      * Calls visit on the visitor and then passes the visitor on to the accept
