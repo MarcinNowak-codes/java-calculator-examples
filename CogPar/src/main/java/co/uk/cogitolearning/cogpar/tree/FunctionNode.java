@@ -26,6 +26,8 @@ package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 import co.uk.cogitolearning.cogpar.ParserException;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Iterator;
 
@@ -34,6 +36,8 @@ import java.util.Iterator;
  * <p>
  * Some pre-defined functions are handled, others can easily be added.
  */
+@ToString
+@EqualsAndHashCode
 public class FunctionNode implements ExpressionNode {
     /**
      * function id for the sin function

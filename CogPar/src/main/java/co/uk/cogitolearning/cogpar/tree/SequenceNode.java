@@ -24,6 +24,9 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -32,6 +35,8 @@ import java.util.Iterator;
  * <p>
  * Holds an arbitrary number of ExpressionNodes together with boolean flags.
  */
+@ToString
+@EqualsAndHashCode
 public abstract class SequenceNode implements ExpressionNode {
     @Override
     public Iterator<ExpressionNode> iterator() {
@@ -42,6 +47,8 @@ public abstract class SequenceNode implements ExpressionNode {
      * An inner class that defines a pair containing an ExpressionNode and a
      * boolean flag.
      */
+    @ToString
+    @EqualsAndHashCode
     public static class Term {
         /**
          * the boolean flag

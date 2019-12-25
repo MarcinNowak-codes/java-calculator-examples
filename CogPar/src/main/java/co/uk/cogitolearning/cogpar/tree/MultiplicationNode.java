@@ -25,6 +25,8 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +36,8 @@ import java.util.List;
  * An ExpressionNode that handles multiplications and divisions. The node can hold
  * an arbitrary number of factors that are either multiplied or divided to the product.
  */
+@ToString
+@EqualsAndHashCode
 public class MultiplicationNode implements ExpressionNode {
     /**
      * the list of terms in the sequence

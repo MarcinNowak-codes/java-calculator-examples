@@ -25,6 +25,8 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,6 +36,8 @@ import java.util.List;
  * An ExpressionNode that handles additions and subtractions. The node can hold
  * an arbitrary number of terms that are either added or subtraced from the sum.
  */
+@ToString
+@EqualsAndHashCode
 public class SubtractionNode implements ExpressionNode {
     /**
      * the list of terms in the sequence

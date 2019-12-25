@@ -26,12 +26,16 @@ package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.EvaluationException;
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Iterator;
 
 /**
  * An ExpressionNode that stores a named variable
  */
+@ToString
+@EqualsAndHashCode
 public class VariableNode implements ExpressionNode {
     /**
      * The name of the variable

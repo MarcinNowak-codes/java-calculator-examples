@@ -25,6 +25,8 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Iterator;
 
@@ -32,6 +34,8 @@ import java.util.Iterator;
  * An ExpressionNode that handles exponentiation. The node holds
  * a base and an exponent and calulates base^exponent
  */
+@ToString
+@EqualsAndHashCode
 public class ExponentiationNode implements ExpressionNode {
     /**
      * the node containing the base

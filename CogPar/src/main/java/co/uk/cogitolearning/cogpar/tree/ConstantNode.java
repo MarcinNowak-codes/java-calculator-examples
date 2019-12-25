@@ -25,12 +25,16 @@
 package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Iterator;
 
 /**
  * An ExpressionNode that stores a constant value
  */
+@ToString
+@EqualsAndHashCode
 public class ConstantNode implements ExpressionNode {
 
     public final double value;
