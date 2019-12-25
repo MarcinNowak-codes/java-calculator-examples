@@ -115,7 +115,25 @@ public class Parser {
     /** handles the non-terminal sum_op */
     private ExpressionNode sumOp(ExpressionNode expr) {
         // sum_op -> PLUSMINUS term sum_op
-        if (lookahead.token == Token.PLUSMINUS) {
+        if (lookahead.token == Token.PLUS) {
+            AdditionNode sum;
+            // This means we are actually dealing with a sum
+            // If expr is not already a sum, we have to create one
+            if (expr.getType() == ExpressionNode.ADDITION_NODE)
+                sum = (AdditionNode) expr;
+            else
+                sum = new AdditionNode(expr, true);
+
+            // reduce the input and recursively call sum_op
+            boolean positive = lookahead.sequence.equals("+");
+            nextToken();
+            ExpressionNode t = term();
+            sum.add(t, positive);
+
+            return sumOp(sum);
+        }
+
+        if (lookahead.token == Token.MINUS) {
             AdditionNode sum;
             // This means we are actually dealing with a sum
             // If expr is not already a sum, we have to create one
@@ -140,7 +158,17 @@ public class Parser {
     /** handles the non-terminal signed_term */
     private ExpressionNode signedTerm() {
         // signed_term -> PLUSMINUS term
-        if (lookahead.token == Token.PLUSMINUS) {
+        if (lookahead.token == Token.PLUS) {
+            boolean positive = lookahead.sequence.equals("+");
+            nextToken();
+            ExpressionNode t = term();
+            if (positive)
+                return t;
+            else
+                return new AdditionNode(t, false);
+        }
+
+        if (lookahead.token == Token.MINUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = term();
@@ -209,7 +237,17 @@ public class Parser {
     /** handles the non-terminal signed_factor */
     private ExpressionNode signedFactor() {
         // signed_factor -> PLUSMINUS factor
-        if (lookahead.token == Token.PLUSMINUS) {
+        if (lookahead.token == Token.PLUS) {
+            boolean positive = lookahead.sequence.equals("+");
+            nextToken();
+            ExpressionNode t = factor();
+            if (positive)
+                return t;
+            else
+                return new AdditionNode(t, false);
+        }
+
+        if (lookahead.token == Token.MINUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = factor();

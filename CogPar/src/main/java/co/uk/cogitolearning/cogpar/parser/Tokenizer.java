@@ -109,7 +109,8 @@ public class Tokenizer {
     private static Tokenizer createExpressionTokenizer() {
         Tokenizer tokenizer = new Tokenizer();
 
-        tokenizer.add("[+-]", Token.PLUSMINUS);
+        tokenizer.add("[+]", Token.PLUS);
+        tokenizer.add("[-]", Token.MINUS);
         tokenizer.add("[*]", Token.MULT);
         tokenizer.add("[/]", Token.DIV);
         tokenizer.add("\\^", Token.RAISED);

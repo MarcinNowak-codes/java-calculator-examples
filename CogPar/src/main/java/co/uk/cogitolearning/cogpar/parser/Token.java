@@ -38,9 +38,9 @@ public class Token {
      */
     public static final int EPSILON = 0;
     /**
-     * Token id for plus or minus
+     * Token id for plus
      */
-    public static final int PLUSMINUS = 1;
+    public static final int PLUS = 1;
     /**
      * Token id for multiplication
      */
@@ -73,6 +73,10 @@ public class Token {
      * Token id for division
      */
     public static final int DIV = 9;
+    /**
+     * Token id for minus
+     */
+    public static final int MINUS = 10;
     /**
      * the token identifier
      */
