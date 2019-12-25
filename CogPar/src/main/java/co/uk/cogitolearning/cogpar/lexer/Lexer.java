@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.parser;
+package co.uk.cogitolearning.cogpar.lexer;
 
 import co.uk.cogitolearning.cogpar.ParserException;
 import co.uk.cogitolearning.cogpar.tree.FunctionNode;
@@ -79,13 +79,12 @@ public class Lexer {
     /**
      * a tokenizer that can handle mathematical expressions
      */
-    private static Lexer expressionTokenizer = null;
+    private static Lexer instance = null;
 
     /**
      * Default constructor
      */
-    public Lexer() {
-        super();
+    private Lexer() {
         tokenInfos = new LinkedList<>();
         tokens = new LinkedList<>();
     }
@@ -93,12 +92,14 @@ public class Lexer {
     /**
      * A static method that returns a tokenizer for mathematical expressions
      *
+     * Not thread safe singleton design pattern
+     *
      * @return a tokenizer that can handle mathematical expressions
      */
-    public static Lexer getExpressionTokenizer() {
-        if (expressionTokenizer == null)
-            expressionTokenizer = createExpressionTokenizer();
-        return expressionTokenizer;
+    public static synchronized Lexer getInstance() {
+        if (instance == null)
+            instance = create();
+        return instance;
     }
 
     /**
@@ -106,7 +107,7 @@ public class Lexer {
      *
      * @return a tokenizer that can handle mathematical expressions
      */
-    private static Lexer createExpressionTokenizer() {
+    private static Lexer create() {
         Lexer lexer = new Lexer();
 
         lexer.add("[+]", Token.PLUS);

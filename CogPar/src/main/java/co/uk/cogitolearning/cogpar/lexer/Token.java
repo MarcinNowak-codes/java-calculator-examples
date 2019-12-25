@@ -22,7 +22,10 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.parser;
+package co.uk.cogitolearning.cogpar.lexer;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
  * A token that is produced by Tokenizer and fed into Parser.parse
@@ -32,6 +35,8 @@ package co.uk.cogitolearning.cogpar.parser;
  * <p>
  * The token id must be one of a number of pre-defined values
  */
+@ToString
+@EqualsAndHashCode
 public class Token {
     /**
      * Token id for the epsilon terminal
@@ -80,7 +85,7 @@ public class Token {
     /**
      * the token identifier
      */
-    public final int token;
+    public final int tokenId;
     /**
      * the string that the token was created from
      */
@@ -93,15 +98,17 @@ public class Token {
     /**
      * Construct the token with its values
      *
-     * @param token    the token identifier
+     * @param tokenId    the token identifier
      * @param sequence the string that the token was created from
      * @param pos      the position of the token in the input string
      */
-    public Token(int token, String sequence, int pos) {
+    public Token(int tokenId, String sequence, int pos) {
         super();
-        this.token = token;
+        this.tokenId = tokenId;
         this.sequence = sequence;
         this.pos = pos;
     }
 
 }
+
+

@@ -43,6 +43,8 @@
 package co.uk.cogitolearning.cogpar.parser;
 
 import co.uk.cogitolearning.cogpar.ParserException;
+import co.uk.cogitolearning.cogpar.lexer.Lexer;
+import co.uk.cogitolearning.cogpar.lexer.Token;
 import co.uk.cogitolearning.cogpar.tree.*;
 
 import java.util.LinkedList;
@@ -74,7 +76,7 @@ public class Parser {
      *         expression tree made out of ExpressionNode objects
      */
     public ExpressionNode parse(String expression) {
-        Lexer lexer = Lexer.getExpressionTokenizer();
+        Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expression);
         return this.parse(lexer.getTokens());
     }
@@ -96,7 +98,7 @@ public class Parser {
         // top level non-terminal is expression
         ExpressionNode expr = expression();
 
-        if (lookahead.token != Token.EPSILON)
+        if (lookahead.tokenId != Token.EPSILON)
             throw new ParserException("Unexpected symbol %s found", lookahead);
 
         return expr;
@@ -114,7 +116,7 @@ public class Parser {
     /** handles the non-terminal sum_op */
     private ExpressionNode sumOp(ExpressionNode expr) {
         // sum_op -> PLUSMINUS term sum_op
-        if (lookahead.token == Token.PLUS) {
+        if (lookahead.tokenId == Token.PLUS) {
             AdditionNode sum;
             // This means we are actually dealing with a sum
             // If expr is not already a sum, we have to create one
@@ -132,7 +134,7 @@ public class Parser {
             return sumOp(sum);
         }
 
-        if (lookahead.token == Token.MINUS) {
+        if (lookahead.tokenId == Token.MINUS) {
             SubtractionNode sum;
             // This means we are actually dealing with a sum
             // If expr is not already a sum, we have to create one
@@ -157,7 +159,7 @@ public class Parser {
     /** handles the non-terminal signed_term */
     private ExpressionNode signedTerm() {
         // signed_term -> PLUSMINUS term
-        if (lookahead.token == Token.PLUS) {
+        if (lookahead.tokenId == Token.PLUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = term();
@@ -167,7 +169,7 @@ public class Parser {
                 return new AdditionNode(t, false);
         }
 
-        if (lookahead.token == Token.MINUS) {
+        if (lookahead.tokenId == Token.MINUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = term();
@@ -191,7 +193,7 @@ public class Parser {
     /** handles the non-terminal term_op */
     private ExpressionNode termOp(ExpressionNode expression) {
         // term_op -> MULTDIV factor term_op
-        if (lookahead.token == Token.MULT) {
+        if (lookahead.tokenId == Token.MULT) {
             MultiplicationNode prod;
 
             // This means we are actually dealing with a product
@@ -210,7 +212,7 @@ public class Parser {
             return termOp(prod);
         }
 
-        if (lookahead.token == Token.DIV) {
+        if (lookahead.tokenId == Token.DIV) {
             DivNode prod;
 
             // This means we are actually dealing with a product
@@ -236,7 +238,7 @@ public class Parser {
     /** handles the non-terminal signed_factor */
     private ExpressionNode signedFactor() {
         // signed_factor -> PLUSMINUS factor
-        if (lookahead.token == Token.PLUS) {
+        if (lookahead.tokenId == Token.PLUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = factor();
@@ -246,7 +248,7 @@ public class Parser {
                 return new AdditionNode(t, false);
         }
 
-        if (lookahead.token == Token.MINUS) {
+        if (lookahead.tokenId == Token.MINUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = factor();
@@ -271,7 +273,7 @@ public class Parser {
     /** handles the non-terminal factor_op */
     private ExpressionNode factorOp(ExpressionNode expr) {
         // factor_op -> RAISED expression
-        if (lookahead.token == Token.RAISED) {
+        if (lookahead.tokenId == Token.RAISED) {
             nextToken();
             ExpressionNode exponent = signedFactor();
 
@@ -285,17 +287,17 @@ public class Parser {
     /** handles the non-terminal argument */
     private ExpressionNode argument() {
         // argument -> FUNCTION argument
-        if (lookahead.token == Token.FUNCTION) {
+        if (lookahead.tokenId == Token.FUNCTION) {
             int function = FunctionNode.stringToFunction(lookahead.sequence);
             nextToken();
             ExpressionNode expr = argument();
             return new FunctionNode(function, expr);
         }
         // argument -> OPEN_BRACKET sum CLOSE_BRACKET
-        else if (lookahead.token == Token.OPEN_BRACKET) {
+        else if (lookahead.tokenId == Token.OPEN_BRACKET) {
             nextToken();
             ExpressionNode expr = expression();
-            if (lookahead.token != Token.CLOSE_BRACKET)
+            if (lookahead.tokenId != Token.CLOSE_BRACKET)
                 throw new ParserException("Closing brackets expected", lookahead);
             nextToken();
             return expr;
@@ -308,20 +310,20 @@ public class Parser {
     /** handles the non-terminal value */
     private ExpressionNode value() {
         // argument -> NUMBER
-        if (lookahead.token == Token.NUMBER) {
+        if (lookahead.tokenId == Token.NUMBER) {
             ExpressionNode expr = new ConstantNode(Double.parseDouble(lookahead.sequence));
             nextToken();
             return expr;
         }
 
         // argument -> VARIABLE
-        if (lookahead.token == Token.VARIABLE) {
+        if (lookahead.tokenId == Token.VARIABLE) {
             ExpressionNode expr = new VariableNode(lookahead.sequence);
             nextToken();
             return expr;
         }
 
-        if (lookahead.token == Token.EPSILON)
+        if (lookahead.tokenId == Token.EPSILON)
             throw new ParserException("Unexpected end of input");
         else
             throw new ParserException("Unexpected symbol %s found", lookahead);

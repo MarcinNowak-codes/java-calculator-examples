@@ -24,7 +24,7 @@
 
 package co.uk.cogitolearning.cogpar;
 
-import co.uk.cogitolearning.cogpar.parser.Token;
+import co.uk.cogitolearning.cogpar.lexer.Token;
 
 /**
  * A simple subclass of RuntimeException that indicates errors when trying to
