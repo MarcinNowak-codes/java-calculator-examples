@@ -38,7 +38,7 @@ public class ParserException extends RuntimeException {
     /**
      * the token that caused the error
      */
-    private Token token = null;
+    public final Token token;
 
     /**
      * Construct the evaluation exception with a message.
@@ -47,6 +47,7 @@ public class ParserException extends RuntimeException {
      */
     public ParserException(String message) {
         super(message);
+        token = null;
     }
 
     /**
@@ -61,20 +62,12 @@ public class ParserException extends RuntimeException {
     }
 
     /**
-     * Get the token.
-     *
-     * @return the token that caused the exception
-     */
-    public Token getToken() {
-        return token;
-    }
-
-    /**
      * Overrides RuntimeException.getMessage to add the token information
      * into the error message.
      *
      * @return the error message
      */
+    @Override
     public String getMessage() {
         String msg = super.getMessage();
         if (token != null) {

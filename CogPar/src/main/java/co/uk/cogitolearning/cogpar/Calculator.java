@@ -44,14 +44,14 @@ class Calculator {
         return calculatePolishNotation(polishNotationList);
     }
 
-    static double calculatePolishNotation(ArrayList<ExpressionNode> list) {
+    private static double calculatePolishNotation(ArrayList<ExpressionNode> list) {
         // https://en.wikipedia.org/wiki/Polish_notation
         Collections.reverse(list); // Scan the given prefix expression from right to left
         Stack<Double> stack = new Stack<>();
-        CalculateVisitor calculateVisitor = new CalculateVisitor(stack);
+        CalculateVisitor visitor = new CalculateVisitor(stack);
 
         for (ExpressionNode node : list)
-            node.accept(calculateVisitor);
+            node.accept(visitor);
 
         return stack.pop();
     }

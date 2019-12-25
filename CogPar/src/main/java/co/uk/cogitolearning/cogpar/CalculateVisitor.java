@@ -10,12 +10,12 @@ import static co.uk.cogitolearning.cogpar.tree.FunctionNode.*;
 public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     private Stack<Double> stack;
 
-    public CalculateVisitor(Stack<Double> stack) {
+    CalculateVisitor(Stack<Double> stack) {
 
         this.stack = stack;
     }
 
-    static public double functionGetValue(int function, double argument) {
+    private static double functionGetValue(int function, double argument) {
         switch (function) {
             case SIN:
                 return Math.sin(argument);
@@ -39,9 +39,10 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
                 return Math.log(argument) * 0.43429448190325182765;
             case LOG2:
                 return Math.log(argument) * 1.442695040888963407360;
-        }
+            default:
+                throw new EvaluationException("Invalid function id " + function + "!");
 
-        throw new EvaluationException("Invalid function id " + function + "!");
+        }
     }
 
     public Void visit(VariableNode node) {

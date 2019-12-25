@@ -85,6 +85,11 @@ public final class FunctionNode implements ExpressionNode {
     public static final int LOG2 = 11;
 
     /**
+     * Consists a string with all the function names concatenated by a | symbol.
+     */
+    public static final String SIN_COS_TAN_ASIN_ACOS_ATAN_SQRT_EXP_LN_LOG_LOG_2 = "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
+
+    /**
      * the id of the function to apply to the argument
      */
     public final int function;
@@ -141,18 +146,6 @@ public final class FunctionNode implements ExpressionNode {
             return FunctionNode.LOG2;
 
         throw new ParserException("Unexpected Function " + str + " found");
-    }
-
-    /**
-     * Returns a string with all the function names concatenated by a | symbol.
-     * <p>
-     * This string is used in Tokenizer.createExpressionTokenizer to create a
-     * regular expression for recognizing function names.
-     *
-     * @return a string containing all the function names
-     */
-    public static String getAllFunctions() {
-        return "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
     }
 
     @Override

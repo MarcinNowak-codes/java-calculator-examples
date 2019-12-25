@@ -27,6 +27,8 @@ package co.uk.cogitolearning.cogpar.lexer;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.io.Serializable;
+
 /**
  * A token that is produced by Tokenizer and fed into Parser.parse
  * <p>
@@ -37,7 +39,8 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class Token {
+public class Token implements Serializable {
+    private static final long serialVersionUID = -1009747984332258567L;
     /**
      * Token id for the epsilon terminal
      */
@@ -103,12 +106,9 @@ public class Token {
      * @param pos      the position of the token in the input string
      */
     public Token(int tokenId, String sequence, int pos) {
-        super();
         this.tokenId = tokenId;
         this.sequence = sequence;
         this.pos = pos;
     }
 
 }
-
-

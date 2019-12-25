@@ -3,6 +3,7 @@ package co.uk.cogitolearning.cogpar.tree;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 final class ExpressionNodeIterator implements Iterator<ExpressionNode> {
     private final List<ExpressionNode> list = new ArrayList<>();
@@ -19,6 +20,8 @@ final class ExpressionNodeIterator implements Iterator<ExpressionNode> {
 
     @Override
     public ExpressionNode next() {
+        if (list.isEmpty())
+            throw new NoSuchElementException("Iteration beyond the end of the collection");
         return list.remove(0);
     }
 

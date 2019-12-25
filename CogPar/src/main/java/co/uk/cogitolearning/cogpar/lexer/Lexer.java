@@ -27,6 +27,7 @@ package co.uk.cogitolearning.cogpar.lexer;
 import co.uk.cogitolearning.cogpar.ParserException;
 import co.uk.cogitolearning.cogpar.tree.FunctionNode;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -115,7 +116,7 @@ public class Lexer {
         lexer.add("[/]", Token.DIV);
         lexer.add("\\^", Token.RAISED);
 
-        String funcs = FunctionNode.getAllFunctions();
+        String funcs = FunctionNode.SIN_COS_TAN_ASIN_ACOS_ATAN_SQRT_EXP_LN_LOG_LOG_2;
         lexer.add("(" + funcs + ")(?!\\w)", Token.FUNCTION);
 
         lexer.add("\\(", Token.OPEN_BRACKET);
@@ -172,7 +173,7 @@ public class Lexer {
      *
      * @return a list of tokens to be fed to Parser
      */
-    public LinkedList<Token> getTokens() {
+    public Deque<Token> getTokens() {
         return tokens;
     }
 
