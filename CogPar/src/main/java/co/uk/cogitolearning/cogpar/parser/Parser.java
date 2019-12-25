@@ -152,20 +152,14 @@ public class Parser {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = term();
-            if (positive)
-                return t;
-            else
-                return new AdditionNode(t, false);
+            return positive ? t : new AdditionNode(t, false);
         }
 
         if (lookahead.tokenId == Token.MINUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = term();
-            if (positive)
-                return t;
-            else
-                return new SubtractionNode(t, false);
+            return positive ? t : new SubtractionNode(t, false);
         }
 
         // signed_term -> term
@@ -237,20 +231,14 @@ public class Parser {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = factor();
-            if (positive)
-                return t;
-            else
-                return new AdditionNode(t, false);
+            return positive ? t : new AdditionNode(t, false);
         }
 
         if (lookahead.tokenId == Token.MINUS) {
             boolean positive = lookahead.sequence.equals("+");
             nextToken();
             ExpressionNode t = factor();
-            if (positive)
-                return t;
-            else
-                return new AdditionNode(t, false);
+            return positive ? t : new AdditionNode(t, false);
         }
 
         // signed_factor -> factor
@@ -338,9 +326,6 @@ public class Parser {
     private void nextToken() {
         tokens.pop();
         // at the end of input we return an epsilon token
-        if (tokens.isEmpty())
-            lookahead = new Token(Token.EPSILON, "", -1);
-        else
-            lookahead = tokens.getFirst();
+        lookahead = tokens.isEmpty() ? new Token(Token.EPSILON, "", -1) : tokens.getFirst();
     }
 }
