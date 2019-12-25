@@ -55,6 +55,9 @@ public class Parser2 {
                     ExpressionNode exponent = parse(tokens);
                     nodes.push(new ExponentiationNode(expr, exponent));
                     break;
+                case Token.VARIABLE:
+                    nodes.push(new VariableNode(token.sequence));
+                    break;
                 default:
                     throw new UnsupportedOperationException("Not supported: " + token.tokenId);
             }
