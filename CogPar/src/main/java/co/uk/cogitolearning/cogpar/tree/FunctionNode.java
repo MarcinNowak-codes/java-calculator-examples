@@ -28,8 +28,6 @@ import co.uk.cogitolearning.cogpar.ParserException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.Iterator;
-
 /**
  * An ExpressionNode that handles mathematical functions.
  * <p>
@@ -160,11 +158,6 @@ public class FunctionNode implements ExpressionNode {
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);
-    }
-
-    @Override
-    public Iterator<ExpressionNode> iterator() {
-        return new ExpressionNodeIterator(this);
     }
 
 }

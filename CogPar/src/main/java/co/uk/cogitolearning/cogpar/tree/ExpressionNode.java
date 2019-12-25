@@ -40,5 +40,8 @@ public interface ExpressionNode extends Iterable<ExpressionNode> {
     void accept(ExpressionNodeVisitor visitor);
 
     @Override
-    Iterator<ExpressionNode> iterator();
+    default Iterator<ExpressionNode> iterator() {
+        return new ExpressionNodeIterator(this);
+    }
+
 }

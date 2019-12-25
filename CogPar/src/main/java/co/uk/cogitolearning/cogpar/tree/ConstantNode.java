@@ -27,8 +27,6 @@ package co.uk.cogitolearning.cogpar.tree;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.Iterator;
-
 /**
  * An ExpressionNode that stores a constant value
  */
@@ -52,8 +50,4 @@ public class ConstantNode implements ExpressionNode {
         visitor.visit(this);
     }
 
-    @Override
-    public Iterator<ExpressionNode> iterator() {
-        return new ExpressionNodeIterator(this);
-    }
 }

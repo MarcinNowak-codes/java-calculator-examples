@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
+class ExpressionNodeIterator implements Iterator<ExpressionNode> {
     private final List<ExpressionNode> list = new ArrayList<>();
 
-    public ExpressionNodeIterator(ExpressionNode expressionNode) {
+    ExpressionNodeIterator(ExpressionNode expressionNode) {
         IteratorVisitor visitor = new IteratorVisitor(list);
         expressionNode.accept(visitor);
     }
