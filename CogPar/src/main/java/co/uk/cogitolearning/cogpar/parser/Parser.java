@@ -4,9 +4,7 @@ import co.uk.cogitolearning.cogpar.ParserException;
 import co.uk.cogitolearning.cogpar.lexer.Token;
 import co.uk.cogitolearning.cogpar.tree.*;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 public class Parser {
 
@@ -19,7 +17,6 @@ public class Parser {
                 case Token.NUMBER:
                     nodes.push(new ConstantNode(Double.parseDouble(token.sequence)));
                     break;
-
                 case Token.PLUS:
                     ExpressionNode left = nodes.pop();
                     ExpressionNode right = parse(tokens);
@@ -27,7 +24,7 @@ public class Parser {
                     break;
                 case Token.MINUS:
                     left = nodes.pop();
-                    right = parse(tokens);
+                    right = lookaheadMinus(tokens);
                     nodes.push(new SubtractionNode(left, right));
                     break;
                 case Token.MULT:
@@ -64,6 +61,14 @@ public class Parser {
 
         }
         return nodes.pop();
+    }
+
+    private ExpressionNode lookaheadMinus(Deque<Token> tokens) {
+        assert !tokens.isEmpty();
+
+        if (tokens.peekFirst().tokenId != Token.OPEN_BRACKET)
+            return parse(new LinkedList<>(Collections.singletonList(tokens.pollFirst())));
+        return parse(tokens);
     }
 
     Deque<Token> tokensInBracket(Deque<Token> tokens) {

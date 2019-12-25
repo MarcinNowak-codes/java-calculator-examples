@@ -81,8 +81,8 @@ public class ParserTest {
         )));
 
         // Then
-        SubtractionNode right = new SubtractionNode(new ConstantNode(2.0), new ConstantNode(3.0));
-        SubtractionNode node = new SubtractionNode(new ConstantNode(6.0), right);
+        SubtractionNode left = new SubtractionNode(new ConstantNode(6.0), new ConstantNode(2.0));
+        SubtractionNode node = new SubtractionNode(left, new ConstantNode(3.0));
 
         assertThat(tree).isEqualTo(node);
     }
