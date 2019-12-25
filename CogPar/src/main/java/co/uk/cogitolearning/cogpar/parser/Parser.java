@@ -74,9 +74,9 @@ public class Parser {
      *         expression tree made out of ExpressionNode objects
      */
     public ExpressionNode parse(String expression) {
-        Tokenizer tokenizer = Tokenizer.getExpressionTokenizer();
-        tokenizer.tokenize(expression);
-        return this.parse(tokenizer.getTokens());
+        Lexer lexer = Lexer.getExpressionTokenizer();
+        lexer.tokenize(expression);
+        return this.parse(lexer.getTokens());
     }
 
     /**

@@ -11,13 +11,13 @@ be used to analyse expressions and store them in an internal data structure for
 later evaluation. Repeated evaluation of the same expression using CogPar is 
 fast.
 
-CogPar comes with a highly configurable tokenizer which can be adapted for your
+CogPar comes with a highly configurable lexer which can be adapted for your
 own needs.
 
 Arbitrary named variables are supported and values can be assigned in a single 
 line of code.
 
-The parser, it's grammar an the tokenizer are well documented. You can read more
+The parser, it's grammar an the lexer are well documented. You can read more
 about the internal workings of CogPar in these posts.
 
 CogPar is distributed under the MIT license, so feel free to use it in your own 

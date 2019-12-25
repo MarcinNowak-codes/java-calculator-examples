@@ -40,7 +40,7 @@ import java.util.regex.Pattern;
  * end-of-string anchors or any capturing groups as these will be added by the
  * tokenizer itslef.
  */
-public class Tokenizer {
+public class Lexer {
     /**
      * Internal class holding the information about a token type.
      */
@@ -79,12 +79,12 @@ public class Tokenizer {
     /**
      * a tokenizer that can handle mathematical expressions
      */
-    private static Tokenizer expressionTokenizer = null;
+    private static Lexer expressionTokenizer = null;
 
     /**
      * Default constructor
      */
-    public Tokenizer() {
+    public Lexer() {
         super();
         tokenInfos = new LinkedList<>();
         tokens = new LinkedList<>();
@@ -95,7 +95,7 @@ public class Tokenizer {
      *
      * @return a tokenizer that can handle mathematical expressions
      */
-    public static Tokenizer getExpressionTokenizer() {
+    public static Lexer getExpressionTokenizer() {
         if (expressionTokenizer == null)
             expressionTokenizer = createExpressionTokenizer();
         return expressionTokenizer;
@@ -106,24 +106,24 @@ public class Tokenizer {
      *
      * @return a tokenizer that can handle mathematical expressions
      */
-    private static Tokenizer createExpressionTokenizer() {
-        Tokenizer tokenizer = new Tokenizer();
+    private static Lexer createExpressionTokenizer() {
+        Lexer lexer = new Lexer();
 
-        tokenizer.add("[+]", Token.PLUS);
-        tokenizer.add("[-]", Token.MINUS);
-        tokenizer.add("[*]", Token.MULT);
-        tokenizer.add("[/]", Token.DIV);
-        tokenizer.add("\\^", Token.RAISED);
+        lexer.add("[+]", Token.PLUS);
+        lexer.add("[-]", Token.MINUS);
+        lexer.add("[*]", Token.MULT);
+        lexer.add("[/]", Token.DIV);
+        lexer.add("\\^", Token.RAISED);
 
         String funcs = FunctionNode.getAllFunctions();
-        tokenizer.add("(" + funcs + ")(?!\\w)", Token.FUNCTION);
+        lexer.add("(" + funcs + ")(?!\\w)", Token.FUNCTION);
 
-        tokenizer.add("\\(", Token.OPEN_BRACKET);
-        tokenizer.add("\\)", Token.CLOSE_BRACKET);
-        tokenizer.add("(?:\\d+\\.?|\\.\\d)\\d*(?:[Ee][-+]?\\d+)?", Token.NUMBER);
-        tokenizer.add("[a-zA-Z]\\w*", Token.VARIABLE);
+        lexer.add("\\(", Token.OPEN_BRACKET);
+        lexer.add("\\)", Token.CLOSE_BRACKET);
+        lexer.add("(?:\\d+\\.?|\\.\\d)\\d*(?:[Ee][-+]?\\d+)?", Token.NUMBER);
+        lexer.add("[a-zA-Z]\\w*", Token.VARIABLE);
 
-        return tokenizer;
+        return lexer;
     }
 
     /**
