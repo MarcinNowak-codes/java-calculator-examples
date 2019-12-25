@@ -24,6 +24,8 @@
 
 package co.uk.cogitolearning.cogpar;
 
+import co.uk.cogitolearning.cogpar.lexer.Lexer;
+import co.uk.cogitolearning.cogpar.parser.Parser;
 import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
 import lombok.experimental.UtilityClass;
 
@@ -34,7 +36,7 @@ import java.util.Stack;
 @UtilityClass
 class Calculator {
 
-    static double calculate(ExpressionNode expr) {
+    static double calculateTree(ExpressionNode expr) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
         for (ExpressionNode node : (Iterable<ExpressionNode>) expr)
@@ -53,5 +55,14 @@ class Calculator {
             node.accept(calculateVisitor);
 
         return stack.pop();
+    }
+
+    static double calculate(String expresion) {
+        Parser parser = new Parser();
+        Lexer lexer = Lexer.getInstance();
+        lexer.tokenize(expresion);
+        ExpressionNode expr = parser.parse(lexer.getTokens());
+        Algorithms.setVariable(expr, "pi", Math.PI);
+        return calculateTree(expr);
     }
 }

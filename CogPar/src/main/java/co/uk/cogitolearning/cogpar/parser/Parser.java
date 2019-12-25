@@ -43,7 +43,6 @@
 package co.uk.cogitolearning.cogpar.parser;
 
 import co.uk.cogitolearning.cogpar.ParserException;
-import co.uk.cogitolearning.cogpar.lexer.Lexer;
 import co.uk.cogitolearning.cogpar.lexer.Token;
 import co.uk.cogitolearning.cogpar.tree.*;
 
@@ -53,42 +52,26 @@ import java.util.LinkedList;
  * A parser for mathematical expressions. The parser class defines a method
  * parse() which takes a string and returns an ExpressionNode that holds a
  * representation of the expression.
- *
+ * <p>
  * Parsing is implemented in the form of a recursive descent parser.
- *
  */
 public class Parser {
-    /** the tokens to parse */
-    LinkedList<Token> tokens;
-    /** the next token */
-    Token lookahead;
-
     /**
-     * Parse a mathematical expression in a string and return an ExpressionNode.
-     *
-     * This is a convenience method that first converts the string into a linked
-     * list of tokens using the expression tokenizer provided by the Tokenizer
-     * class.
-     *
-     * @param expression
-     *          the string holding the input
-     * @return the internal representation of the expression in form of an
-     *         expression tree made out of ExpressionNode objects
+     * the tokens to parse
      */
-    public ExpressionNode parse(String expression) {
-        Lexer lexer = Lexer.getInstance();
-        lexer.tokenize(expression);
-        return this.parse(lexer.getTokens());
-    }
+    LinkedList<Token> tokens;
+    /**
+     * the next token
+     */
+    Token lookahead;
 
     /**
      * Parse a mathematical expression in contained in a list of tokens and return
      * an ExpressionNode.
      *
-     * @param tokens
-     *          a list of tokens holding the tokenized input
+     * @param tokens a list of tokens holding the tokenized input
      * @return the internal representation of the expression in form of an
-     *         expression tree made out of ExpressionNode objects
+     * expression tree made out of ExpressionNode objects
      */
     public ExpressionNode parse(LinkedList<Token> tokens) {
         // implementing a recursive descent parser
@@ -104,7 +87,9 @@ public class Parser {
         return expr;
     }
 
-    /** handles the non-terminal expression */
+    /**
+     * handles the non-terminal expression
+     */
     private ExpressionNode expression() {
         // only one rule
         // expression -> signed_term sum_op
@@ -113,7 +98,9 @@ public class Parser {
         return expr;
     }
 
-    /** handles the non-terminal sum_op */
+    /**
+     * handles the non-terminal sum_op
+     */
     private ExpressionNode sumOp(ExpressionNode expr) {
         // sum_op -> PLUSMINUS term sum_op
         if (lookahead.tokenId == Token.PLUS) {
@@ -156,7 +143,9 @@ public class Parser {
         return expr;
     }
 
-    /** handles the non-terminal signed_term */
+    /**
+     * handles the non-terminal signed_term
+     */
     private ExpressionNode signedTerm() {
         // signed_term -> PLUSMINUS term
         if (lookahead.tokenId == Token.PLUS) {
@@ -183,14 +172,18 @@ public class Parser {
         return term();
     }
 
-    /** handles the non-terminal term */
+    /**
+     * handles the non-terminal term
+     */
     private ExpressionNode term() {
         // term -> factor term_op
         ExpressionNode f = factor();
         return termOp(f);
     }
 
-    /** handles the non-terminal term_op */
+    /**
+     * handles the non-terminal term_op
+     */
     private ExpressionNode termOp(ExpressionNode expression) {
         // term_op -> MULTDIV factor term_op
         if (lookahead.tokenId == Token.MULT) {
@@ -235,7 +228,9 @@ public class Parser {
         return expression;
     }
 
-    /** handles the non-terminal signed_factor */
+    /**
+     * handles the non-terminal signed_factor
+     */
     private ExpressionNode signedFactor() {
         // signed_factor -> PLUSMINUS factor
         if (lookahead.tokenId == Token.PLUS) {
@@ -262,7 +257,9 @@ public class Parser {
         return factor();
     }
 
-    /** handles the non-terminal factor */
+    /**
+     * handles the non-terminal factor
+     */
     private ExpressionNode factor() {
         // factor -> argument factor_op
         ExpressionNode a = argument();
@@ -270,7 +267,9 @@ public class Parser {
     }
 
 
-    /** handles the non-terminal factor_op */
+    /**
+     * handles the non-terminal factor_op
+     */
     private ExpressionNode factorOp(ExpressionNode expr) {
         // factor_op -> RAISED expression
         if (lookahead.tokenId == Token.RAISED) {
@@ -284,7 +283,9 @@ public class Parser {
         return expr;
     }
 
-    /** handles the non-terminal argument */
+    /**
+     * handles the non-terminal argument
+     */
     private ExpressionNode argument() {
         // argument -> FUNCTION argument
         if (lookahead.tokenId == Token.FUNCTION) {
@@ -307,7 +308,9 @@ public class Parser {
         return value();
     }
 
-    /** handles the non-terminal value */
+    /**
+     * handles the non-terminal value
+     */
     private ExpressionNode value() {
         // argument -> NUMBER
         if (lookahead.tokenId == Token.NUMBER) {

@@ -91,7 +91,7 @@ public class Lexer {
 
     /**
      * A static method that returns a tokenizer for mathematical expressions
-     *
+     * <p>
      * Not thread safe singleton design pattern
      *
      * @return a tokenizer that can handle mathematical expressions

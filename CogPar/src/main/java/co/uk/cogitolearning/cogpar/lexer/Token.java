@@ -98,7 +98,7 @@ public class Token {
     /**
      * Construct the token with its values
      *
-     * @param tokenId    the token identifier
+     * @param tokenId  the token identifier
      * @param sequence the string that the token was created from
      * @param pos      the position of the token in the input string
      */

@@ -1,6 +1,5 @@
 package co.uk.cogitolearning.cogpar;
 
-import co.uk.cogitolearning.cogpar.parser.Parser;
 import co.uk.cogitolearning.cogpar.tree.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,8 +18,7 @@ public class CalculatorTest {
         MultiplicationNode multi = new MultiplicationNode(sum, true);
         multi.add(four, true);
 
-
-        Assert.assertEquals(20.0, Calculator.calculate(multi), 0.1);
+        Assert.assertEquals(20.0, Calculator.calculateTree(multi), 0.1);
     }
 
     @Test
@@ -46,59 +44,27 @@ public class CalculatorTest {
 
         Algorithms.setVariable(root, "pi", Math.PI);
 
-        Assert.assertEquals(6144.0, Calculator.calculate(root), 0.1);
+        Assert.assertEquals(6144.0, Calculator.calculateTree(root), 0.1);
     }
 
     @Test
     public void shouldParse() {
-        // Given
-        Parser parser = new Parser();
-        // When
-        String expresion = "2*(1+sin(pi/2))^2";
-        ExpressionNode expr = parser.parse(expresion);
-        Algorithms.setVariable(expr, "pi", Math.PI);
-
-        // Then
-        Assert.assertEquals(8.0, Calculator.calculate(expr), 0.1);
+        Assert.assertEquals(8.0, Calculator.calculate("2*(1+sin(pi/2))^2"), 0.1);
     }
 
     @Test
     public void shouldParseSub() {
-        // Given
-        Parser parser = new Parser();
-        // When
-        String expresion = "3-1";
-        ExpressionNode expr = parser.parse(expresion);
-        Algorithms.setVariable(expr, "pi", Math.PI);
-
-        // Then
-        Assert.assertEquals(3 - 1, Calculator.calculate(expr), 0.1);
+        Assert.assertEquals(3 - 1, Calculator.calculate("3-1"), 0.1);
     }
 
     @Test
     public void shouldParseSub2() {
-        // Given
-        Parser parser = new Parser();
-        // When
-        String expresion = "4-1-2";
-        ExpressionNode expr = parser.parse(expresion);
-        Algorithms.setVariable(expr, "pi", Math.PI);
-
-        // Then
-        Assert.assertEquals(4 - 1 - 2, Calculator.calculate(expr), 0.1);
+        Assert.assertEquals(4 - 1 - 2, Calculator.calculate("4-1-2"), 0.1);
     }
 
     @Test
     public void shouldParseAdd2() {
-        // Given
-        Parser parser = new Parser();
-        // When
-        String expresion = "1+2+3";
-        ExpressionNode expr = parser.parse(expresion);
-        Algorithms.setVariable(expr, "pi", Math.PI);
-
-        // Then
-        Assert.assertEquals(1 + 2 + 3, Calculator.calculate(expr), 0.1);
+        Assert.assertEquals(1 + 2 + 3, Calculator.calculate("1+2+3"), 0.1);
     }
 
 }
