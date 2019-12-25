@@ -14,10 +14,8 @@ public class CalculatorTest {
         ConstantNode three = new ConstantNode(3);
         ConstantNode four = new ConstantNode(4);
 
-        AdditionNode sum = new AdditionNode(two, true);
-        sum.add(three, true);
-        MultiplicationNode multi = new MultiplicationNode(sum, true);
-        multi.add(four, true);
+        AdditionNodeNew sum = new AdditionNodeNew(two, three);
+        MultiplicationNodeNew multi = new MultiplicationNodeNew(sum, four);
 
         Assert.assertEquals(20.0, Calculator.calculateTree(multi), 0.1);
     }
@@ -29,17 +27,13 @@ public class CalculatorTest {
         // String exprstr = "6*(3+sin(pi/2))^5"; //=6144
         ConstantNode five = new ConstantNode(6);
 
-        DivNode halfPi = new DivNode();
         VariableNode pi = new VariableNode("pi");
-        halfPi.add(pi, true);
-        halfPi.add(new ConstantNode(2), true);
+        DivNodeNew halfPi = new DivNodeNew(pi, new ConstantNode(2));
 
         FunctionNode sin = new FunctionNode(FunctionNode.SIN, halfPi);
-        AdditionNode braces = new AdditionNode(new ConstantNode(3), true);
-        braces.add(sin, true);
+        AdditionNodeNew braces = new AdditionNodeNew(new ConstantNode(3), sin);
         ExponentiationNode exponent = new ExponentiationNode(braces, new ConstantNode(5));
-        MultiplicationNode multiplication = new MultiplicationNode(five, true);
-        multiplication.add(exponent, true);
+        MultiplicationNodeNew multiplication = new MultiplicationNodeNew(five, exponent);
 
         root = multiplication;
 

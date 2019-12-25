@@ -43,16 +43,6 @@ public interface ExpressionNodeVisitor<T> {
     T visit(ConstantNode node);
 
     /**
-     * Visit a AdditionExpressionNode
-     */
-    T visit(AdditionNode node);
-
-    /**
-     * Visit a MultiplicationExpressionNode
-     */
-    T visit(MultiplicationNode node);
-
-    /**
      * Visit a ExponentiationExpressionNode
      */
     T visit(ExponentiationNode node);
@@ -61,10 +51,6 @@ public interface ExpressionNodeVisitor<T> {
      * Visit a FunctionExpressionNode
      */
     T visit(FunctionNode node);
-
-    T visit(DivNode node);
-
-    T visit(SubtractionNode node);
 
     T visit(AdditionNodeNew node);
 

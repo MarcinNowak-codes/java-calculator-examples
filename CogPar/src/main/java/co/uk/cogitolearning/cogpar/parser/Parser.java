@@ -8,7 +8,7 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
 
-public class Parser2 {
+public class Parser {
 
     public ExpressionNode parse(Deque<Token> tokens) {
         Stack<ExpressionNode> nodes = new Stack<>();

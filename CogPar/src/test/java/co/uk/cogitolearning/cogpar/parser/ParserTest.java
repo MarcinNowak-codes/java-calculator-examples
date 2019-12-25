@@ -9,12 +9,12 @@ import java.util.LinkedList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ParserTest2 {
+public class ParserTest {
 
     @Test
     public void shouldParseAdd2() {
         // Given
-        Parser2 parser = new Parser2();
+        Parser parser = new Parser();
 
         // When
         ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
@@ -31,7 +31,7 @@ public class ParserTest2 {
     @Test
     public void shouldParseAdd3() {
         // Given
-        Parser2 parser = new Parser2();
+        Parser parser = new Parser();
 
         // When
         ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
@@ -52,7 +52,7 @@ public class ParserTest2 {
     @Test
     public void shouldParseSub2() {
         // Given
-        Parser2 parser = new Parser2();
+        Parser parser = new Parser();
 
         // When
         ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
@@ -69,7 +69,7 @@ public class ParserTest2 {
     @Test
     public void shouldParseSub3() {
         // Given
-        Parser2 parser = new Parser2();
+        Parser parser = new Parser();
 
         // When
         ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
@@ -90,7 +90,7 @@ public class ParserTest2 {
     @Test
     public void shouldParseExtended() {
         // Given
-        Parser2 parser = new Parser2();
+        Parser parser = new Parser();
 
         // When
         // 6*(3+sin(3.1415/2))^5

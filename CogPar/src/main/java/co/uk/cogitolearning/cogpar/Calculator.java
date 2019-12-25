@@ -25,7 +25,7 @@
 package co.uk.cogitolearning.cogpar;
 
 import co.uk.cogitolearning.cogpar.lexer.Lexer;
-import co.uk.cogitolearning.cogpar.parser.Parser2;
+import co.uk.cogitolearning.cogpar.parser.Parser;
 import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
 import lombok.experimental.UtilityClass;
 
@@ -58,7 +58,7 @@ class Calculator {
     }
 
     static double calculate(String expresion) {
-        Parser2 parser = new Parser2();
+        Parser parser = new Parser();
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
         ExpressionNode expr = parser.parse(lexer.getTokens());

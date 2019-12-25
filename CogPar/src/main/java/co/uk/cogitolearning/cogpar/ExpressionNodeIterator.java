@@ -40,20 +40,6 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
             return null;
         }
 
-        public Void visit(AdditionNode node) {
-            list.add(node);
-            for (SequenceNode.Term t : node.terms)
-                t.expression.accept(this);
-            return null;
-        }
-
-        public Void visit(MultiplicationNode node) {
-            list.add(node);
-            for (SequenceNode.Term t : node.terms)
-                t.expression.accept(this);
-            return null;
-        }
-
         public Void visit(ExponentiationNode node) {
             list.add(node);
             node.base.accept(this);
@@ -64,21 +50,6 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         public Void visit(FunctionNode node) {
             list.add(node);
             node.getArgument().accept(this);
-            return null;
-        }
-
-        public Void visit(DivNode node) {
-            list.add(node);
-            for (SequenceNode.Term t : node.terms)
-                t.expression.accept(this);
-            return null;
-        }
-
-        @Override
-        public Void visit(SubtractionNode node) {
-            list.add(node);
-            for (SequenceNode.Term t : node.terms)
-                t.expression.accept(this);
             return null;
         }
 

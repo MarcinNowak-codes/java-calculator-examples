@@ -50,6 +50,7 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
      * Checks the nodes name against the name to set and sets the value if the two
      * strings match
      */
+    @Override
     public Void visit(VariableNode node) {
         if (node.getName().equals(name))
             node.setValue(value);
@@ -59,6 +60,7 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
     /**
      * Do nothing
      */
+    @Override
     public Void visit(ConstantNode node) {
         return null;
     }
@@ -66,20 +68,7 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
     /**
      * Do nothing
      */
-    public Void visit(AdditionNode node) {
-        return null;
-    }
-
-    /**
-     * Do nothing
-     */
-    public Void visit(MultiplicationNode node) {
-        return null;
-    }
-
-    /**
-     * Do nothing
-     */
+    @Override
     public Void visit(ExponentiationNode node) {
         return null;
     }
@@ -87,19 +76,8 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
     /**
      * Do nothing
      */
-    public Void visit(FunctionNode node) {
-        return null;
-    }
-
-    /**
-     * Do nothing
-     */
-    public Void visit(DivNode node) {
-        return null;
-    }
-
     @Override
-    public Void visit(SubtractionNode node) {
+    public Void visit(FunctionNode node) {
         return null;
     }
 
