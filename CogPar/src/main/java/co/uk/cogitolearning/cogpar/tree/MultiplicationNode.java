@@ -26,22 +26,29 @@ package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * An ExpressionNode that handles multiplications and divisions. The node can hold
  * an arbitrary number of factors that are either multiplied or divided to the product.
  */
-public class MultiplicationNode extends SequenceNode {
+public class MultiplicationNode implements ExpressionNode {
+    /**
+     * the list of terms in the sequence
+     */
+    public final List<SequenceNode.Term> terms; //FIXME: Exposing internal representation.
 
     /**
      * Constructor to create a multiplication with the first term already added.
      *
-     * @param a        the term to be added
+     * @param node     the term to be added
      * @param positive a flag indicating whether the term is multiplied or divided
      */
-    public MultiplicationNode(ExpressionNode a, boolean positive) {
-        super(a, positive);
+    public MultiplicationNode(ExpressionNode node, boolean positive) {
+        this.terms = new ArrayList<>();
+        this.terms.add(new SequenceNode.Term(positive, node));
     }
 
     /**
@@ -59,6 +66,16 @@ public class MultiplicationNode extends SequenceNode {
     @Override
     public Iterator<ExpressionNode> iterator() {
         return new ExpressionNodeIterator(this);
+    }
+
+    /**
+     * Add another term to the sequence
+     *
+     * @param node     the term to be added
+     * @param positive a boolean flag
+     */
+    public void add(ExpressionNode node, boolean positive) {
+        this.terms.add(new SequenceNode.Term(positive, node));
     }
 
 }

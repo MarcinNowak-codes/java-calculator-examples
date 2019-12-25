@@ -3,6 +3,7 @@ package co.uk.cogitolearning.cogpar;
 import co.uk.cogitolearning.cogpar.parser.Parser;
 import co.uk.cogitolearning.cogpar.tree.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -14,9 +15,9 @@ public class CalculatorTest {
         ConstantNode three = new ConstantNode(3);
         ConstantNode four = new ConstantNode(4);
 
-        SequenceNode sum = new AdditionNode(two, true);
+        AdditionNode sum = new AdditionNode(two, true);
         sum.add(three, true);
-        SequenceNode multi = new MultiplicationNode(sum, true);
+        MultiplicationNode multi = new MultiplicationNode(sum, true);
         multi.add(four, true);
 
 
@@ -60,6 +61,20 @@ public class CalculatorTest {
 
         // Then
         Assert.assertEquals(8.0, Calculator.calculate(expr), 0.1);
+    }
+
+    @Ignore
+    @Test
+    public void shouldParseSub() {
+        // Given
+        Parser parser = new Parser();
+        // When
+        String expresion = "3-1";
+        ExpressionNode expr = parser.parse(expresion);
+        Algorithms.setVariable(expr, "pi", Math.PI);
+
+        // Then
+        Assert.assertEquals(3 - 1, Calculator.calculate(expr), 0.1);
     }
 
 }

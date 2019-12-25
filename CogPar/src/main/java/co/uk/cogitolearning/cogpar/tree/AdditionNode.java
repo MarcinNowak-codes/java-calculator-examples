@@ -26,13 +26,19 @@ package co.uk.cogitolearning.cogpar.tree;
 
 import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * An ExpressionNode that handles additions and subtractions. The node can hold
  * an arbitrary number of terms that are either added or subtraced from the sum.
  */
-public class AdditionNode extends SequenceNode {
+public class AdditionNode implements ExpressionNode {
+    /**
+     * the list of terms in the sequence
+     */
+    public final List<SequenceNode.Term> terms;
 
     /**
      * Constructor to create an addition with the first term already added.
@@ -41,7 +47,8 @@ public class AdditionNode extends SequenceNode {
      * @param positive a flag indicating whether the term is added or subtracted
      */
     public AdditionNode(ExpressionNode node, boolean positive) {
-        super(node, positive);
+        this.terms = new ArrayList<>();
+        this.terms.add(new SequenceNode.Term(positive, node));
     }
 
     /**
@@ -59,6 +66,16 @@ public class AdditionNode extends SequenceNode {
     @Override
     public Iterator iterator() {
         return new ExpressionNodeIterator(this);
+    }
+
+    /**
+     * Add another term to the sequence
+     *
+     * @param node     the term to be added
+     * @param positive a boolean flag
+     */
+    public void add(ExpressionNode node, boolean positive) {
+        this.terms.add(new SequenceNode.Term(positive, node));
     }
 
 }
