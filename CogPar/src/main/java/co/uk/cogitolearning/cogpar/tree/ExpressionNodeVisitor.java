@@ -63,4 +63,6 @@ public interface ExpressionNodeVisitor<T> {
     T visit(FunctionNode node);
 
     T visit(DivNode node);
+
+    T visit(SubtractionNode subtractionNode);
 }

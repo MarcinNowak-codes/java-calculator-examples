@@ -98,4 +98,9 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visit(SubtractionNode subtractionNode) {
+        return null;
+    }
+
 }

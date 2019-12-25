@@ -134,13 +134,13 @@ public class Parser {
         }
 
         if (lookahead.token == Token.MINUS) {
-            AdditionNode sum;
+            SubtractionNode sum;
             // This means we are actually dealing with a sum
             // If expr is not already a sum, we have to create one
             if (expr.getType() == ExpressionNode.ADDITION_NODE)
-                sum = (AdditionNode) expr;
+                sum = (SubtractionNode) expr;
             else
-                sum = new AdditionNode(expr, true);
+                sum = new SubtractionNode(expr, true);
 
             // reduce the input and recursively call sum_op
             boolean positive = lookahead.sequence.equals("+");

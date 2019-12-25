@@ -3,7 +3,6 @@ package co.uk.cogitolearning.cogpar;
 import co.uk.cogitolearning.cogpar.parser.Parser;
 import co.uk.cogitolearning.cogpar.tree.*;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -63,7 +62,6 @@ public class CalculatorTest {
         Assert.assertEquals(8.0, Calculator.calculate(expr), 0.1);
     }
 
-    @Ignore
     @Test
     public void shouldParseSub() {
         // Given

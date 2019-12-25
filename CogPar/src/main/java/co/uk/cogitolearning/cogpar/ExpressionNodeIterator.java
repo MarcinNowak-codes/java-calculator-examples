@@ -73,5 +73,13 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
                 t.expression.accept(this);
             return null;
         }
+
+        @Override
+        public Void visit(SubtractionNode node) {
+            list.add(node);
+            for (SequenceNode.Term t : node.terms)
+                t.expression.accept(this);
+            return null;
+        }
     }
 }
