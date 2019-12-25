@@ -57,6 +57,26 @@ public class CalculatorTest {
     }
 
     @Test
+    public void shouldParseSub2Sin() {
+        Assert.assertEquals(4 - Math.sin(Math.PI / 2), Calculator.calculate("4-sin(pi/2)"), 0.1);
+    }
+
+    @Test
+    public void shouldParseSub3Sin() {
+        Assert.assertEquals(4 - 1 - Math.sin(Math.PI / 2), Calculator.calculate("4-1-sin(pi/2)"), 0.1);
+    }
+
+    @Test
+    public void shouldParseSub2Pi() {
+        Assert.assertEquals(4 - Math.PI, Calculator.calculate("4-pi"), 0.1);
+    }
+
+    @Test
+    public void shouldParseSub3Pi() {
+        Assert.assertEquals(5 - 1 - Math.PI, Calculator.calculate("5-1-pi"), 0.1);
+    }
+
+    @Test
     public void shouldParseAdd2() {
         Assert.assertEquals(1 + 2 + 3, Calculator.calculate("1+2+3"), 0.1);
     }

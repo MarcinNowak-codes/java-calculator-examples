@@ -66,7 +66,7 @@ public class Parser {
     private ExpressionNode lookaheadMinus(Deque<Token> tokens) {
         assert !tokens.isEmpty();
 
-        if (tokens.peekFirst().tokenId != Token.OPEN_BRACKET)
+        if (tokens.peekFirst().tokenId == Token.NUMBER)
             return parse(new LinkedList<>(Collections.singletonList(tokens.pollFirst())));
         return parse(tokens);
     }
