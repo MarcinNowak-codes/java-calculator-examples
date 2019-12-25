@@ -104,7 +104,6 @@ public class FunctionNode implements ExpressionNode {
      * @param argument the argument of the function
      */
     public FunctionNode(int function, ExpressionNode argument) {
-        super();
         this.function = function;
         this.argument = argument;
     }

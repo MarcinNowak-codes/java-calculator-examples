@@ -89,5 +89,29 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
             node.addendRight.accept(this);
             return null;
         }
+
+        @Override
+        public Void visit(SubtractionNodeNew node) {
+            list.add(node);
+            node.minuend.accept(this);
+            node.subtrahend.accept(this);
+            return null;
+        }
+
+        @Override
+        public Void visit(MultiplicationNodeNew node) {
+            list.add(node);
+            node.left.accept(this);
+            node.right.accept(this);
+            return null;
+        }
+
+        @Override
+        public Void visit(DivNodeNew node) {
+            list.add(node);
+            node.left.accept(this);
+            node.right.accept(this);
+            return null;
+        }
     }
 }

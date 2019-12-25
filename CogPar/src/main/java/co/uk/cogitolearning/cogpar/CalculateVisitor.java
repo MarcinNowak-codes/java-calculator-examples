@@ -100,6 +100,31 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
         return null;
     }
 
+    @Override
+    public Void visit(SubtractionNodeNew node) {
+        double operand1 = stack.pop();
+        double operand2 = stack.pop();
+
+        stack.push(operand1 - operand2);
+        return null;
+    }
+
+    @Override
+    public Void visit(MultiplicationNodeNew node) {
+        double operand1 = stack.pop();
+        double operand2 = stack.pop();
+        stack.push(operand1 * operand2);
+        return null;
+    }
+
+    @Override
+    public Void visit(DivNodeNew node) {
+        double operand1 = stack.pop();
+        double operand2 = stack.pop();
+        stack.push(operand1 / operand2);
+        return null;
+    }
+
     public Void visit(MultiplicationNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();

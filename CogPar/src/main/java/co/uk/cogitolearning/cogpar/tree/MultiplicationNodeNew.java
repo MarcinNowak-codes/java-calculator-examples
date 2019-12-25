@@ -24,53 +24,47 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
+import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import java.util.Iterator;
+
 /**
- * An interface for the visitor design pattern.
- * <p>
- * Expression nodes can be visited by ExpressionNodeVisitor by calling their
- * accept methods. The expression nodes, in turn, call the appropriate visit
- * method of the expression node visitor.
+ * An ExpressionNode that handles multiplications and divisions. The node can hold
+ * an arbitrary number of factors that are either multiplied or divided to the product.
  */
-public interface ExpressionNodeVisitor<T> {
-    /**
-     * Visit a VariableExpressionNode
-     */
-    T visit(VariableNode node);
+@ToString
+@EqualsAndHashCode
+public class MultiplicationNodeNew implements ExpressionNode {
+    public final ExpressionNode left;
+    public final ExpressionNode right;
 
     /**
-     * Visit a ConstantExpressionNode
+     * Constructor to create a multiplication with the first term already added.
+     *  @param left
+     * @param right
      */
-    T visit(ConstantNode node);
+    public MultiplicationNodeNew(ExpressionNode left, ExpressionNode right) {
+        this.left = left;
+        this.right = right;
+    }
 
     /**
-     * Visit a AdditionExpressionNode
+     * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
      */
-    T visit(AdditionNode node);
+    public int getType() {
+        return ExpressionNode.MULTIPLICATION_NODE;
+    }
 
-    /**
-     * Visit a MultiplicationExpressionNode
-     */
-    T visit(MultiplicationNode node);
+    @Override
+    public void accept(ExpressionNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 
-    /**
-     * Visit a ExponentiationExpressionNode
-     */
-    T visit(ExponentiationNode node);
+    @Override
+    public Iterator<ExpressionNode> iterator() {
+        return new ExpressionNodeIterator(this);
+    }
 
-    /**
-     * Visit a FunctionExpressionNode
-     */
-    T visit(FunctionNode node);
-
-    T visit(DivNode node);
-
-    T visit(SubtractionNode node);
-
-    T visit(AdditionNodeNew node);
-
-    T visit(SubtractionNodeNew node);
-
-    T visit(MultiplicationNodeNew node);
-
-    T visit(DivNodeNew node);
 }
