@@ -68,7 +68,7 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(AdditionNodeNew node) {
+    public Void visit(AdditionNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
 
@@ -77,7 +77,7 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(SubtractionNodeNew node) {
+    public Void visit(SubtractionNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
 
@@ -86,7 +86,7 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(MultiplicationNodeNew node) {
+    public Void visit(MultiplicationNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         stack.push(operand1 * operand2);
@@ -94,7 +94,7 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(DivNodeNew node) {
+    public Void visit(DivNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         stack.push(operand1 / operand2);

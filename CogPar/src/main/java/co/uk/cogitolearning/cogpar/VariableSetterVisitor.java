@@ -82,22 +82,22 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(AdditionNodeNew node) {
+    public Void visit(AdditionNode node) {
         return null;
     }
 
     @Override
-    public Void visit(SubtractionNodeNew node) {
+    public Void visit(SubtractionNode node) {
         return null;
     }
 
     @Override
-    public Void visit(MultiplicationNodeNew node) {
+    public Void visit(MultiplicationNode node) {
         return null;
     }
 
     @Override
-    public Void visit(DivNodeNew node) {
+    public Void visit(DivNode node) {
         return null;
     }
 

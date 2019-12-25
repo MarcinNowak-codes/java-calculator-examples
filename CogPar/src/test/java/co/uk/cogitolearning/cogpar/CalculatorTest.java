@@ -14,8 +14,8 @@ public class CalculatorTest {
         ConstantNode three = new ConstantNode(3);
         ConstantNode four = new ConstantNode(4);
 
-        AdditionNodeNew sum = new AdditionNodeNew(two, three);
-        MultiplicationNodeNew multi = new MultiplicationNodeNew(sum, four);
+        AdditionNode sum = new AdditionNode(two, three);
+        MultiplicationNode multi = new MultiplicationNode(sum, four);
 
         Assert.assertEquals(20.0, Calculator.calculateTree(multi), 0.1);
     }
@@ -28,12 +28,12 @@ public class CalculatorTest {
         ConstantNode five = new ConstantNode(6);
 
         VariableNode pi = new VariableNode("pi");
-        DivNodeNew halfPi = new DivNodeNew(pi, new ConstantNode(2));
+        DivNode halfPi = new DivNode(pi, new ConstantNode(2));
 
         FunctionNode sin = new FunctionNode(FunctionNode.SIN, halfPi);
-        AdditionNodeNew braces = new AdditionNodeNew(new ConstantNode(3), sin);
+        AdditionNode braces = new AdditionNode(new ConstantNode(3), sin);
         ExponentiationNode exponent = new ExponentiationNode(braces, new ConstantNode(5));
-        MultiplicationNodeNew multiplication = new MultiplicationNodeNew(five, exponent);
+        MultiplicationNode multiplication = new MultiplicationNode(five, exponent);
 
         root = multiplication;
 

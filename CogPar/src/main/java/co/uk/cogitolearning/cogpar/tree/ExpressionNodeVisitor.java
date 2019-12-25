@@ -52,11 +52,11 @@ public interface ExpressionNodeVisitor<T> {
      */
     T visit(FunctionNode node);
 
-    T visit(AdditionNodeNew node);
+    T visit(AdditionNode node);
 
-    T visit(SubtractionNodeNew node);
+    T visit(SubtractionNode node);
 
-    T visit(MultiplicationNodeNew node);
+    T visit(MultiplicationNode node);
 
-    T visit(DivNodeNew node);
+    T visit(DivNode node);
 }

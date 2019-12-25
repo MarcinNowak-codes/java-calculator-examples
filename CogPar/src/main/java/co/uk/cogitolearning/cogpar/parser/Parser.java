@@ -23,17 +23,17 @@ public class Parser {
                 case Token.PLUS:
                     ExpressionNode left = nodes.pop();
                     ExpressionNode right = parse(tokens);
-                    nodes.push(new AdditionNodeNew(left, right));
+                    nodes.push(new AdditionNode(left, right));
                     break;
                 case Token.MINUS:
                     left = nodes.pop();
                     right = parse(tokens);
-                    nodes.push(new SubtractionNodeNew(left, right));
+                    nodes.push(new SubtractionNode(left, right));
                     break;
                 case Token.MULT:
                     left = nodes.pop();
                     right = parse(tokens);
-                    nodes.push(new MultiplicationNodeNew(left, right));
+                    nodes.push(new MultiplicationNode(left, right));
                     break;
                 case Token.OPEN_BRACKET:
                     nodes.push(parse(tokensInBracket(tokens)));
@@ -48,7 +48,7 @@ public class Parser {
                 case Token.DIV:
                     left = nodes.pop();
                     right = parse(tokens);
-                    nodes.push(new DivNodeNew(left, right));
+                    nodes.push(new DivNode(left, right));
                     break;
                 case Token.RAISED:
                     ExpressionNode expr = nodes.pop();

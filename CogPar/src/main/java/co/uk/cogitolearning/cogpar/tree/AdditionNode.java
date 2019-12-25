@@ -38,7 +38,7 @@ import java.util.List;
  */
 @ToString
 @EqualsAndHashCode
-public class AdditionNodeNew implements ExpressionNode {
+public class AdditionNode implements ExpressionNode {
     public final ExpressionNode addendLeft;
     public final ExpressionNode addendRight;
 
@@ -48,7 +48,7 @@ public class AdditionNodeNew implements ExpressionNode {
      * @param addendLeft  the term to be added
      * @param addendRight the term to be added
      */
-    public AdditionNodeNew(ExpressionNode addendLeft, ExpressionNode addendRight) {
+    public AdditionNode(ExpressionNode addendLeft, ExpressionNode addendRight) {
         this.addendLeft = addendLeft;
         this.addendRight = addendRight;
     }

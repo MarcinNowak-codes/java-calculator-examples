@@ -23,7 +23,7 @@ public class ParserTest {
                 new Token(Token.NUMBER, "2", 2))));
 
         // Then
-        AdditionNodeNew node = new AdditionNodeNew(new ConstantNode(1.0), new ConstantNode(2.0));
+        AdditionNode node = new AdditionNode(new ConstantNode(1.0), new ConstantNode(2.0));
 
         assertThat(tree).isEqualTo(node);
     }
@@ -43,8 +43,8 @@ public class ParserTest {
         )));
 
         // Then
-        AdditionNodeNew right = new AdditionNodeNew(new ConstantNode(2.0), new ConstantNode(3.0));
-        AdditionNodeNew node = new AdditionNodeNew(new ConstantNode(1.0), right);
+        AdditionNode right = new AdditionNode(new ConstantNode(2.0), new ConstantNode(3.0));
+        AdditionNode node = new AdditionNode(new ConstantNode(1.0), right);
 
         assertThat(tree).isEqualTo(node);
     }
@@ -61,7 +61,7 @@ public class ParserTest {
                 new Token(Token.NUMBER, "1", 2))));
 
         // Then
-        SubtractionNodeNew node = new SubtractionNodeNew(new ConstantNode(3.0), new ConstantNode(1.0));
+        SubtractionNode node = new SubtractionNode(new ConstantNode(3.0), new ConstantNode(1.0));
 
         assertThat(tree).isEqualTo(node);
     }
@@ -81,8 +81,8 @@ public class ParserTest {
         )));
 
         // Then
-        SubtractionNodeNew right = new SubtractionNodeNew(new ConstantNode(2.0), new ConstantNode(3.0));
-        SubtractionNodeNew node = new SubtractionNodeNew(new ConstantNode(6.0), right);
+        SubtractionNode right = new SubtractionNode(new ConstantNode(2.0), new ConstantNode(3.0));
+        SubtractionNode node = new SubtractionNode(new ConstantNode(6.0), right);
 
         assertThat(tree).isEqualTo(node);
     }
@@ -112,13 +112,13 @@ public class ParserTest {
         )));
 
         // Then
-        MultiplicationNodeNew expected;
-        DivNodeNew div = new DivNodeNew(new ConstantNode(3.1415), new ConstantNode(2.0));
+        MultiplicationNode expected;
+        DivNode div = new DivNode(new ConstantNode(3.1415), new ConstantNode(2.0));
         FunctionNode sin = new FunctionNode(FunctionNode.SIN, div);
-        AdditionNodeNew base = new AdditionNodeNew(new ConstantNode(3.0), sin);
+        AdditionNode base = new AdditionNode(new ConstantNode(3.0), sin);
         ExponentiationNode exp = new ExponentiationNode(base, new ConstantNode(5.0));
 
-        expected = new MultiplicationNodeNew(new ConstantNode(6.0), exp);
+        expected = new MultiplicationNode(new ConstantNode(6.0), exp);
 
         assertThat(tree).isEqualTo(expected);
     }

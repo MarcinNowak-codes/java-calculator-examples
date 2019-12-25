@@ -31,21 +31,23 @@ import lombok.ToString;
 import java.util.Iterator;
 
 /**
- * An ExpressionNode that handles multiplications and divisions. The node can hold
- * an arbitrary number of factors that are either multiplied or divided to the product.
+ * An ExpressionNode that handles divisions. The node can hold
+ * an two number of factors that are divided.
  */
 @ToString
 @EqualsAndHashCode
-public class MultiplicationNodeNew implements ExpressionNode {
+public class DivNode implements ExpressionNode {
     public final ExpressionNode left;
     public final ExpressionNode right;
 
     /**
      * Constructor to create a multiplication with the first term already added.
-     *  @param left
+     *
+     * @param left
      * @param right
      */
-    public MultiplicationNodeNew(ExpressionNode left, ExpressionNode right) {
+    public DivNode(ExpressionNode left, ExpressionNode right) {
+
         this.left = left;
         this.right = right;
     }
@@ -54,7 +56,7 @@ public class MultiplicationNodeNew implements ExpressionNode {
      * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
      */
     public int getType() {
-        return ExpressionNode.MULTIPLICATION_NODE;
+        return ExpressionNode.DIVISION_NODE;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class MultiplicationNodeNew implements ExpressionNode {
     }
 
     @Override
-    public Iterator<ExpressionNode> iterator() {
+    public Iterator iterator() {
         return new ExpressionNodeIterator(this);
     }
 

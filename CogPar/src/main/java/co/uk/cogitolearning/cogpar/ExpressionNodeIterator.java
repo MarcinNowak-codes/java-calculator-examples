@@ -54,7 +54,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         }
 
         @Override
-        public Void visit(AdditionNodeNew node) {
+        public Void visit(AdditionNode node) {
             list.add(node);
             node.addendLeft.accept(this);
             node.addendRight.accept(this);
@@ -62,7 +62,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         }
 
         @Override
-        public Void visit(SubtractionNodeNew node) {
+        public Void visit(SubtractionNode node) {
             list.add(node);
             node.minuend.accept(this);
             node.subtrahend.accept(this);
@@ -70,7 +70,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         }
 
         @Override
-        public Void visit(MultiplicationNodeNew node) {
+        public Void visit(MultiplicationNode node) {
             list.add(node);
             node.left.accept(this);
             node.right.accept(this);
@@ -78,7 +78,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         }
 
         @Override
-        public Void visit(DivNodeNew node) {
+        public Void visit(DivNode node) {
             list.add(node);
             node.left.accept(this);
             node.right.accept(this);

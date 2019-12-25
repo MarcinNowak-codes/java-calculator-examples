@@ -36,7 +36,7 @@ import java.util.Iterator;
  */
 @ToString
 @EqualsAndHashCode
-public class SubtractionNodeNew implements ExpressionNode {
+public class SubtractionNode implements ExpressionNode {
     public final ExpressionNode minuend;
     public final ExpressionNode subtrahend;
 
@@ -45,7 +45,7 @@ public class SubtractionNodeNew implements ExpressionNode {
      * @param minuend
      * @param subtrahend
      */
-    public SubtractionNodeNew(ExpressionNode minuend, ExpressionNode subtrahend) {
+    public SubtractionNode(ExpressionNode minuend, ExpressionNode subtrahend) {
         this.minuend = minuend;
         this.subtrahend = subtrahend;
     }
