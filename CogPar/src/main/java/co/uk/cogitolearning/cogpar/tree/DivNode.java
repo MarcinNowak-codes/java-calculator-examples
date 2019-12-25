@@ -37,26 +37,18 @@ import java.util.Iterator;
 @ToString
 @EqualsAndHashCode
 public class DivNode implements ExpressionNode {
-    public final ExpressionNode left;
-    public final ExpressionNode right;
+    public final ExpressionNode numerator;
+    public final ExpressionNode denominator;
 
     /**
      * Constructor to create a multiplication with the first term already added.
      *
-     * @param left
-     * @param right
+     * @param numerator
+     * @param denominator
      */
-    public DivNode(ExpressionNode left, ExpressionNode right) {
-
-        this.left = left;
-        this.right = right;
-    }
-
-    /**
-     * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
-     */
-    public int getType() {
-        return ExpressionNode.DIVISION_NODE;
+    public DivNode(ExpressionNode numerator, ExpressionNode denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
 
     @Override

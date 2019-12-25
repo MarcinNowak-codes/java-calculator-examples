@@ -90,12 +90,12 @@ public class FunctionNode implements ExpressionNode {
     /**
      * the id of the function to apply to the argument
      */
-    private int function;
+    public final int function;
 
     /**
      * the argument of the function
      */
-    private ExpressionNode argument;
+    public final ExpressionNode argument;
 
     /**
      * Construct a function by id and argument.
@@ -106,13 +106,6 @@ public class FunctionNode implements ExpressionNode {
     public FunctionNode(int function, ExpressionNode argument) {
         this.function = function;
         this.argument = argument;
-    }
-
-    /**
-     * Returns the type of the node, in this case ExpressionNode.FUNCTION_NODE
-     */
-    public int getType() {
-        return FUNCTION_NODE;
     }
 
     /**
@@ -175,11 +168,4 @@ public class FunctionNode implements ExpressionNode {
         return new ExpressionNodeIterator(this);
     }
 
-    public int getFunction() {
-        return function;
-    }
-
-    public ExpressionNode getArgument() {
-        return argument;
-    }
 }

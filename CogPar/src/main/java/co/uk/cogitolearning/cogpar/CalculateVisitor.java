@@ -58,7 +58,7 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
 
     public Void visit(FunctionNode node) {
         double operand1 = stack.pop();
-        stack.push(functionGetValue(node.getFunction(), operand1));
+        stack.push(functionGetValue(node.function, operand1));
         return null;
     }
 

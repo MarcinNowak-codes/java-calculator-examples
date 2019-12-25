@@ -37,24 +37,17 @@ import java.util.Iterator;
 @ToString
 @EqualsAndHashCode
 public class MultiplicationNode implements ExpressionNode {
-    public final ExpressionNode left;
-    public final ExpressionNode right;
+    public final ExpressionNode multiplicand;
+    public final ExpressionNode multiplier;
 
     /**
      * Constructor to create a multiplication with the first term already added.
-     *  @param left
-     * @param right
+     *  @param multiplicand
+     * @param multiplier
      */
-    public MultiplicationNode(ExpressionNode left, ExpressionNode right) {
-        this.left = left;
-        this.right = right;
-    }
-
-    /**
-     * Returns the type of the node, in this case ExpressionNode.MULTIPLICATION_NODE
-     */
-    public int getType() {
-        return ExpressionNode.MULTIPLICATION_NODE;
+    public MultiplicationNode(ExpressionNode multiplicand, ExpressionNode multiplier) {
+        this.multiplicand = multiplicand;
+        this.multiplier = multiplier;
     }
 
     @Override

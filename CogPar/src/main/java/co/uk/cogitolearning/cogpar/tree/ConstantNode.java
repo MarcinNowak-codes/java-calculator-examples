@@ -48,14 +48,6 @@ public class ConstantNode implements ExpressionNode {
         this.value = value;
     }
 
-    /**
-     * Returns the type of the node, in this case ExpressionNode.CONSTANT_NODE
-     */
-    @Override
-    public int getType() {
-        return ExpressionNode.CONSTANT_NODE;
-    }
-
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);

@@ -74,7 +74,7 @@ public class LexerTest {
                 new Token(Token.NUMBER, "5", 20)
         );
     }
-    @Ignore
+
     @Test
     public void tokenizeExtendedVariable() {
         // Given

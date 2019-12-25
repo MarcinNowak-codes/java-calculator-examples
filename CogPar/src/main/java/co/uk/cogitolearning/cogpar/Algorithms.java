@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
 import java.util.Iterator;
 
 @UtilityClass
-public class Algorithms {
+class Algorithms {
     static void setVariable(ExpressionNode root, String name, double value) {
         VariableSetterVisitor piVisitor = new VariableSetterVisitor(name, value);
         Iterator<ExpressionNode> it = root.iterator();

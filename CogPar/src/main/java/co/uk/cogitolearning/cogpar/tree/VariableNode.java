@@ -68,13 +68,6 @@ public class VariableNode implements ExpressionNode {
     }
 
     /**
-     * Returns the type of the node, in this case ExpressionNode.VARIABLE_NODE
-     */
-    public int getType() {
-        return ExpressionNode.VARIABLE_NODE;
-    }
-
-    /**
      * Sets the value of the variable
      *
      * @param value the value of the variable

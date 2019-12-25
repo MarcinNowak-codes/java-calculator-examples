@@ -57,13 +57,6 @@ public class ExponentiationNode implements ExpressionNode {
         this.exponent = exponent;
     }
 
-    /**
-     * Returns the type of the node, in this case ExpressionNode.EXPONENTIATION_NODE
-     */
-    public int getType() {
-        return ExpressionNode.EXPONENTIATION_NODE;
-    }
-
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);

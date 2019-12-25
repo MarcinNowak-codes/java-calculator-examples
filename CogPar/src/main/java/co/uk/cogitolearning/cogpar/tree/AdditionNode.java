@@ -53,13 +53,6 @@ public class AdditionNode implements ExpressionNode {
         this.addendRight = addendRight;
     }
 
-    /**
-     * Returns the type of the node, in this case ExpressionNode.ADDITION_NODE
-     */
-    public int getType() {
-        return ADDITION_NODE;
-    }
-
     @Override
     public void accept(ExpressionNodeVisitor visitor) {
         visitor.visit(this);

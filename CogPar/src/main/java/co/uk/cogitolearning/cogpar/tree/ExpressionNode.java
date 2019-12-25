@@ -33,46 +33,6 @@ import java.util.Iterator;
  */
 public interface ExpressionNode extends Iterable {
     /**
-     * Node id for variable nodes
-     */
-    int VARIABLE_NODE = 1;
-    /**
-     * Node id for constant nodes
-     */
-    int CONSTANT_NODE = 2;
-    /**
-     * Node id for addition nodes
-     */
-    int ADDITION_NODE = 3;
-    /**
-     * Node id for multiplication nodes
-     */
-    int MULTIPLICATION_NODE = 4;
-    /**
-     * Node id for exponentiation nodes
-     */
-    int EXPONENTIATION_NODE = 5;
-    /**
-     * Node id for function nodes
-     */
-    int FUNCTION_NODE = 6;
-    /**
-     * Node id for division nodes
-     */
-    int DIVISION_NODE = 7;
-
-    /**
-     * Returns the type of the node.ExpressionNode
-     * <p>
-     * Each class derived from ExpressionNode representing a specific
-     * role in the expression should return the type according to that
-     * role.
-     *
-     * @return type of the node
-     */
-    int getType();
-
-    /**
      * Method needed for the visitor design pattern but not iterate on child node.
      *
      * @param visitor the visitor
