@@ -46,7 +46,7 @@ import co.uk.cogitolearning.cogpar.ParserException;
 import co.uk.cogitolearning.cogpar.lexer.Token;
 import co.uk.cogitolearning.cogpar.tree.*;
 
-import java.util.LinkedList;
+import java.util.Deque;
 
 /**
  * A parser for mathematical expressions. The parser class defines a method
@@ -59,7 +59,7 @@ public class Parser {
     /**
      * the tokens to parse
      */
-    private LinkedList<Token> tokens;
+    private Deque<Token> tokens;
     /**
      * the next token
      */
@@ -73,9 +73,9 @@ public class Parser {
      * @return the internal representation of the expression in form of an
      * expression tree made out of ExpressionNode objects
      */
-    public ExpressionNode parse(LinkedList<Token> tokens) {
+    public ExpressionNode parse(Deque<Token> tokens) {
         // implementing a recursive descent parser
-        this.tokens = (LinkedList<Token>) tokens.clone();
+        this.tokens = tokens;
         lookahead = this.tokens.getFirst();
 
         // top level non-terminal is expression
@@ -165,7 +165,7 @@ public class Parser {
             if (positive)
                 return t;
             else
-                return new AdditionNode(t, false);
+                return new SubtractionNode(t, false);
         }
 
         // signed_term -> term

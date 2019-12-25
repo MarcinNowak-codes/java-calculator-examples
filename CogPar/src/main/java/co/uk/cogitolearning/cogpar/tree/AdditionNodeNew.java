@@ -24,47 +24,50 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
+import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
- * An interface for the visitor design pattern.
- * <p>
- * Expression nodes can be visited by ExpressionNodeVisitor by calling their
- * accept methods. The expression nodes, in turn, call the appropriate visit
- * method of the expression node visitor.
+ * An ExpressionNode that handles additions and subtractions. The node can hold
+ * an arbitrary number of terms that are either added or subtracted from the sum.
  */
-public interface ExpressionNodeVisitor<T> {
-    /**
-     * Visit a VariableExpressionNode
-     */
-    T visit(VariableNode node);
+@ToString
+@EqualsAndHashCode
+public class AdditionNodeNew implements ExpressionNode {
+    public final ExpressionNode addendLeft;
+    public final ExpressionNode addendRight;
 
     /**
-     * Visit a ConstantExpressionNode
+     * Constructor to create an addition with the first term already added.
+     *
+     * @param addendLeft  the term to be added
+     * @param addendRight the term to be added
      */
-    T visit(ConstantNode node);
+    public AdditionNodeNew(ExpressionNode addendLeft, ExpressionNode addendRight) {
+        this.addendLeft = addendLeft;
+        this.addendRight = addendRight;
+    }
 
     /**
-     * Visit a AdditionExpressionNode
+     * Returns the type of the node, in this case ExpressionNode.ADDITION_NODE
      */
-    T visit(AdditionNode node);
+    public int getType() {
+        return ADDITION_NODE;
+    }
 
-    /**
-     * Visit a MultiplicationExpressionNode
-     */
-    T visit(MultiplicationNode node);
+    @Override
+    public void accept(ExpressionNodeVisitor visitor) {
+        visitor.visit(this);
+    }
 
-    /**
-     * Visit a ExponentiationExpressionNode
-     */
-    T visit(ExponentiationNode node);
+    @Override
+    public Iterator iterator() {
+        return new ExpressionNodeIterator(this);
+    }
 
-    /**
-     * Visit a FunctionExpressionNode
-     */
-    T visit(FunctionNode node);
-
-    T visit(DivNode node);
-
-    T visit(SubtractionNode node);
-
-    T visit(AdditionNodeNew node);
 }

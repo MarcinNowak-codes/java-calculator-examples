@@ -81,5 +81,13 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
                 t.expression.accept(this);
             return null;
         }
+
+        @Override
+        public Void visit(AdditionNodeNew node) {
+            list.add(node);
+            node.addendLeft.accept(this);
+            node.addendRight.accept(this);
+            return null;
+        }
     }
 }
