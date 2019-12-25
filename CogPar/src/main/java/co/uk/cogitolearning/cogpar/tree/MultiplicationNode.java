@@ -24,7 +24,6 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
-import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

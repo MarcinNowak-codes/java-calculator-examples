@@ -8,9 +8,8 @@ import java.util.Iterator;
 @UtilityClass
 class Algorithms {
     static void setVariable(ExpressionNode root, String name, double value) {
-        VariableSetterVisitor piVisitor = new VariableSetterVisitor(name, value);
-        Iterator<ExpressionNode> it = root.iterator();
-        while (it.hasNext())
-            it.next().accept(piVisitor);
+        VariableSetterVisitor visitor = new VariableSetterVisitor(name, value);
+        for (ExpressionNode expressionNode : root)
+            expressionNode.accept(visitor);
     }
 }

@@ -24,13 +24,10 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
-import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * An ExpressionNode that handles additions and subtractions. The node can hold
@@ -59,7 +56,7 @@ public class AdditionNode implements ExpressionNode {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<ExpressionNode> iterator() {
         return new ExpressionNodeIterator(this);
     }
 

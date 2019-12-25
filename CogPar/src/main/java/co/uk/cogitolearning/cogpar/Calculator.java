@@ -39,9 +39,8 @@ class Calculator {
     static double calculateTree(ExpressionNode expr) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
-        for (ExpressionNode node : (Iterable<ExpressionNode>) expr)
+        for (ExpressionNode node : expr)
             polishNotationList.add(node);
-
         return calculatePolishNotation(polishNotationList);
     }
 

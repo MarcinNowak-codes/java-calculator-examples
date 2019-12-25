@@ -31,7 +31,7 @@ import java.util.Iterator;
  * <p>
  * Every concrete type of expression node has to implement this interface.
  */
-public interface ExpressionNode extends Iterable {
+public interface ExpressionNode extends Iterable<ExpressionNode> {
     /**
      * Method needed for the visitor design pattern but not iterate on child node.
      *
@@ -39,5 +39,6 @@ public interface ExpressionNode extends Iterable {
      */
     void accept(ExpressionNodeVisitor visitor);
 
+    @Override
     Iterator<ExpressionNode> iterator();
 }

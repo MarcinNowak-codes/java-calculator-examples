@@ -1,12 +1,11 @@
-package co.uk.cogitolearning.cogpar;
-
-import co.uk.cogitolearning.cogpar.tree.*;
+package co.uk.cogitolearning.cogpar.tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
-    private final ArrayList<ExpressionNode> list = new ArrayList<>();
+    private final List<ExpressionNode> list = new ArrayList<>();
 
     public ExpressionNodeIterator(ExpressionNode expressionNode) {
         IteratorVisitor visitor = new IteratorVisitor(list);
@@ -24,10 +23,10 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
     }
 
     private static class IteratorVisitor implements ExpressionNodeVisitor<Void> {
-        private ArrayList<ExpressionNode> list;
+        private List<ExpressionNode> list;
 
-        IteratorVisitor(ArrayList<ExpressionNode> stack) {
-            this.list = stack;
+        IteratorVisitor(List<ExpressionNode> list) {
+            this.list = list;
         }
 
         public Void visit(VariableNode node) {

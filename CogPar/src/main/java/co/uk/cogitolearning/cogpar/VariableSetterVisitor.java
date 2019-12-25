@@ -41,7 +41,6 @@ public class VariableSetterVisitor implements ExpressionNodeVisitor<Void> {
      * @param value the value of the variable
      */
     VariableSetterVisitor(String name, double value) {
-        super();
         this.name = name;
         this.value = value;
     }

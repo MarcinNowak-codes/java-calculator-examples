@@ -58,7 +58,6 @@ public class Lexer {
          * Construct TokenInfo with its values
          */
         TokenInfo(Pattern regex, int token) {
-            super();
             this.regex = regex;
             this.token = token;
         }

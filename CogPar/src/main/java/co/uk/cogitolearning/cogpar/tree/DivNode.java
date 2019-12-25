@@ -24,7 +24,6 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
-import co.uk.cogitolearning.cogpar.ExpressionNodeIterator;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -57,7 +56,7 @@ public class DivNode implements ExpressionNode {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<ExpressionNode> iterator() {
         return new ExpressionNodeIterator(this);
     }
 
