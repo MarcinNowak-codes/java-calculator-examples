@@ -42,9 +42,9 @@ public class Token {
      */
     public static final int PLUSMINUS = 1;
     /**
-     * Token id for multiplication or division
+     * Token id for multiplication
      */
-    public static final int MULTDIV = 2;
+    public static final int MULT = 2;
     /**
      * Token id for the exponentiation symbol
      */
@@ -69,7 +69,10 @@ public class Token {
      * Token id for variable names
      */
     public static final int VARIABLE = 8;
-
+    /**
+     * Token id for division
+     */
+    public static final int DIV = 9;
     /**
      * the token identifier
      */

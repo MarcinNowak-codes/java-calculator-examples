@@ -110,7 +110,8 @@ public class Tokenizer {
         Tokenizer tokenizer = new Tokenizer();
 
         tokenizer.add("[+-]", Token.PLUSMINUS);
-        tokenizer.add("[*/]", Token.MULTDIV);
+        tokenizer.add("[*]", Token.MULT);
+        tokenizer.add("[/]", Token.DIV);
         tokenizer.add("\\^", Token.RAISED);
 
         String funcs = FunctionNode.getAllFunctions();

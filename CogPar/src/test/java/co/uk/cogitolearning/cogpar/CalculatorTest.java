@@ -54,7 +54,7 @@ public class CalculatorTest {
         // Given
         Parser parser = new Parser();
         // When
-        String expresion = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
+        String expresion = "2*(1+sin(pi/2))^2";
         ExpressionNode expr = parser.parse(expresion);
         Algorithms.setVariable(expr, "pi", Math.PI);
 

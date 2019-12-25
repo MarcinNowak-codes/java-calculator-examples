@@ -164,7 +164,7 @@ public class Parser {
     /** handles the non-terminal term_op */
     private ExpressionNode termOp(ExpressionNode expression) {
         // term_op -> MULTDIV factor term_op
-        if (lookahead.token == Token.MULTDIV) {
+        if (lookahead.token == Token.MULT) {
             MultiplicationNode prod;
 
             // This means we are actually dealing with a product
@@ -173,6 +173,25 @@ public class Parser {
                 prod = (MultiplicationNode) expression;
             else
                 prod = new MultiplicationNode(expression, true);
+
+            // reduce the input and recursively call sum_op
+            boolean positive = lookahead.sequence.equals("*");
+            nextToken();
+            ExpressionNode f = signedFactor();
+            prod.add(f, positive);
+
+            return termOp(prod);
+        }
+
+        if (lookahead.token == Token.DIV) {
+            DivNode prod;
+
+            // This means we are actually dealing with a product
+            // If expr is not already a PRODUCT, we have to create one
+            if (expression.getType() == ExpressionNode.DIVISION_NODE)
+                prod = (DivNode) expression;
+            else
+                prod = new DivNode(expression, true);
 
             // reduce the input and recursively call sum_op
             boolean positive = lookahead.sequence.equals("*");
