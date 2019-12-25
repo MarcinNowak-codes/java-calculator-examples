@@ -110,4 +110,35 @@ public class ParserTest {
 
         assertThat(tree).isEqualTo(node);
     }
+
+    @Test
+    public void shouldParseSubExtended() {
+        // Given
+        Parser parser = new Parser();
+
+        // When
+        ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
+                new Token(7, "6", 0),
+                new Token(2, "*", 1),
+                new Token(5, "(", 2),
+                new Token(7, "3", 3),
+                new Token(1, "+", 4),
+                new Token(4, "sin", 5),
+                new Token(5, "(", 8),
+                new Token(8, "pi", 9),
+                new Token(9, "/", 11),
+                new Token(7, "2", 12),
+                new Token(6, ")", 13),
+                new Token(6, ")", 14),
+                new Token(3, "^", 15),
+                new Token(7, "5", 16)
+        )));
+
+        // Then
+        SubtractionNode node = new SubtractionNode(new ConstantNode(6.0), true);
+        node.add(new ConstantNode(2.0), false);
+        node.add(new ConstantNode(3.0), false);
+
+        assertThat(tree).isEqualTo(node);
+    }
 }
