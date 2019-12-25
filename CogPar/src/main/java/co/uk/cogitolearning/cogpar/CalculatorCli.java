@@ -15,7 +15,7 @@ public class CalculatorCli {
         try {
             System.out.println("The value of the expression is " + Calculator.calculate(expresion));
         } catch (ParserException | EvaluationException e) {
-            System.out.println(e.getMessage());
+            System.err.println(e.getMessage());
         }
     }
 

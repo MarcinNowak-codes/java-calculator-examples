@@ -59,11 +59,11 @@ public class Parser {
     /**
      * the tokens to parse
      */
-    LinkedList<Token> tokens;
+    private LinkedList<Token> tokens;
     /**
      * the next token
      */
-    Token lookahead;
+    private Token lookahead;
 
     /**
      * Parse a mathematical expression in contained in a list of tokens and return
