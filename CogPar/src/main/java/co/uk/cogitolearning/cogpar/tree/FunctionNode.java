@@ -35,7 +35,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class FunctionNode implements ExpressionNode {
+public final class FunctionNode implements ExpressionNode {
     /**
      * function id for the sin function
      */

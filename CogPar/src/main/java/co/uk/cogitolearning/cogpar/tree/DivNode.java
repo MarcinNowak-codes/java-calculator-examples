@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class DivNode implements ExpressionNode {
+public final class DivNode implements ExpressionNode {
     public final ExpressionNode numerator;
     public final ExpressionNode denominator;
 

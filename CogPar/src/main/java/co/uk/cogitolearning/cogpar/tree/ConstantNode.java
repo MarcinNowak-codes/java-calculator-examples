@@ -32,7 +32,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class ConstantNode implements ExpressionNode {
+public final class ConstantNode implements ExpressionNode {
 
     public final double value;
 

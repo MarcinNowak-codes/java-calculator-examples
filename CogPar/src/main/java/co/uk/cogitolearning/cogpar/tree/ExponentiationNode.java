@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class ExponentiationNode implements ExpressionNode {
+public final class ExponentiationNode implements ExpressionNode {
     /**
      * the node containing the base
      */

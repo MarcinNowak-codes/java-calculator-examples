@@ -33,7 +33,7 @@ import lombok.ToString;
  */
 @ToString
 @EqualsAndHashCode
-public class VariableNode implements ExpressionNode {
+public final class VariableNode implements ExpressionNode {
     /**
      * The name of the variable
      */

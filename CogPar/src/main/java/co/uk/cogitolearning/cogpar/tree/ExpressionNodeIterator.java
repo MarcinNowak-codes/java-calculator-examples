@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-class ExpressionNodeIterator implements Iterator<ExpressionNode> {
+final class ExpressionNodeIterator implements Iterator<ExpressionNode> {
     private final List<ExpressionNode> list = new ArrayList<>();
 
     ExpressionNodeIterator(ExpressionNode expressionNode) {
