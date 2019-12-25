@@ -75,4 +75,30 @@ public class CalculatorTest {
         Assert.assertEquals(3 - 1, Calculator.calculate(expr), 0.1);
     }
 
+    @Test
+    public void shouldParseSub2() {
+        // Given
+        Parser parser = new Parser();
+        // When
+        String expresion = "4-1-2";
+        ExpressionNode expr = parser.parse(expresion);
+        Algorithms.setVariable(expr, "pi", Math.PI);
+
+        // Then
+        Assert.assertEquals(4 - 1 - 2, Calculator.calculate(expr), 0.1);
+    }
+
+    @Test
+    public void shouldParseAdd2() {
+        // Given
+        Parser parser = new Parser();
+        // When
+        String expresion = "1+2+3";
+        ExpressionNode expr = parser.parse(expresion);
+        Algorithms.setVariable(expr, "pi", Math.PI);
+
+        // Then
+        Assert.assertEquals(1 + 2 + 3, Calculator.calculate(expr), 0.1);
+    }
+
 }

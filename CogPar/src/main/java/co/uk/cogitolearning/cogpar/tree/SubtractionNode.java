@@ -40,6 +40,10 @@ public class SubtractionNode implements ExpressionNode {
      */
     public final List<SequenceNode.Term> terms;
 
+//    public final ExpressionNode minuend;
+//    public final ExpressionNode subtrahend;
+
+
     /**
      * Constructor to create an addition with the first term already added.
      *

@@ -12,13 +12,13 @@ public class CalculatorCli {
      */
     public static void main(String[] args) {
 
-        String exprstr = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
+        String expresion = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
 //    String exprstr = "2*3";
-        if (args.length > 0) exprstr = args[0];
+        if (args.length > 0) expresion = args[0];
 
         Parser parser = new Parser();
         try {
-            ExpressionNode expr = parser.parse(exprstr);
+            ExpressionNode expr = parser.parse(expresion);
             Algorithms.setVariable(expr, "pi", Math.PI);
 
             System.out.println("The value of the expression is " + Calculator.calculate(expr));

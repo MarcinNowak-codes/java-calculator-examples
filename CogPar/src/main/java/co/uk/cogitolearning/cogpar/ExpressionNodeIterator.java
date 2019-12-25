@@ -26,7 +26,7 @@ public class ExpressionNodeIterator implements Iterator<ExpressionNode> {
     private static class IteratorVisitor implements ExpressionNodeVisitor<Void> {
         private ArrayList<ExpressionNode> list;
 
-        public IteratorVisitor(ArrayList<ExpressionNode> stack) {
+        IteratorVisitor(ArrayList<ExpressionNode> stack) {
             this.list = stack;
         }
 

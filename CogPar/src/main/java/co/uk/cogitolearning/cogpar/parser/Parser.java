@@ -76,8 +76,7 @@ public class Parser {
     public ExpressionNode parse(String expression) {
         Tokenizer tokenizer = Tokenizer.getExpressionTokenizer();
         tokenizer.tokenize(expression);
-        LinkedList<Token> tokens = tokenizer.getTokens();
-        return this.parse(tokens);
+        return this.parse(tokenizer.getTokens());
     }
 
     /**
