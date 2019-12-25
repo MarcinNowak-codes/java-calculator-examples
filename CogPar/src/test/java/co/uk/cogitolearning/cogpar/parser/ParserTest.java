@@ -112,33 +112,39 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldParseSubExtended() {
+    public void shouldParseExtended() {
         // Given
         Parser parser = new Parser();
 
         // When
+        // 6*(3+sin(3.1415/2))^5
         ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
-                new Token(7, "6", 0),
-                new Token(2, "*", 1),
-                new Token(5, "(", 2),
-                new Token(7, "3", 3),
-                new Token(1, "+", 4),
-                new Token(4, "sin", 5),
-                new Token(5, "(", 8),
-                new Token(8, "pi", 9),
-                new Token(9, "/", 11),
-                new Token(7, "2", 12),
-                new Token(6, ")", 13),
-                new Token(6, ")", 14),
-                new Token(3, "^", 15),
-                new Token(7, "5", 16)
+                new Token(Token.NUMBER, "6", 0),
+                new Token(Token.MULT, "*", 1),
+                new Token(Token.OPEN_BRACKET, "(", 2),
+                new Token(Token.NUMBER, "3", 3),
+                new Token(Token.PLUS, "+", 4),
+                new Token(Token.FUNCTION, "sin", 5),
+                new Token(Token.OPEN_BRACKET, "(", 8),
+                new Token(Token.NUMBER, "3.1415", 9),
+                new Token(Token.DIV, "/", 15),
+                new Token(Token.NUMBER, "2", 16),
+                new Token(Token.CLOSE_BRACKET, ")", 17),
+                new Token(Token.CLOSE_BRACKET, ")", 18),
+                new Token(Token.RAISED, "^", 19),
+                new Token(Token.NUMBER, "5", 20)
         )));
 
         // Then
-        SubtractionNode node = new SubtractionNode(new ConstantNode(6.0), true);
-        node.add(new ConstantNode(2.0), false);
-        node.add(new ConstantNode(3.0), false);
-
-        assertThat(tree).isEqualTo(node);
+        MultiplicationNode expected;
+        expected = new MultiplicationNode(new ConstantNode(6.0), true);
+        DivNode div = new DivNode(new ConstantNode(3.1415), true);
+        div.add(new ConstantNode(2.0), false);
+        FunctionNode sin = new FunctionNode(FunctionNode.SIN, div);
+        AdditionNode base = new AdditionNode(new ConstantNode(3.0), true);
+        base.add(sin, true);
+        ExponentiationNode exp = new ExponentiationNode(base, new ConstantNode(5.0));
+        expected.add(exp, true);
+        assertThat(tree).isEqualTo(expected);
     }
 }
