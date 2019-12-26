@@ -12,10 +12,10 @@ import java.util.Stack;
 public class Parser {
 
     public ExpressionNode parse(List<Token> tokens) {
-        return _parse(tokens).pop();
+        return _parse(tokens);
     }
 
-    private Stack<ExpressionNode> _parse(List<Token> tokens) {
+    private ExpressionNode _parse(List<Token> tokens) {
         Stack<ExpressionNode> nodes = new Stack<>();
 
         while (!tokens.isEmpty()) {
@@ -26,7 +26,7 @@ public class Parser {
                     break;
                 case Token.PLUS:
                     ExpressionNode left = nodes.pop();
-                    ExpressionNode right = parse(tokens);
+                    ExpressionNode right = _parse(tokens);
                     nodes.push(new AdditionNode(left, right));
                     break;
                 case Token.MINUS:
@@ -36,27 +36,27 @@ public class Parser {
                     break;
                 case Token.MULT:
                     left = nodes.pop();
-                    right = parse(tokens);
+                    right = _parse(tokens);
                     nodes.push(new MultiplicationNode(left, right));
                     break;
                 case Token.OPEN_BRACKET:
-                    nodes.push(parse(tokensInBracket(tokens)));
+                    nodes.push(_parse(tokensInBracket(tokens)));
                     break;
                 case Token.CLOSE_BRACKET:
                     break;
 
                 case Token.FUNCTION:
                     int function = FunctionNode.stringToFunction(token.sequence);
-                    nodes.push(new FunctionNode(function, parse(tokens)));
+                    nodes.push(new FunctionNode(function, _parse(tokens)));
                     break;
                 case Token.DIV:
                     left = nodes.pop();
-                    right = parse(tokens);
+                    right = _parse(tokens);
                     nodes.push(new DivNode(left, right));
                     break;
                 case Token.RAISED:
                     ExpressionNode expr = nodes.pop();
-                    ExpressionNode exponent = parse(tokens);
+                    ExpressionNode exponent = _parse(tokens);
                     nodes.push(new ExponentiationNode(expr, exponent));
                     break;
                 case Token.VARIABLE:
@@ -67,15 +67,15 @@ public class Parser {
             }
 
         }
-        return nodes;
+        return nodes.pop();
     }
 
     private ExpressionNode lookaheadMinus(List<Token> tokens) {
         assert !tokens.isEmpty();
 
         if (tokens.get(0).tokenId == Token.NUMBER)
-            return parse(new LinkedList<>(Collections.singletonList(tokens.remove(0))));
-        return parse(tokens);
+            return _parse(new LinkedList<>(Collections.singletonList(tokens.remove(0))));
+        return _parse(tokens);
     }
 
     List<Token> tokensInBracket(List<Token> tokens) {
