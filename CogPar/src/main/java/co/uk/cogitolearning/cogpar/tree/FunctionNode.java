@@ -115,37 +115,36 @@ public final class FunctionNode implements ExpressionNode {
      * <p>
      * If the function is not found this method throws an error.
      *
-     * @param str the name of the function
+     * @param function the name of the function
      * @return the id of the function
      */
-    public static int stringToFunction(String str) {
-        if (str.equals("sin"))
-            return FunctionNode.SIN;
-        if (str.equals("cos"))
-            return FunctionNode.COS;
-        if (str.equals("tan"))
-            return FunctionNode.TAN;
-
-        if (str.equals("asin"))
-            return FunctionNode.ASIN;
-        if (str.equals("acos"))
-            return FunctionNode.ACOS;
-        if (str.equals("atan"))
-            return FunctionNode.ATAN;
-
-        if (str.equals("sqrt"))
-            return FunctionNode.SQRT;
-        if (str.equals("exp"))
-            return FunctionNode.EXP;
-
-        if (str.equals("ln"))
-            return FunctionNode.LN;
-        if (str.equals("log"))
-            return FunctionNode.LOG;
-        if (str.equals("log2"))
-            return FunctionNode.LOG2;
-
-        throw new ParserException("Unexpected Function " + str + " found");
+    public static int stringToFunction(String function) {
+        switch (function) {
+            case "sin":
+                return FunctionNode.SIN;
+            case "cos":
+                return FunctionNode.COS;
+            case "tan":
+                return FunctionNode.TAN;
+            case "asin":
+                return FunctionNode.ASIN;
+            case "acos":
+                return FunctionNode.ACOS;
+            case "atan":
+                return FunctionNode.ATAN;
+            case "sqrt":
+                return FunctionNode.SQRT;
+            case "exp":
+                return FunctionNode.EXP;
+            case "ln":
+                return FunctionNode.LN;
+            case "log":
+                return FunctionNode.LOG;
+            case "log2":
+                return FunctionNode.LOG2;
+            default:
+                throw new ParserException("Unexpected Function " + function + " found");
+        }
     }
 
     @Override
