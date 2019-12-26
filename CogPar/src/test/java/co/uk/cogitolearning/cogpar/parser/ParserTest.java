@@ -102,7 +102,7 @@ public class ParserTest {
                 new Token(Token.PLUS, "+", 4),
                 new Token(Token.FUNCTION, "sin", 5),
                 new Token(Token.OPEN_BRACKET, "(", 8),
-                new Token(Token.NUMBER, "3.1415", 9),
+                new Token(Token.NUMBER, Double.toString(Math.PI), 9),
                 new Token(Token.DIV, "/", 15),
                 new Token(Token.NUMBER, "2", 16),
                 new Token(Token.CLOSE_BRACKET, ")", 17),
@@ -113,7 +113,7 @@ public class ParserTest {
 
         // Then
         MultiplicationNode expected;
-        DivNode div = new DivNode(new ConstantNode(3.1415), new ConstantNode(2.0));
+        DivNode div = new DivNode(new ConstantNode(Math.PI), new ConstantNode(2.0));
         FunctionNode sin = new FunctionNode(FunctionNode.SIN, div);
         AdditionNode base = new AdditionNode(new ConstantNode(3.0), sin);
         ExponentiationNode exp = new ExponentiationNode(base, new ConstantNode(5.0));

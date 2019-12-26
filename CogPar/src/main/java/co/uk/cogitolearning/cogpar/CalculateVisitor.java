@@ -3,15 +3,18 @@ package co.uk.cogitolearning.cogpar;
 
 import co.uk.cogitolearning.cogpar.tree.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Stack;
 
 import static co.uk.cogitolearning.cogpar.tree.FunctionNode.*;
 
 public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
-    private Stack<Double> stack;
+    private final Stack<Double> stack;
+
+    private final Map<String, Double> variable = new HashMap<>();
 
     CalculateVisitor(Stack<Double> stack) {
-
         this.stack = stack;
     }
 
@@ -46,7 +49,12 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     public Void visit(VariableNode node) {
-        stack.push(node.getValue());
+        if (!variable.containsKey(node.getName())) {
+            stack.push(node.getValue());
+            return null;
+        }
+//            throw new EvaluationException("Variable '" + node.getName() + "' was not initialized.");
+        stack.push(variable.get(node.getName()));
         return null;
     }
 
@@ -102,4 +110,8 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
         return null;
     }
 
+
+    public void addVariable(String name, Double value) {
+        this.variable.put(name, value);
+    }
 }
