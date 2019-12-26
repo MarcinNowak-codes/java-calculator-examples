@@ -12,6 +12,10 @@ import java.util.Stack;
 public class Parser {
 
     public ExpressionNode parse(List<Token> tokens) {
+        return _parse(tokens).pop();
+    }
+
+    private Stack<ExpressionNode> _parse(List<Token> tokens) {
         Stack<ExpressionNode> nodes = new Stack<>();
 
         while (!tokens.isEmpty()) {
@@ -63,7 +67,7 @@ public class Parser {
             }
 
         }
-        return nodes.pop();
+        return nodes;
     }
 
     private ExpressionNode lookaheadMinus(List<Token> tokens) {
