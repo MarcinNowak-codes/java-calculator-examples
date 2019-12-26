@@ -24,7 +24,6 @@
 
 package co.uk.cogitolearning.cogpar.tree;
 
-import co.uk.cogitolearning.cogpar.EvaluationException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -37,15 +36,7 @@ public final class VariableNode implements ExpressionNode {
     /**
      * The name of the variable
      */
-    private String name;
-    /**
-     * The value of the variable
-     */
-    private double value;
-    /**
-     * indicates if the value has been set
-     */
-    private boolean valueSet;
+    public final String name;
 
     /**
      * Construct with the name of the variable.
@@ -54,35 +45,6 @@ public final class VariableNode implements ExpressionNode {
      */
     public VariableNode(String name) {
         this.name = name;
-        valueSet = false;
-    }
-
-    /**
-     * @return the name of the variable
-     */
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets the value of the variable
-     *
-     * @param value the value of the variable
-     */
-    public void setValue(double value) {
-        this.value = value;
-        this.valueSet = true;
-    }
-
-    /**
-     * Returns the value of the variable but throws an exception if the value has
-     * not been set
-     */
-    public double getValue() {
-        if (!valueSet)
-            throw new EvaluationException("Variable '" + name + "' was not initialized.");
-
-        return value;
     }
 
     @Override

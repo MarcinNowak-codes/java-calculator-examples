@@ -31,29 +31,26 @@ import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Stack;
 
 @UtilityClass
 class Calculator {
 
-    static double calculateTree(ExpressionNode expr) {
+    static double calculateTree(ExpressionNode expr, CalculateVisitor visitor) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
         for (ExpressionNode node : expr)
             polishNotationList.add(node);
-        return calculatePolishNotation(polishNotationList);
+        return calculatePolishNotation(polishNotationList, visitor);
     }
 
-    private static double calculatePolishNotation(ArrayList<ExpressionNode> list) {
+    private static double calculatePolishNotation(ArrayList<ExpressionNode> list, CalculateVisitor visitor) {
         // https://en.wikipedia.org/wiki/Polish_notation
         Collections.reverse(list); // Scan the given prefix expression from right to left
-        Stack<Double> stack = new Stack<>();
-        CalculateVisitor visitor = new CalculateVisitor(stack);
 
         for (ExpressionNode node : list)
             node.accept(visitor);
 
-        return stack.pop();
+        return visitor.getValue();
     }
 
     static double calculate(String expresion) {
@@ -61,7 +58,8 @@ class Calculator {
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
         ExpressionNode expr = parser.parse(lexer.getTokens());
-        Algorithms.setVariable(expr, "pi", Math.PI);
-        return calculateTree(expr);
+        CalculateVisitor visitor = new CalculateVisitor();
+        visitor.addVariable("pi", Math.PI);
+        return calculateTree(expr, visitor);
     }
 }

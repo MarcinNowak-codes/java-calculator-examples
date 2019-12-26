@@ -10,13 +10,9 @@ import java.util.Stack;
 import static co.uk.cogitolearning.cogpar.tree.FunctionNode.*;
 
 public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
-    private final Stack<Double> stack;
+    private final Stack<Double> stack = new Stack<>();
 
     private final Map<String, Double> variable = new HashMap<>();
-
-    CalculateVisitor(Stack<Double> stack) {
-        this.stack = stack;
-    }
 
     private static double functionGetValue(int function, double argument) {
         switch (function) {
@@ -49,12 +45,10 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     public Void visit(VariableNode node) {
-        if (!variable.containsKey(node.getName())) {
-            stack.push(node.getValue());
-            return null;
-        }
-//            throw new EvaluationException("Variable '" + node.getName() + "' was not initialized.");
-        stack.push(variable.get(node.getName()));
+        if (!variable.containsKey(node.name))
+            throw new EvaluationException("Variable '" + node.name + "' was not initialized.");
+
+        stack.push(variable.get(node.name));
         return null;
     }
 
@@ -113,5 +107,9 @@ public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
 
     public void addVariable(String name, Double value) {
         this.variable.put(name, value);
+    }
+
+    public double getValue() {
+        return stack.pop();
     }
 }
