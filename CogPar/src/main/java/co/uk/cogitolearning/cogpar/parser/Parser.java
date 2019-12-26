@@ -4,15 +4,18 @@ import co.uk.cogitolearning.cogpar.ParserException;
 import co.uk.cogitolearning.cogpar.lexer.Token;
 import co.uk.cogitolearning.cogpar.tree.*;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
 
 public class Parser {
 
-    public ExpressionNode parse(Deque<Token> tokens) {
+    public ExpressionNode parse(List<Token> tokens) {
         Stack<ExpressionNode> nodes = new Stack<>();
 
         while (!tokens.isEmpty()) {
-            Token token = tokens.pollFirst();
+            Token token = tokens.remove(0);
             switch (token.tokenId) {
                 case Token.NUMBER:
                     nodes.push(new ConstantNode(Double.parseDouble(token.sequence)));
@@ -63,19 +66,19 @@ public class Parser {
         return nodes.pop();
     }
 
-    private ExpressionNode lookaheadMinus(Deque<Token> tokens) {
+    private ExpressionNode lookaheadMinus(List<Token> tokens) {
         assert !tokens.isEmpty();
 
-        if (tokens.peekFirst().tokenId == Token.NUMBER)
-            return parse(new LinkedList<>(Collections.singletonList(tokens.pollFirst())));
+        if (tokens.get(0).tokenId == Token.NUMBER)
+            return parse(new LinkedList<>(Collections.singletonList(tokens.remove(0))));
         return parse(tokens);
     }
 
-    Deque<Token> tokensInBracket(Deque<Token> tokens) {
+    List<Token> tokensInBracket(List<Token> tokens) {
         int brackets = 0;
-        Deque<Token> internals = new LinkedList<>();
+        List<Token> internals = new LinkedList<>();
         while (!tokens.isEmpty()) {
-            Token token = tokens.pollFirst();
+            Token token = tokens.remove(0);
             if (token.tokenId == Token.CLOSE_BRACKET && brackets == 0)
                 return internals;
 

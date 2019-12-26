@@ -27,8 +27,8 @@ package co.uk.cogitolearning.cogpar.lexer;
 import co.uk.cogitolearning.cogpar.ParserException;
 import co.uk.cogitolearning.cogpar.tree.FunctionNode;
 
-import java.util.Deque;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -173,7 +173,7 @@ public class Lexer {
      *
      * @return a list of tokens to be fed to Parser
      */
-    public Deque<Token> getTokens() {
+    public List<Token> getTokens() {
         return tokens;
     }
 
