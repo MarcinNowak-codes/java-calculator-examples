@@ -16,7 +16,7 @@ public class CalculatorTest {
         AdditionNode sum = new AdditionNode(two, three);
         MultiplicationNode multi = new MultiplicationNode(sum, four);
 
-        CalculateVisitor visitor = new CalculateVisitor();
+        CalculationVisitor visitor = new CalculationVisitor();
         Assert.assertEquals(20.0, Calculator.calculateTree(multi, visitor), 0.1);
     }
 
@@ -37,7 +37,7 @@ public class CalculatorTest {
 
         root = multiplication;
 
-        CalculateVisitor visitor = new CalculateVisitor();
+        CalculationVisitor visitor = new CalculationVisitor();
         visitor.addVariable("pi", Math.PI);
         Assert.assertEquals(6144.0, Calculator.calculateTree(root, visitor), 0.1);
     }

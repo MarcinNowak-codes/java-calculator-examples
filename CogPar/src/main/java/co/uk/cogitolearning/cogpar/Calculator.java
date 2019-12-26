@@ -35,7 +35,7 @@ import java.util.Collections;
 @UtilityClass
 class Calculator {
 
-    static double calculateTree(ExpressionNode expr, CalculateVisitor visitor) {
+    static double calculateTree(ExpressionNode expr, CalculationVisitor visitor) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
         for (ExpressionNode node : expr)
@@ -43,7 +43,7 @@ class Calculator {
         return calculatePolishNotation(polishNotationList, visitor);
     }
 
-    private static double calculatePolishNotation(ArrayList<ExpressionNode> list, CalculateVisitor visitor) {
+    private static double calculatePolishNotation(ArrayList<ExpressionNode> list, CalculationVisitor visitor) {
         // https://en.wikipedia.org/wiki/Polish_notation
         Collections.reverse(list); // Scan the given prefix expression from right to left
 
@@ -58,7 +58,7 @@ class Calculator {
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
         ExpressionNode expr = parser.parse(lexer.getTokens());
-        CalculateVisitor visitor = new CalculateVisitor();
+        CalculationVisitor visitor = new CalculationVisitor();
         visitor.addVariable("pi", Math.PI);
         return calculateTree(expr, visitor);
     }

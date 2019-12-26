@@ -9,7 +9,7 @@ import java.util.Stack;
 
 import static co.uk.cogitolearning.cogpar.tree.FunctionNode.*;
 
-public class CalculateVisitor implements ExpressionNodeVisitor<Void> {
+public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     private final Stack<Double> stack = new Stack<>();
 
     private final Map<String, Double> variable = new HashMap<>();
