@@ -22,21 +22,26 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import java.util.Iterator;
 
 /**
- * A simple subclass of RuntimeException that indicates errors when trying to
- * evaluate an expression.
+ * An interface for expression nodes.
+ * <p>
+ * Every concrete type of expression node has to implement this interface.
  */
-public class EvaluationException extends RuntimeException {
-    private static final long serialVersionUID = 4794094610927358603L;
-
+public interface ExpressionNode extends Iterable<ExpressionNode> {
     /**
-     * Construct the evaluation exception with a message.
+     * Method needed for the visitor design pattern but not iterate on child node.
      *
-     * @param message the message containing the cause of the exception
+     * @param visitor the visitor
      */
-    public EvaluationException(String message) {
-        super(message);
+    void accept(ExpressionNodeVisitor visitor);
+
+    @Override
+    default Iterator<ExpressionNode> iterator() {
+        return new ExpressionNodeIterator(this);
     }
+
 }

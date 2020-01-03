@@ -22,21 +22,35 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * A simple subclass of RuntimeException that indicates errors when trying to
- * evaluate an expression.
+ * An ExpressionNode that handles additions and subtractions. The node can hold
+ * an arbitrary number of terms that are either added or subtracted from the sum.
  */
-public class EvaluationException extends RuntimeException {
-    private static final long serialVersionUID = 4794094610927358603L;
+@ToString
+@EqualsAndHashCode
+public final class AdditionNode implements ExpressionNode {
+    public final ExpressionNode addendLeft;
+    public final ExpressionNode addendRight;
 
     /**
-     * Construct the evaluation exception with a message.
+     * Constructor to create an addition with the first term already added.
      *
-     * @param message the message containing the cause of the exception
+     * @param addendLeft  the term to be added
+     * @param addendRight the term to be added
      */
-    public EvaluationException(String message) {
-        super(message);
+    public AdditionNode(ExpressionNode addendLeft, ExpressionNode addendRight) {
+        this.addendLeft = addendLeft;
+        this.addendRight = addendRight;
     }
+
+    @Override
+    public void accept(ExpressionNodeVisitor visitor) {
+        visitor.visit(this);
+    }
+
 }

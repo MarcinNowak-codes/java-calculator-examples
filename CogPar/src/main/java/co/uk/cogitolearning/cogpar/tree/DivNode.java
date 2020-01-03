@@ -22,21 +22,35 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * A simple subclass of RuntimeException that indicates errors when trying to
- * evaluate an expression.
+ * An ExpressionNode that handles divisions. The node can hold
+ * an two number of factors that are divided.
  */
-public class EvaluationException extends RuntimeException {
-    private static final long serialVersionUID = 4794094610927358603L;
+@ToString
+@EqualsAndHashCode
+public final class DivNode implements ExpressionNode {
+    public final ExpressionNode numerator;
+    public final ExpressionNode denominator;
 
     /**
-     * Construct the evaluation exception with a message.
+     * Constructor to create a multiplication with the first term already added.
      *
-     * @param message the message containing the cause of the exception
+     * @param numerator
+     * @param denominator
      */
-    public EvaluationException(String message) {
-        super(message);
+    public DivNode(ExpressionNode numerator, ExpressionNode denominator) {
+        this.numerator = numerator;
+        this.denominator = denominator;
     }
+
+    @Override
+    public void accept(ExpressionNodeVisitor visitor) {
+        visitor.visit(this);
+    }
+
 }

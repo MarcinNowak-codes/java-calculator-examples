@@ -22,21 +22,32 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
+
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * A simple subclass of RuntimeException that indicates errors when trying to
- * evaluate an expression.
+ * An ExpressionNode that stores a constant value
  */
-public class EvaluationException extends RuntimeException {
-    private static final long serialVersionUID = 4794094610927358603L;
+@ToString
+@EqualsAndHashCode
+public final class ConstantNode implements ExpressionNode {
+
+    public final double value;
 
     /**
-     * Construct the evaluation exception with a message.
+     * Construct with the fixed value.
      *
-     * @param message the message containing the cause of the exception
+     * @param value the value of the constant
      */
-    public EvaluationException(String message) {
-        super(message);
+    public ConstantNode(double value) {
+        this.value = value;
     }
+
+    @Override
+    public void accept(ExpressionNodeVisitor visitor) {
+        visitor.visit(this);
+    }
+
 }

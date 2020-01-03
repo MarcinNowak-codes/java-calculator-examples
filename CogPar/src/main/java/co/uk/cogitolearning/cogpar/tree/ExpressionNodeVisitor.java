@@ -22,21 +22,41 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cogpar.tree;
 
 /**
- * A simple subclass of RuntimeException that indicates errors when trying to
- * evaluate an expression.
+ * An interface for the visitor design pattern.
+ * <p>
+ * Expression nodes can be visited by ExpressionNodeVisitor by calling their
+ * accept methods. The expression nodes, in turn, call the appropriate visit
+ * method of the expression node visitor.
  */
-public class EvaluationException extends RuntimeException {
-    private static final long serialVersionUID = 4794094610927358603L;
+public interface ExpressionNodeVisitor<T> {
+    /**
+     * Visit a VariableExpressionNode
+     */
+    T visit(VariableNode node);
 
     /**
-     * Construct the evaluation exception with a message.
-     *
-     * @param message the message containing the cause of the exception
+     * Visit a ConstantExpressionNode
      */
-    public EvaluationException(String message) {
-        super(message);
-    }
+    T visit(ConstantNode node);
+
+    /**
+     * Visit a ExponentiationExpressionNode
+     */
+    T visit(ExponentiationNode node);
+
+    /**
+     * Visit a FunctionExpressionNode
+     */
+    T visit(FunctionNode node);
+
+    T visit(AdditionNode node);
+
+    T visit(SubtractionNode node);
+
+    T visit(MultiplicationNode node);
+
+    T visit(DivNode node);
 }
