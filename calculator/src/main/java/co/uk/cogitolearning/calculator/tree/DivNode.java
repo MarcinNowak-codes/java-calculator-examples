@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -40,7 +40,7 @@ public final class DivNode implements ExpressionNode {
     /**
      * Constructor to create a multiplication with the first term already added.
      *
-     * @param numerator division numerator
+     * @param numerator   division numerator
      * @param denominator division denominator
      */
     public DivNode(ExpressionNode numerator, ExpressionNode denominator) {

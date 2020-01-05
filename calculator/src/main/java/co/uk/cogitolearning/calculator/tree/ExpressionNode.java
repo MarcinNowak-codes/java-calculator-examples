@@ -22,41 +22,26 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
+
+import java.util.Iterator;
 
 /**
- * An interface for the visitor design pattern.
+ * An interface for expression nodes.
  * <p>
- * Expression nodes can be visited by ExpressionNodeVisitor by calling their
- * accept methods. The expression nodes, in turn, call the appropriate visit
- * method of the expression node visitor.
+ * Every concrete type of expression node has to implement this interface.
  */
-public interface ExpressionNodeVisitor<T> {
+public interface ExpressionNode extends Iterable<ExpressionNode> {
     /**
-     * Visit a VariableExpressionNode
+     * Method needed for the visitor design pattern but not iterate on child node.
+     *
+     * @param visitor the visitor
      */
-    T visit(VariableNode node);
+    void accept(ExpressionNodeVisitor visitor);
 
-    /**
-     * Visit a ConstantExpressionNode
-     */
-    T visit(ConstantNode node);
+    @Override
+    default Iterator<ExpressionNode> iterator() {
+        return new ExpressionNodeIterator(this);
+    }
 
-    /**
-     * Visit a ExponentiationExpressionNode
-     */
-    T visit(ExponentiationNode node);
-
-    /**
-     * Visit a FunctionExpressionNode
-     */
-    T visit(FunctionNode node);
-
-    T visit(AdditionNode node);
-
-    T visit(SubtractionNode node);
-
-    T visit(MultiplicationNode node);
-
-    T visit(DivNode node);
 }

@@ -22,41 +22,21 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
-
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+package co.uk.cogitolearning.calculator;
 
 /**
- * An ExpressionNode that handles exponentiation. The node holds
- * a base and an exponent and calulates base^exponent
+ * A simple subclass of RuntimeException that indicates errors when trying to
+ * evaluate an expression.
  */
-@ToString
-@EqualsAndHashCode
-public final class ExponentiationNode implements ExpressionNode {
-    /**
-     * the node containing the base
-     */
-    public final ExpressionNode base;
-    /**
-     * the node containing the exponent
-     */
-    public final ExpressionNode exponent;
+public class EvaluationException extends RuntimeException {
+    private static final long serialVersionUID = 4794094610927358603L;
 
     /**
-     * Construct the ExponentiationExpressionNode with base and exponent
+     * Construct the evaluation exception with a message.
      *
-     * @param base     the node containing the base
-     * @param exponent the node containing the exponent
+     * @param message the message containing the cause of the exception
      */
-    public ExponentiationNode(ExpressionNode base, ExpressionNode exponent) {
-        this.base = base;
-        this.exponent = exponent;
+    EvaluationException(String message) {
+        super(message);
     }
-
-    @Override
-    public void accept(ExpressionNodeVisitor visitor) {
-        visitor.visit(this);
-    }
-
 }

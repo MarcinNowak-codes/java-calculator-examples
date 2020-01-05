@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.calculator;
 
-import co.uk.cogitolearning.cogpar.lexer.Token;
+import co.uk.cogitolearning.calculator.lexer.Token;
 
 /**
  * A simple subclass of RuntimeException that indicates errors when trying to

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -41,7 +41,7 @@ public final class MultiplicationNode implements ExpressionNode {
      * Constructor to create a multiplication with the first term already added.
      *
      * @param multiplicand multiplication multiplicand
-     * @param multiplier multiplicand multiplier
+     * @param multiplier   multiplicand multiplier
      */
     public MultiplicationNode(ExpressionNode multiplicand, ExpressionNode multiplier) {
         this.multiplicand = multiplicand;

@@ -1,4 +1,4 @@
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
 import java.util.ArrayList;
 import java.util.Iterator;

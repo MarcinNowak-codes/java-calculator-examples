@@ -22,17 +22,18 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.calculator;
 
-import co.uk.cogitolearning.cogpar.lexer.Lexer;
-import co.uk.cogitolearning.cogpar.parser.Parser;
-import co.uk.cogitolearning.cogpar.tree.ExpressionNode;
+import co.uk.cogitolearning.calculator.lexer.Lexer;
+import co.uk.cogitolearning.calculator.parser.Parser;
+import co.uk.cogitolearning.calculator.tree.ExpressionNode;
 import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 @UtilityClass
+public
 class Calculator {
 
     static double calculateTree(ExpressionNode expr, CalculationVisitor visitor) {
@@ -53,7 +54,7 @@ class Calculator {
         return visitor.getValue();
     }
 
-    static double calculate(String expresion) {
+    public static double calculate(String expresion) {
         Parser parser = new Parser();
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
