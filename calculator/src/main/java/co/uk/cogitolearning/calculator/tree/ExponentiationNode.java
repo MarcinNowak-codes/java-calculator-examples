@@ -22,30 +22,36 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * An ExpressionNode that handles additions and subtractions. The node can hold
- * an arbitrary number of terms that are either added or subtraced from the sum.
+ * An ExpressionNode that handles exponentiation. The node holds
+ * a base and an exponent and calulates base^exponent
  */
 @ToString
 @EqualsAndHashCode
-public final class SubtractionNode implements ExpressionNode {
-    public final ExpressionNode minuend;
-    public final ExpressionNode subtrahend;
+public final class ExponentiationNode implements ExpressionNode {
+    /**
+     * the node containing the base
+     */
+    public final ExpressionNode base;
+    /**
+     * the node containing the exponent
+     */
+    public final ExpressionNode exponent;
 
     /**
-     * Constructor to create an addition with the first term already added.
+     * Construct the ExponentiationExpressionNode with base and exponent
      *
-     * @param minuend subtraction minuend
-     * @param subtrahend subtraction subtrahend
+     * @param base     the node containing the base
+     * @param exponent the node containing the exponent
      */
-    public SubtractionNode(ExpressionNode minuend, ExpressionNode subtrahend) {
-        this.minuend = minuend;
-        this.subtrahend = subtrahend;
+    public ExponentiationNode(ExpressionNode base, ExpressionNode exponent) {
+        this.base = base;
+        this.exponent = exponent;
     }
 
     @Override

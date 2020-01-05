@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.lexer;
+package co.uk.cogitolearning.calculator.lexer;
 
-import co.uk.cogitolearning.cogpar.ParserException;
-import co.uk.cogitolearning.cogpar.tree.FunctionNode;
+import co.uk.cogitolearning.calculator.ParserException;
+import co.uk.cogitolearning.calculator.tree.FunctionNode;
 
 import java.util.LinkedList;
 import java.util.List;

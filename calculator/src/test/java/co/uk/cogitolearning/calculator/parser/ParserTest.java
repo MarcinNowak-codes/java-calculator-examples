@@ -1,7 +1,7 @@
-package co.uk.cogitolearning.cogpar.parser;
+package co.uk.cogitolearning.calculator.parser;
 
-import co.uk.cogitolearning.cogpar.lexer.Token;
-import co.uk.cogitolearning.cogpar.tree.*;
+import co.uk.cogitolearning.calculator.lexer.Token;
+import co.uk.cogitolearning.calculator.tree.*;
 import org.junit.Test;
 
 import java.util.Arrays;

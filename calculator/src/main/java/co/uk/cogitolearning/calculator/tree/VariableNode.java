@@ -22,30 +22,29 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * An ExpressionNode that handles additions and subtractions. The node can hold
- * an arbitrary number of terms that are either added or subtracted from the sum.
+ * An ExpressionNode that stores a named variable
  */
 @ToString
 @EqualsAndHashCode
-public final class AdditionNode implements ExpressionNode {
-    public final ExpressionNode addendLeft;
-    public final ExpressionNode addendRight;
+public final class VariableNode implements ExpressionNode {
+    /**
+     * The name of the variable
+     */
+    public final String name;
 
     /**
-     * Constructor to create an addition with the first term already added.
+     * Construct with the name of the variable.
      *
-     * @param addendLeft  the term to be added
-     * @param addendRight the term to be added
+     * @param name the name of the variable
      */
-    public AdditionNode(ExpressionNode addendLeft, ExpressionNode addendRight) {
-        this.addendLeft = addendLeft;
-        this.addendRight = addendRight;
+    public VariableNode(String name) {
+        this.name = name;
     }
 
     @Override

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

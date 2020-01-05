@@ -22,26 +22,35 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
-import java.util.Iterator;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 /**
- * An interface for expression nodes.
- * <p>
- * Every concrete type of expression node has to implement this interface.
+ * An ExpressionNode that handles additions and subtractions. The node can hold
+ * an arbitrary number of terms that are either added or subtraced from the sum.
  */
-public interface ExpressionNode extends Iterable<ExpressionNode> {
+@ToString
+@EqualsAndHashCode
+public final class SubtractionNode implements ExpressionNode {
+    public final ExpressionNode minuend;
+    public final ExpressionNode subtrahend;
+
     /**
-     * Method needed for the visitor design pattern but not iterate on child node.
+     * Constructor to create an addition with the first term already added.
      *
-     * @param visitor the visitor
+     * @param minuend    subtraction minuend
+     * @param subtrahend subtraction subtrahend
      */
-    void accept(ExpressionNodeVisitor visitor);
+    public SubtractionNode(ExpressionNode minuend, ExpressionNode subtrahend) {
+        this.minuend = minuend;
+        this.subtrahend = subtrahend;
+    }
 
     @Override
-    default Iterator<ExpressionNode> iterator() {
-        return new ExpressionNodeIterator(this);
+    public void accept(ExpressionNodeVisitor visitor) {
+        visitor.visit(this);
     }
 
 }

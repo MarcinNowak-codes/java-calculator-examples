@@ -1,13 +1,13 @@
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.calculator;
 
 
-import co.uk.cogitolearning.cogpar.tree.*;
+import co.uk.cogitolearning.calculator.tree.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import static co.uk.cogitolearning.cogpar.tree.FunctionNode.*;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.*;
 
 public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     private final Stack<Double> stack = new Stack<>();

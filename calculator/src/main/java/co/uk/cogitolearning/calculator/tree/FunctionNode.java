@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package co.uk.cogitolearning.cogpar.tree;
+package co.uk.cogitolearning.calculator.tree;
 
-import co.uk.cogitolearning.cogpar.ParserException;
+import co.uk.cogitolearning.calculator.ParserException;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 

@@ -1,6 +1,6 @@
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.calculator;
 
-import co.uk.cogitolearning.cogpar.tree.*;
+import co.uk.cogitolearning.calculator.tree.*;
 import org.junit.Assert;
 import org.junit.Test;
 

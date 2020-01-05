@@ -1,4 +1,4 @@
-package co.uk.cogitolearning.cogpar.lexer;
+package co.uk.cogitolearning.calculator.lexer;
 
 import org.junit.Test;
 

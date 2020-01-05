@@ -1,4 +1,8 @@
-package co.uk.cogitolearning.cogpar;
+package co.uk.cogitolearning.cli;
+
+import co.uk.cogitolearning.calculator.Calculator;
+import co.uk.cogitolearning.calculator.EvaluationException;
+import co.uk.cogitolearning.calculator.ParserException;
 
 /**
  * Command line interface for calculator
