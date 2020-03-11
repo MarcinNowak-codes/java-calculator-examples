@@ -27,14 +27,13 @@ package co.uk.cogitolearning.calculator;
 import co.uk.cogitolearning.calculator.lexer.Lexer;
 import co.uk.cogitolearning.calculator.parser.Parser;
 import co.uk.cogitolearning.calculator.tree.ExpressionNode;
-import lombok.experimental.UtilityClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-@UtilityClass
-public
-class Calculator {
+public class Calculator {
+
+    private final CalculationVisitor visitor = new CalculationVisitor();
 
     static double calculateTree(ExpressionNode expr, CalculationVisitor visitor) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
@@ -54,13 +53,16 @@ class Calculator {
         return visitor.getValue();
     }
 
-    public static double calculate(String expresion) {
+    public double calculate(String expresion) {
         Parser parser = new Parser();
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
         ExpressionNode expr = parser.parse(lexer.getTokens());
-        CalculationVisitor visitor = new CalculationVisitor();
-        visitor.addVariable("pi", Math.PI);
         return calculateTree(expr, visitor);
+    }
+
+    public Calculator withVariable(String variable, double value) {
+        visitor.addVariable(variable, value);
+        return this;
     }
 }

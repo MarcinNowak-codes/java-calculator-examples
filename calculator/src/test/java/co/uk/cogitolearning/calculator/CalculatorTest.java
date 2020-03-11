@@ -2,6 +2,7 @@ package co.uk.cogitolearning.calculator;
 
 import co.uk.cogitolearning.calculator.tree.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -41,42 +42,114 @@ public class CalculatorTest {
 
     @Test
     public void shouldParse() {
-        Assert.assertEquals(8.0, Calculator.calculate("2*(1+sin(pi/2))^2"), 0.1);
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("pi", Math.PI);
+        // when
+        double value = calculator.calculate("2*(1+sin(pi/2))^2");
+        // then
+        Assert.assertEquals(8.0, value, 0.1);
     }
 
     @Test
     public void shouldParseSub() {
-        Assert.assertEquals(3.0 - 1.0, Calculator.calculate("3-1"), 0.1);
+        // given
+        Calculator calculator = new Calculator();
+        // when
+        double value = calculator.calculate("3-1");
+        // then
+        Assert.assertEquals(3.0 - 1.0, value, 0.1);
     }
 
     @Test
     public void shouldParseSub2() {
-        Assert.assertEquals(4.0 - 1.0 - 2.0, Calculator.calculate("4-1-2"), 0.1);
+        // given
+        Calculator calculator = new Calculator();
+        // when
+        double value = calculator.calculate("4-1-2");
+        // then
+        Assert.assertEquals(4.0 - 1.0 - 2.0, value, 0.1);
     }
 
     @Test
     public void shouldParseSub2Sin() {
-        Assert.assertEquals(4 - Math.sin(Math.PI / 2), Calculator.calculate("4-sin(pi/2)"), 0.1);
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("pi", Math.PI);
+        // when
+        double value = calculator.calculate("4-sin(pi/2)");
+        // then
+        Assert.assertEquals(4 - Math.sin(Math.PI / 2), value, 0.1);
     }
 
     @Test
     public void shouldParseSub3Sin() {
-        Assert.assertEquals(4 - 1 - Math.sin(Math.PI / 2), Calculator.calculate("4-1-sin(pi/2)"), 0.1);
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("pi", Math.PI);
+        // when
+        double value = calculator.calculate("4-1-sin(pi/2)");
+        // then
+        Assert.assertEquals(4 - 1 - Math.sin(Math.PI / 2), value, 0.1);
     }
 
     @Test
     public void shouldParseSub2Pi() {
-        Assert.assertEquals(4 - Math.PI, Calculator.calculate("4-pi"), 0.1);
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("pi", Math.PI);
+        // when
+        double value = calculator.calculate("4-pi");
+        // then
+        Assert.assertEquals(4 - Math.PI, value, 0.1);
+    }
+
+    @Test
+    public void shouldParseMul2Pi() {
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("pi", Math.PI);
+        // when
+        double value = calculator.calculate("4-pi");
+        // then
+        Assert.assertEquals(4 - Math.PI, value, 0.1);
     }
 
     @Test
     public void shouldParseSub3Pi() {
-        Assert.assertEquals(5 - 1 - Math.PI, Calculator.calculate("5-1-pi"), 0.1);
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("pi", Math.PI);
+        // when
+        double value = calculator.calculate("5-1-pi");
+        // then
+        Assert.assertEquals(5 - 1 - Math.PI, value, 0.1);
     }
 
     @Test
     public void shouldParseAdd2() {
-        Assert.assertEquals(1.0 + 2.0 + 3.0, Calculator.calculate("1+2+3"), 0.1);
+        // given
+        Calculator calculator = new Calculator();
+        // when
+        double value = calculator.calculate("1+2+3");
+        // then
+        Assert.assertEquals(1.0 + 2.0 + 3.0, value, 0.1);
+    }
+
+    @Ignore
+    @Test
+    public void shouldParseRump() {
+        // https://books.google.pl/books?id=fZsXBgAAQBAJ&pg=PA179&lpg=PA179&dq=floating+point+error+ibm+format&source=bl&ots=MI5qlHzp51&sig=ACfU3U1lp8FThhWkCmk3erU9ShJGavLl3Q&hl=en&sa=X&ved=2ahUKEwjdm8XH4JLoAhUwSBUIHUxsCiUQ6AEwEHoECAoQAQ#v=onepage&q&f=false
+        // x=77617, y=33096
+        // given
+        Calculator calculator = new Calculator()
+                .withVariable("x", 77617)
+                .withVariable("y", 33096);
+        // when
+        double value = calculator.calculate("333.75y^6+x^2(11x^2*y^2-y^6-121y^4-2)+5.5y^8+x/2y");
+
+        // then
+        Assert.assertEquals(-0.827, value, 0.1);
     }
 
 }
