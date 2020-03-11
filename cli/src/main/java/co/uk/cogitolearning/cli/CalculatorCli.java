@@ -17,7 +17,9 @@ public class CalculatorCli {
         if (args.length > 0) expresion = args[0];
 
         try {
-            System.out.println("The value of the expression is " + Calculator.calculate(expresion));
+            Calculator calculator = new Calculator()
+                    .withVariable("pi", Math.PI);
+            System.out.println("The value of the expression is " + calculator.calculate(expresion));
         } catch (ParserException | EvaluationException e) {
             System.err.println(e.getMessage());
         }
