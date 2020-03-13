@@ -2,24 +2,34 @@ package co.uk.cogitolearning.calculator.parser;
 
 import co.uk.cogitolearning.calculator.ParserException;
 import co.uk.cogitolearning.calculator.lexer.Token;
-import co.uk.cogitolearning.calculator.tree.*;
+import co.uk.cogitolearning.calculator.tree.AdditionNode;
+import co.uk.cogitolearning.calculator.tree.ConstantNode;
+import co.uk.cogitolearning.calculator.tree.DivNode;
+import co.uk.cogitolearning.calculator.tree.ExponentiationNode;
+import co.uk.cogitolearning.calculator.tree.ExpressionNode;
+import co.uk.cogitolearning.calculator.tree.FunctionNode;
+import co.uk.cogitolearning.calculator.tree.MultiplicationNode;
+import co.uk.cogitolearning.calculator.tree.SubtractionNode;
+import co.uk.cogitolearning.calculator.tree.VariableNode;
+import lombok.experimental.UtilityClass;
 
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
+@UtilityClass
 public class Parser {
 
-    public ExpressionNode parse(List<Token> tokens) {
+    public static ExpressionNode parse(final List<Token> tokens) {
         //TODO: Replace recursion with iteration
         Stack<ExpressionNode> nodes = new Stack<>();
 
         while (!tokens.isEmpty()) {
             Token token = tokens.remove(0);
-            switch (token.tokenId) {
+            switch (token.getTokenId()) {
                 case Token.NUMBER:
-                    nodes.push(new ConstantNode(Double.parseDouble(token.sequence)));
+                    nodes.push(new ConstantNode(Double.parseDouble(token.getSequence())));
                     break;
                 case Token.PLUS:
                     ExpressionNode left = nodes.pop();
@@ -43,7 +53,7 @@ public class Parser {
                     break;
 
                 case Token.FUNCTION:
-                    int function = FunctionNode.stringToFunction(token.sequence);
+                    int function = FunctionNode.stringToFunction(token.getSequence());
                     nodes.push(new FunctionNode(function, parse(tokens)));
                     break;
                 case Token.DIV:
@@ -57,37 +67,41 @@ public class Parser {
                     nodes.push(new ExponentiationNode(expr, exponent));
                     break;
                 case Token.VARIABLE:
-                    nodes.push(new VariableNode(token.sequence));
+                    nodes.push(new VariableNode(token.getSequence()));
                     break;
                 default:
-                    throw new UnsupportedOperationException("Not supported: " + token.tokenId);
+                    throw new UnsupportedOperationException("Not supported: " + token.getTokenId());
             }
 
         }
         return nodes.pop();
     }
 
-    private ExpressionNode lookaheadMinus(List<Token> tokens) {
+    private static ExpressionNode lookaheadMinus(final List<Token> tokens) {
         assert !tokens.isEmpty();
 
-        if (tokens.get(0).tokenId == Token.NUMBER)
+        if (tokens.get(0).getTokenId() == Token.NUMBER) {
             return parse(new LinkedList<>(Collections.singletonList(tokens.remove(0))));
+        }
         return parse(tokens);
     }
 
-    private List<Token> tokensInBracket(List<Token> tokens) {
+    private static List<Token> tokensInBracket(final List<Token> tokens) {
         int brackets = 0;
         List<Token> internals = new LinkedList<>();
         while (!tokens.isEmpty()) {
             Token token = tokens.remove(0);
-            if (token.tokenId == Token.CLOSE_BRACKET && brackets == 0)
+            if (token.getTokenId() == Token.CLOSE_BRACKET && brackets == 0) {
                 return internals;
+            }
 
-            if (token.tokenId == Token.CLOSE_BRACKET && brackets > 0)
+            if (token.getTokenId() == Token.CLOSE_BRACKET && brackets > 0) {
                 brackets--;
+            }
 
-            if (token.tokenId == Token.OPEN_BRACKET)
+            if (token.getTokenId() == Token.OPEN_BRACKET) {
                 brackets++;
+            }
 
             internals.add(token);
         }

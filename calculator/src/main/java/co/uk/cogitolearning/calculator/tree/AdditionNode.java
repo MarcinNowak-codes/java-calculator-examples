@@ -24,32 +24,31 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
  * An ExpressionNode that handles additions and subtractions. The node can hold
  * an arbitrary number of terms that are either added or subtracted from the sum.
  */
+@Getter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
 public final class AdditionNode implements ExpressionNode {
-    public final ExpressionNode addendLeft;
-    public final ExpressionNode addendRight;
-
     /**
-     * Constructor to create an addition with the first term already added.
-     *
-     * @param addendLeft  the term to be added
-     * @param addendRight the term to be added
+     * AddendLeft the term to be added.
      */
-    public AdditionNode(ExpressionNode addendLeft, ExpressionNode addendRight) {
-        this.addendLeft = addendLeft;
-        this.addendRight = addendRight;
-    }
+    private final ExpressionNode addendLeft;
+    /**
+     * AddendRight the term to be added.
+     */
+    private final ExpressionNode addendRight;
 
     @Override
-    public void accept(ExpressionNodeVisitor visitor) {
+    public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);
     }
 

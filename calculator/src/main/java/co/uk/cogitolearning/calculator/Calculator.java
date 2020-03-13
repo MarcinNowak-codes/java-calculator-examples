@@ -31,37 +31,38 @@ import co.uk.cogitolearning.calculator.tree.ExpressionNode;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Calculator {
+public final class Calculator {
 
     private final CalculationVisitor visitor = new CalculationVisitor();
 
-    static double calculateTree(ExpressionNode expr, CalculationVisitor visitor) {
+    static double calculateTree(final ExpressionNode expr, final CalculationVisitor visitor) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
-        for (ExpressionNode node : expr)
+        for (ExpressionNode node : expr) {
             polishNotationList.add(node);
+        }
         return calculatePolishNotation(polishNotationList, visitor);
     }
 
-    private static double calculatePolishNotation(ArrayList<ExpressionNode> list, CalculationVisitor visitor) {
+    private static double calculatePolishNotation(final ArrayList<ExpressionNode> list, final CalculationVisitor visitor) {
         // https://en.wikipedia.org/wiki/Polish_notation
         Collections.reverse(list); // Scan the given prefix expression from right to left
 
-        for (ExpressionNode node : list)
+        for (ExpressionNode node : list) {
             node.accept(visitor);
+        }
 
         return visitor.getValue();
     }
 
-    public double calculate(String expresion) {
-        Parser parser = new Parser();
+    public double calculate(final String expresion) {
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
-        ExpressionNode expr = parser.parse(lexer.getTokens());
+        ExpressionNode expr = Parser.parse(lexer.getTokens());
         return calculateTree(expr, visitor);
     }
 
-    public Calculator withVariable(String variable, double value) {
+    public Calculator withVariable(final String variable, final double value) {
         visitor.addVariable(variable, value);
         return this;
     }

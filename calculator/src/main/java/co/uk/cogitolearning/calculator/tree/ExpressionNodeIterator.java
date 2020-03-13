@@ -8,7 +8,7 @@ import java.util.NoSuchElementException;
 final class ExpressionNodeIterator implements Iterator<ExpressionNode> {
     private final List<ExpressionNode> list = new ArrayList<>();
 
-    ExpressionNodeIterator(ExpressionNode expressionNode) {
+    ExpressionNodeIterator(final ExpressionNode expressionNode) {
         IteratorVisitor visitor = new IteratorVisitor(list);
         expressionNode.accept(visitor);
     }
@@ -20,70 +20,75 @@ final class ExpressionNodeIterator implements Iterator<ExpressionNode> {
 
     @Override
     public ExpressionNode next() {
-        if (list.isEmpty())
+        if (list.isEmpty()) {
             throw new NoSuchElementException("Iteration beyond the end of the collection");
+        }
         return list.remove(0);
     }
 
     private static class IteratorVisitor implements ExpressionNodeVisitor<Void> {
-        private List<ExpressionNode> list;
+        private final List<ExpressionNode> list;
 
-        IteratorVisitor(List<ExpressionNode> list) {
+        IteratorVisitor(final List<ExpressionNode> list) {
             this.list = list;
         }
 
-        public Void visit(VariableNode node) {
+        @Override
+        public Void visit(final VariableNode node) {
             list.add(node);
-            return null;
-        }
-
-        public Void visit(ConstantNode node) {
-            list.add(node);
-            return null;
-        }
-
-        public Void visit(ExponentiationNode node) {
-            list.add(node);
-            node.base.accept(this);
-            node.exponent.accept(this);
-            return null;
-        }
-
-        public Void visit(FunctionNode node) {
-            list.add(node);
-            node.argument.accept(this);
             return null;
         }
 
         @Override
-        public Void visit(AdditionNode node) {
+        public Void visit(final ConstantNode node) {
             list.add(node);
-            node.addendLeft.accept(this);
-            node.addendRight.accept(this);
             return null;
         }
 
         @Override
-        public Void visit(SubtractionNode node) {
+        public Void visit(final ExponentiationNode node) {
             list.add(node);
-            node.minuend.accept(this);
-            node.subtrahend.accept(this);
+            node.getBase().accept(this);
+            node.getExponent().accept(this);
             return null;
         }
 
         @Override
-        public Void visit(MultiplicationNode node) {
+        public Void visit(final FunctionNode node) {
             list.add(node);
-            node.multiplicand.accept(this);
-            node.multiplier.accept(this);
+            node.getArgument().accept(this);
             return null;
         }
 
         @Override
-        public Void visit(DivNode node) {
+        public Void visit(final AdditionNode node) {
             list.add(node);
-            node.numerator.accept(this);
-            node.denominator.accept(this);
+            node.getAddendLeft().accept(this);
+            node.getAddendRight().accept(this);
+            return null;
+        }
+
+        @Override
+        public Void visit(final SubtractionNode node) {
+            list.add(node);
+            node.getMinuend().accept(this);
+            node.getSubtrahend().accept(this);
+            return null;
+        }
+
+        @Override
+        public Void visit(final MultiplicationNode node) {
+            list.add(node);
+            node.getMultiplicand().accept(this);
+            node.getMultiplier().accept(this);
+            return null;
+        }
+
+        @Override
+        public Void visit(final DivNode node) {
+            list.add(node);
+            node.getNumerator().accept(this);
+            node.getDenominator().accept(this);
             return null;
         }
     }

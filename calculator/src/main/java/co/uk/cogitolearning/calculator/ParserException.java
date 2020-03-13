@@ -29,23 +29,23 @@ import co.uk.cogitolearning.calculator.lexer.Token;
 /**
  * A simple subclass of RuntimeException that indicates errors when trying to
  * parse the input to Parser.
- * <p>
- * The exception stores the token that caused the error.
+ *
+ * <p>The exception stores the token that caused the error.
  */
 public class ParserException extends RuntimeException {
     private static final long serialVersionUID = -1009747984332258423L;
 
     /**
-     * the token that caused the error
+     * The token that caused the error.
      */
-    public final Token token;
+    private final Token token;
 
     /**
      * Construct the evaluation exception with a message.
      *
      * @param message the message containing the cause of the exception
      */
-    public ParserException(String message) {
+    public ParserException(final String message) {
         super(message);
         token = null;
     }
@@ -56,7 +56,7 @@ public class ParserException extends RuntimeException {
      * @param message the message containing the cause of the exception
      * @param token   the token that caused the exception
      */
-    public ParserException(String message, Token token) {
+    public ParserException(final String message, final Token token) {
         super(message);
         this.token = token;
     }
@@ -71,7 +71,7 @@ public class ParserException extends RuntimeException {
     public String getMessage() {
         String msg = super.getMessage();
         if (token != null) {
-            msg = msg.replace("%s", token.sequence);
+            msg = msg.replace("%s", token.getSequence());
         }
         return msg;
     }

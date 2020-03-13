@@ -26,6 +26,8 @@ package co.uk.cogitolearning.calculator.lexer;
 
 import co.uk.cogitolearning.calculator.ParserException;
 import co.uk.cogitolearning.calculator.tree.FunctionNode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,54 +37,48 @@ import java.util.regex.Pattern;
 /**
  * A class for reading an input string and separating it into tokens that can be
  * fed into Parser.
- * <p>
- * The user can add regular expressions that will be matched against the front
+ *
+ * <p>The user can add regular expressions that will be matched against the front
  * of the string. Regular expressions should not contain beginning-of-string or
  * end-of-string anchors or any capturing groups as these will be added by the
- * tokenizer itslef.
+ * tokenizer itself.
  */
-public class Lexer {
+public final class Lexer {
     /**
      * Internal class holding the information about a token type.
      */
+    @Getter
+    @AllArgsConstructor
     private static class TokenInfo {
         /**
-         * the regular expression to match against
+         * The regular expression to match against.
          */
-        final Pattern regex;
+        private final Pattern regex;
         /**
-         * the token id that the regular expression is linked to
+         * The token id that the regular expression is linked to.
          */
-        final int token;
-
-        /**
-         * Construct TokenInfo with its values
-         */
-        TokenInfo(Pattern regex, int token) {
-            this.regex = regex;
-            this.token = token;
-        }
+        private final int token;
     }
 
     /**
-     * a list of TokenInfo objects
-     * <p>
-     * Each token type corresponds to one entry in the list
+     * A list of TokenInfo objects.
+     *
+     * <p>Each token type corresponds to one entry in the list
      */
     private LinkedList<TokenInfo> tokenInfos;
 
     /**
-     * the list of tokens produced when tokenizing the input
+     * The list of tokens produced when tokenizing the input.
      */
     private LinkedList<Token> tokens;
 
     /**
-     * a tokenizer that can handle mathematical expressions
+     * A tokenizer that can handle mathematical expressions.
      */
     private static Lexer instance = null;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     private Lexer() {
         tokenInfos = new LinkedList<>();
@@ -90,20 +86,21 @@ public class Lexer {
     }
 
     /**
-     * A static method that returns a tokenizer for mathematical expressions
-     * <p>
-     * Not thread safe singleton design pattern
+     * A static method that returns a tokenizer for mathematical expressions.
+     *
+     * <p>Not thread safe singleton design pattern
      *
      * @return a tokenizer that can handle mathematical expressions
      */
     public static synchronized Lexer getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = create();
+        }
         return instance;
     }
 
     /**
-     * A static method that actually creates a tokenizer for mathematical expressions
+     * A static method that actually creates a tokenizer for mathematical expressions.
      *
      * @return a tokenizer that can handle mathematical expressions
      */
@@ -128,23 +125,23 @@ public class Lexer {
     }
 
     /**
-     * Add a regular expression and a token id to the internal list of recognized tokens
+     * Add a regular expression and a token id to the internal list of recognized tokens.
      *
      * @param regex the regular expression to match against
      * @param token the token id that the regular expression is linked to
      */
-    public void add(String regex, int token) {
+    public void add(final String regex, final int token) {
         tokenInfos.add(new TokenInfo(Pattern.compile("^(" + regex + ")"), token));
     }
 
     /**
      * Tokenize an input string.
-     * <p>
-     * The reult of tokenizing can be accessed via getTokens
+     *
+     * <p>The result of tokenizing can be accessed via getTokens
      *
      * @param str the string to tokenize
      */
-    public void tokenize(String str) {
+    public void tokenize(final String str) {
         String s = str.trim();
         int totalLength = s.length();
         tokens.clear();
@@ -161,8 +158,9 @@ public class Lexer {
                     break;
                 }
             }
-            if (!match)
+            if (!match) {
                 throw new ParserException("Unexpected character in input: " + s);
+            }
         }
     }
 

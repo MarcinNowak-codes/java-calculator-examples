@@ -55,7 +55,7 @@ public class CalculatorTest {
         // when
         double value = calculator.calculate(expresion);
         // then
-        assertEquals(expected, value, 0.1);
+        assertEquals(expected, value, 0.00001);
     }
 
     static Stream<Arguments> stringIntAndListProvider() {
@@ -67,6 +67,8 @@ public class CalculatorTest {
                 arguments("4-1-sin(pi/2)", 4 - 1 - Math.sin(Math.PI / 2)),
                 arguments("4-pi", 4 - Math.PI),
                 arguments("5-1-pi", 5 - 1 - Math.PI),
+                arguments("log2(2)", 1.0),
+                arguments("log(10)", 1.0),
                 arguments("1+2+3", 1.0 + 2.0 + 3.0)
         );
     }
