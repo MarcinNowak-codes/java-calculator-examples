@@ -32,8 +32,8 @@ import lombok.ToString;
 
 /**
  * An ExpressionNode that handles mathematical functions.
- * <p>
- * Some pre-defined functions are handled, others can easily be added.
+ *
+ * <p>Some pre-defined functions are handled, others can easily be added.
  */
 @Getter
 @ToString
@@ -105,8 +105,8 @@ public final class FunctionNode implements ExpressionNode {
 
     /**
      * Converts a string to a function id.
-     * <p>
-     * If the function is not found this method throws an error.
+     *
+     * <p>If the function is not found this method throws an error.
      *
      * @param function the name of the function
      * @return the id of the function

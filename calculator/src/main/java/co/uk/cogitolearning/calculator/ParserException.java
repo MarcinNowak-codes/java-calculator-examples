@@ -29,8 +29,8 @@ import co.uk.cogitolearning.calculator.lexer.Token;
 /**
  * A simple subclass of RuntimeException that indicates errors when trying to
  * parse the input to Parser.
- * <p>
- * The exception stores the token that caused the error.
+ *
+ * <p>The exception stores the token that caused the error.
  */
 public class ParserException extends RuntimeException {
     private static final long serialVersionUID = -1009747984332258423L;

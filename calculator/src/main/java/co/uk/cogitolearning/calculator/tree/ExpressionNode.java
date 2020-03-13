@@ -28,8 +28,8 @@ import java.util.Iterator;
 
 /**
  * An interface for expression nodes.
- * <p>
- * Every concrete type of expression node has to implement this interface.
+ *
+ * <p>Every concrete type of expression node has to implement this interface.
  */
 public interface ExpressionNode extends Iterable<ExpressionNode> {
     /**

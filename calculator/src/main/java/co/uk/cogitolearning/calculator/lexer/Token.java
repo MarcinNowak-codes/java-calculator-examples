@@ -33,11 +33,11 @@ import java.io.Serializable;
 
 /**
  * A token that is produced by Tokenizer and fed into Parser.parse
- * <p>
- * A token consists of a token identifier, a string that the token was
+ *
+ * <p>A token consists of a token identifier, a string that the token was
  * created from and the position in the input string that the token was found.
- * <p>
- * The token id must be one of a number of pre-defined values
+ *
+ * <p>The token id must be one of a number of pre-defined values
  */
 @Getter
 @ToString

@@ -37,11 +37,11 @@ import java.util.regex.Pattern;
 /**
  * A class for reading an input string and separating it into tokens that can be
  * fed into Parser.
- * <p>
- * The user can add regular expressions that will be matched against the front
+ *
+ * <p>The user can add regular expressions that will be matched against the front
  * of the string. Regular expressions should not contain beginning-of-string or
  * end-of-string anchors or any capturing groups as these will be added by the
- * tokenizer itslef.
+ * tokenizer itself.
  */
 public final class Lexer {
     /**
@@ -62,8 +62,8 @@ public final class Lexer {
 
     /**
      * A list of TokenInfo objects.
-     * <p>
-     * Each token type corresponds to one entry in the list
+     *
+     * <p>Each token type corresponds to one entry in the list
      */
     private LinkedList<TokenInfo> tokenInfos;
 
@@ -87,8 +87,8 @@ public final class Lexer {
 
     /**
      * A static method that returns a tokenizer for mathematical expressions.
-     * <p>
-     * Not thread safe singleton design pattern
+     *
+     * <p>Not thread safe singleton design pattern
      *
      * @return a tokenizer that can handle mathematical expressions
      */
@@ -136,8 +136,8 @@ public final class Lexer {
 
     /**
      * Tokenize an input string.
-     * <p>
-     * The reult of tokenizing can be accessed via getTokens
+     *
+     * <p>The result of tokenizing can be accessed via getTokens
      *
      * @param str the string to tokenize
      */

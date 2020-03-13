@@ -26,8 +26,8 @@ package co.uk.cogitolearning.calculator.tree;
 
 /**
  * An interface for the visitor design pattern.
- * <p>
- * Expression nodes can be visited by ExpressionNodeVisitor by calling their
+ *
+ * <p>Expression nodes can be visited by ExpressionNodeVisitor by calling their
  * accept methods. The expression nodes, in turn, call the appropriate visit
  * method of the expression node visitor.
  */
