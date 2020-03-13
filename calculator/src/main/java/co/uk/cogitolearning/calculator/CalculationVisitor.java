@@ -32,36 +32,6 @@ public final class CalculationVisitor implements ExpressionNodeVisitor<Void> {
 
     private final Map<String, Double> variable = new HashMap<>();
 
-    private static double functionGetValue(final int function, final double argument) {
-        switch (function) {
-            case SIN:
-                return Math.sin(argument);
-            case COS:
-                return Math.cos(argument);
-            case TAN:
-                return Math.tan(argument);
-            case ASIN:
-                return Math.asin(argument);
-            case ACOS:
-                return Math.acos(argument);
-            case ATAN:
-                return Math.atan(argument);
-            case SQRT:
-                return Math.sqrt(argument);
-            case EXP:
-                return Math.exp(argument);
-            case LN:
-                return Math.log(argument);
-            case LOG:
-                return Math.log10(argument);
-            case LOG2:
-                return Math.log(argument) * 1.442695040888963407360;
-            default:
-                throw new EvaluationException("Invalid function id " + function + "!");
-
-        }
-    }
-
     @Override
     public Void visit(final VariableNode node) {
         if (!variable.containsKey(node.getName())) {
@@ -85,6 +55,36 @@ public final class CalculationVisitor implements ExpressionNodeVisitor<Void> {
         double operand1 = stack.pop();
         stack.push(functionGetValue(node.getFunction(), operand1));
         return null;
+    }
+
+    private static double functionGetValue(final int function, final double argument) {
+        switch (function) {
+            case SIN:
+                return Math.sin(argument);
+            case COS:
+                return Math.cos(argument);
+            case TAN:
+                return Math.tan(argument);
+            case ASIN:
+                return Math.asin(argument);
+            case ACOS:
+                return Math.acos(argument);
+            case ATAN:
+                return Math.atan(argument);
+            case SQRT:
+                return Math.sqrt(argument);
+            case EXP:
+                return Math.exp(argument);
+            case LN:
+                return Math.log(argument);
+            case LOG:
+                return Math.log10(argument);
+            case LOG2:
+                return Math.log10(argument) / Math.log10(2); // Change of base
+            default:
+                throw new EvaluationException("Invalid function id " + function + "!");
+
+        }
     }
 
     @Override
