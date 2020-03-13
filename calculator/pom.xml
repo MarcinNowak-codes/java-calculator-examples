@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>co.uk.cogitolearning</groupId>
-        <artifactId>cogpar</artifactId>
+        <artifactId>cogito-calculator</artifactId>
         <version>0.1.0-SNAPSHOT</version>
     </parent>
 
