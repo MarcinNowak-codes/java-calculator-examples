@@ -36,7 +36,7 @@ public class EvaluationException extends RuntimeException {
      *
      * @param message the message containing the cause of the exception
      */
-    EvaluationException(String message) {
+    EvaluationException(final String message) {
         super(message);
     }
 }

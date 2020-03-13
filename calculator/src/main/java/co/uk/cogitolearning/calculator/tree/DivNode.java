@@ -24,32 +24,31 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
  * An ExpressionNode that handles divisions. The node can hold
  * an two number of factors that are divided.
  */
+@Getter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
 public final class DivNode implements ExpressionNode {
-    public final ExpressionNode numerator;
-    public final ExpressionNode denominator;
-
     /**
-     * Constructor to create a multiplication with the first term already added.
-     *
-     * @param numerator   division numerator
-     * @param denominator division denominator
+     * Division numerator.
      */
-    public DivNode(ExpressionNode numerator, ExpressionNode denominator) {
-        this.numerator = numerator;
-        this.denominator = denominator;
-    }
+    private final ExpressionNode numerator;
+    /**
+     * Division denominator.
+     */
+    private final ExpressionNode denominator;
 
     @Override
-    public void accept(ExpressionNodeVisitor visitor) {
+    public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);
     }
 

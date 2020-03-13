@@ -14,10 +14,9 @@ public class ParserTest {
     @Test
     public void shouldParseAdd2() {
         // Given
-        Parser parser = new Parser();
 
         // When
-        ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
+        ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
                 new Token(Token.NUMBER, "1", 0),
                 new Token(Token.PLUS, "+", 1),
                 new Token(Token.NUMBER, "2", 2))));
@@ -31,10 +30,9 @@ public class ParserTest {
     @Test
     public void shouldParseAdd3() {
         // Given
-        Parser parser = new Parser();
 
         // When
-        ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
+        ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
                 new Token(Token.NUMBER, "1", 0),
                 new Token(Token.PLUS, "+", 1),
                 new Token(Token.NUMBER, "2", 2),
@@ -52,10 +50,9 @@ public class ParserTest {
     @Test
     public void shouldParseSub2() {
         // Given
-        Parser parser = new Parser();
 
         // When
-        ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
+        ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
                 new Token(Token.NUMBER, "3", 0),
                 new Token(Token.MINUS, "-", 1),
                 new Token(Token.NUMBER, "1", 2))));
@@ -69,10 +66,9 @@ public class ParserTest {
     @Test
     public void shouldParseSub3() {
         // Given
-        Parser parser = new Parser();
 
         // When
-        ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
+        ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
                 new Token(Token.NUMBER, "6", 0),
                 new Token(Token.MINUS, "-", 1),
                 new Token(Token.NUMBER, "2", 2),
@@ -90,11 +86,10 @@ public class ParserTest {
     @Test
     public void shouldParseExtended() {
         // Given
-        Parser parser = new Parser();
 
         // When
         // 6*(3+sin(3.1415/2))^5
-        ExpressionNode tree = parser.parse(new LinkedList<>(Arrays.asList(
+        ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
                 new Token(Token.NUMBER, "6", 0),
                 new Token(Token.MULT, "*", 1),
                 new Token(Token.OPEN_BRACKET, "(", 2),

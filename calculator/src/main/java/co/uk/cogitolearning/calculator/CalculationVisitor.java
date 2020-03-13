@@ -1,20 +1,38 @@
 package co.uk.cogitolearning.calculator;
 
 
-import co.uk.cogitolearning.calculator.tree.*;
+import co.uk.cogitolearning.calculator.tree.AdditionNode;
+import co.uk.cogitolearning.calculator.tree.ConstantNode;
+import co.uk.cogitolearning.calculator.tree.DivNode;
+import co.uk.cogitolearning.calculator.tree.ExponentiationNode;
+import co.uk.cogitolearning.calculator.tree.ExpressionNodeVisitor;
+import co.uk.cogitolearning.calculator.tree.FunctionNode;
+import co.uk.cogitolearning.calculator.tree.MultiplicationNode;
+import co.uk.cogitolearning.calculator.tree.SubtractionNode;
+import co.uk.cogitolearning.calculator.tree.VariableNode;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.*;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.ACOS;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.ASIN;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.ATAN;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.COS;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.EXP;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.LN;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.LOG;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.LOG2;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.SIN;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.SQRT;
+import static co.uk.cogitolearning.calculator.tree.FunctionNode.TAN;
 
-public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
+public final class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     private final Stack<Double> stack = new Stack<>();
 
     private final Map<String, Double> variable = new HashMap<>();
 
-    private static double functionGetValue(int function, double argument) {
+    private static double functionGetValue(final int function, final double argument) {
         switch (function) {
             case SIN:
                 return Math.sin(argument);
@@ -35,7 +53,7 @@ public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
             case LN:
                 return Math.log(argument);
             case LOG:
-                return Math.log(argument) * 0.43429448190325182765;
+                return Math.log10(argument);
             case LOG2:
                 return Math.log(argument) * 1.442695040888963407360;
             default:
@@ -44,34 +62,39 @@ public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
         }
     }
 
-    public Void visit(VariableNode node) {
-        if (!variable.containsKey(node.name))
-            throw new EvaluationException("Variable '" + node.name + "' was not initialized.");
+    @Override
+    public Void visit(final VariableNode node) {
+        if (!variable.containsKey(node.getName())) {
+            throw new EvaluationException("Variable '" + node.getName() + "' was not initialized.");
+        }
 
-        stack.push(variable.get(node.name));
+        stack.push(variable.get(node.getName()));
         return null;
     }
 
-    public Void visit(ExponentiationNode node) {
+    @Override
+    public Void visit(final ExponentiationNode node) {
         double base = stack.pop();
         double exponent = stack.pop();
         stack.push(Math.pow(base, exponent));
         return null;
     }
 
-    public Void visit(FunctionNode node) {
+    @Override
+    public Void visit(final FunctionNode node) {
         double operand1 = stack.pop();
-        stack.push(functionGetValue(node.function, operand1));
-        return null;
-    }
-
-    public Void visit(ConstantNode node) {
-        stack.push(node.value);
+        stack.push(functionGetValue(node.getFunction(), operand1));
         return null;
     }
 
     @Override
-    public Void visit(AdditionNode node) {
+    public Void visit(final ConstantNode node) {
+        stack.push(node.getValue());
+        return null;
+    }
+
+    @Override
+    public Void visit(final AdditionNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
 
@@ -80,7 +103,7 @@ public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(SubtractionNode node) {
+    public Void visit(final SubtractionNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
 
@@ -89,7 +112,7 @@ public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(MultiplicationNode node) {
+    public Void visit(final MultiplicationNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         stack.push(operand1 * operand2);
@@ -97,15 +120,14 @@ public class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     }
 
     @Override
-    public Void visit(DivNode node) {
+    public Void visit(final DivNode node) {
         double operand1 = stack.pop();
         double operand2 = stack.pop();
         stack.push(operand1 / operand2);
         return null;
     }
 
-
-    public void addVariable(String name, Double value) {
+    public void addVariable(final String name, final Double value) {
         this.variable.put(name, value);
     }
 

@@ -33,22 +33,22 @@ package co.uk.cogitolearning.calculator.tree;
  */
 public interface ExpressionNodeVisitor<T> {
     /**
-     * Visit a VariableExpressionNode
+     * Visit a VariableExpressionNode.
      */
     T visit(VariableNode node);
 
     /**
-     * Visit a ConstantExpressionNode
+     * Visit a ConstantExpressionNode.
      */
     T visit(ConstantNode node);
 
     /**
-     * Visit a ExponentiationExpressionNode
+     * Visit a ExponentiationExpressionNode.
      */
     T visit(ExponentiationNode node);
 
     /**
-     * Visit a FunctionExpressionNode
+     * Visit a FunctionExpressionNode.
      */
     T visit(FunctionNode node);
 

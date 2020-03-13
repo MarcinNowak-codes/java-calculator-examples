@@ -25,7 +25,9 @@
 package co.uk.cogitolearning.calculator.tree;
 
 import co.uk.cogitolearning.calculator.ParserException;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
@@ -33,54 +35,56 @@ import lombok.ToString;
  * <p>
  * Some pre-defined functions are handled, others can easily be added.
  */
+@Getter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
 public final class FunctionNode implements ExpressionNode {
     /**
-     * function id for the sin function
+     * Function id for the sin function.
      */
     public static final int SIN = 1;
     /**
-     * function id for the cos function
+     * Function id for the cos function.
      */
     public static final int COS = 2;
     /**
-     * function id for the tan function
+     * Function id for the tan function.
      */
     public static final int TAN = 3;
 
     /**
-     * function id for the asin function
+     * Function id for the asin function.
      */
     public static final int ASIN = 4;
     /**
-     * function id for the acos function
+     * Function id for the acos function.
      */
     public static final int ACOS = 5;
     /**
-     * function id for the atan function
+     * Function id for the atan function.
      */
     public static final int ATAN = 6;
 
     /**
-     * function id for the sqrt function
+     * Function id for the sqrt function.
      */
     public static final int SQRT = 7;
     /**
-     * function id for the exp function
+     * Function id for the exp function.
      */
     public static final int EXP = 8;
 
     /**
-     * function id for the ln function
+     * Function id for the ln function.
      */
     public static final int LN = 9;
     /**
-     * function id for the log function
+     * Function id for the log function.
      */
     public static final int LOG = 10;
     /**
-     * function id for the log2 function
+     * Function id for the log2 function.
      */
     public static final int LOG2 = 11;
 
@@ -90,25 +94,14 @@ public final class FunctionNode implements ExpressionNode {
     public static final String SIN_COS_TAN_ASIN_ACOS_ATAN_SQRT_EXP_LN_LOG_LOG_2 = "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
 
     /**
-     * the id of the function to apply to the argument
+     * The id of the function to apply to the argument.
      */
-    public final int function;
+    private final int function;
 
     /**
-     * the argument of the function
+     * The argument of the function.
      */
-    public final ExpressionNode argument;
-
-    /**
-     * Construct a function by id and argument.
-     *
-     * @param function the id of the function to apply
-     * @param argument the argument of the function
-     */
-    public FunctionNode(int function, ExpressionNode argument) {
-        this.function = function;
-        this.argument = argument;
-    }
+    private final ExpressionNode argument;
 
     /**
      * Converts a string to a function id.
@@ -118,7 +111,7 @@ public final class FunctionNode implements ExpressionNode {
      * @param function the name of the function
      * @return the id of the function
      */
-    public static int stringToFunction(String function) {
+    public static int stringToFunction(final String function) {
         switch (function) {
             case "sin":
                 return FunctionNode.SIN;
@@ -148,7 +141,7 @@ public final class FunctionNode implements ExpressionNode {
     }
 
     @Override
-    public void accept(ExpressionNodeVisitor visitor) {
+    public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);
     }
 

@@ -24,32 +24,31 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
 
 /**
  * An ExpressionNode that handles multiplications and divisions. The node can hold
  * an arbitrary number of factors that are either multiplied or divided to the product.
  */
+@Getter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
 public final class MultiplicationNode implements ExpressionNode {
-    public final ExpressionNode multiplicand;
-    public final ExpressionNode multiplier;
-
     /**
-     * Constructor to create a multiplication with the first term already added.
-     *
-     * @param multiplicand multiplication multiplicand
-     * @param multiplier   multiplicand multiplier
+     * Multiplication multiplicand.
      */
-    public MultiplicationNode(ExpressionNode multiplicand, ExpressionNode multiplier) {
-        this.multiplicand = multiplicand;
-        this.multiplier = multiplier;
-    }
+    private final ExpressionNode multiplicand;
+    /**
+     * Multiplicand multiplier.
+     */
+    private final ExpressionNode multiplier;
 
     @Override
-    public void accept(ExpressionNodeVisitor visitor) {
+    public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);
     }
 

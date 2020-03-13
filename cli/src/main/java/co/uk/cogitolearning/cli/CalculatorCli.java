@@ -3,18 +3,22 @@ package co.uk.cogitolearning.cli;
 import co.uk.cogitolearning.calculator.Calculator;
 import co.uk.cogitolearning.calculator.EvaluationException;
 import co.uk.cogitolearning.calculator.ParserException;
+import lombok.experimental.UtilityClass;
 
 /**
- * Command line interface for calculator
+ * Command line interface for calculator.
  */
+@UtilityClass
 public class CalculatorCli {
     /**
-     * The main method to test the functionality of the parser
+     * The main method to test the functionality of the parser.
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
 
         String expresion = "2*(1+sin(0.5 * pi))^2"; //=8  with pi/2 is problem because DivExpressionNode was introduced. Parser has to be fixed.
-        if (args.length > 0) expresion = args[0];
+        if (args.length > 0) {
+            expresion = args[0];
+        }
 
         try {
             Calculator calculator = new Calculator()
