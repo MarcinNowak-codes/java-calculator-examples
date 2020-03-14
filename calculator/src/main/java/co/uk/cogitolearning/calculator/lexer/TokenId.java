@@ -1,5 +1,8 @@
 package co.uk.cogitolearning.calculator.lexer;
 
+/**
+ * Handled token identifiers.
+ */
 public enum TokenId {
     /**
      * Token id for the epsilon terminal.
