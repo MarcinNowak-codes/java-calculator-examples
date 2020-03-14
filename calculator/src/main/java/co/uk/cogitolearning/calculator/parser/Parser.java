@@ -8,6 +8,7 @@ import co.uk.cogitolearning.calculator.tree.ConstantNode;
 import co.uk.cogitolearning.calculator.tree.DivNode;
 import co.uk.cogitolearning.calculator.tree.ExponentiationNode;
 import co.uk.cogitolearning.calculator.tree.ExpressionNode;
+import co.uk.cogitolearning.calculator.tree.FunctionId;
 import co.uk.cogitolearning.calculator.tree.FunctionNode;
 import co.uk.cogitolearning.calculator.tree.MultiplicationNode;
 import co.uk.cogitolearning.calculator.tree.SubtractionNode;
@@ -52,9 +53,8 @@ public class Parser {
                     break;
                 case CLOSE_BRACKET:
                     break;
-
                 case FUNCTION:
-                    int function = FunctionNode.stringToFunction(token.getSequence());
+                    FunctionId function = stringToFunction(token.getSequence());
                     nodes.push(new FunctionNode(function, parse(tokens)));
                     break;
                 case DIV:
@@ -107,5 +107,42 @@ public class Parser {
             internals.add(token);
         }
         throw new ParserException("Closing bracket is missing");
+    }
+
+    /**
+     * Converts a string to a function id.
+     *
+     * <p>If the function is not found this method throws an error.
+     *
+     * @param function the name of the function
+     * @return the id of the function
+     */
+    private static FunctionId stringToFunction(final String function) {
+        switch (function) {
+            case "sin":
+                return FunctionId.SIN;
+            case "cos":
+                return FunctionId.COS;
+            case "tan":
+                return FunctionId.TAN;
+            case "asin":
+                return FunctionId.ASIN;
+            case "acos":
+                return FunctionId.ACOS;
+            case "atan":
+                return FunctionId.ATAN;
+            case "sqrt":
+                return FunctionId.SQRT;
+            case "exp":
+                return FunctionId.EXP;
+            case "ln":
+                return FunctionId.LN;
+            case "log":
+                return FunctionId.LOG;
+            case "log2":
+                return FunctionId.LOG2;
+            default:
+                throw new ParserException("Unexpected Function " + function + " found");
+        }
     }
 }

@@ -36,7 +36,7 @@ public class CalculatorTest {
         VariableNode pi = new VariableNode("pi");
         DivNode halfPi = new DivNode(pi, new ConstantNode(2));
 
-        FunctionNode sin = new FunctionNode(FunctionNode.SIN, halfPi);
+        FunctionNode sin = new FunctionNode(FunctionId.SIN, halfPi);
         AdditionNode braces = new AdditionNode(new ConstantNode(3), sin);
         ExponentiationNode exponent = new ExponentiationNode(braces, new ConstantNode(5));
         MultiplicationNode root = new MultiplicationNode(five, exponent);

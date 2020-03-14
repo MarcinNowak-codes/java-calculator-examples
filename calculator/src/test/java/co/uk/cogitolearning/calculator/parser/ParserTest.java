@@ -110,7 +110,7 @@ public class ParserTest {
         // Then
         MultiplicationNode expected;
         DivNode div = new DivNode(new ConstantNode(Math.PI), new ConstantNode(2.0));
-        FunctionNode sin = new FunctionNode(FunctionNode.SIN, div);
+        FunctionNode sin = new FunctionNode(FunctionId.SIN, div);
         AdditionNode base = new AdditionNode(new ConstantNode(3.0), sin);
         ExponentiationNode exp = new ExponentiationNode(base, new ConstantNode(5.0));
 
