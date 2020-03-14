@@ -1,6 +1,7 @@
 package co.uk.cogitolearning.calculator.parser;
 
 import co.uk.cogitolearning.calculator.lexer.Token;
+import co.uk.cogitolearning.calculator.lexer.TokenId;
 import co.uk.cogitolearning.calculator.tree.*;
 import org.junit.Test;
 
@@ -17,9 +18,9 @@ public class ParserTest {
 
         // When
         ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
-                new Token(Token.NUMBER, "1", 0),
-                new Token(Token.PLUS, "+", 1),
-                new Token(Token.NUMBER, "2", 2))));
+                new Token(TokenId.NUMBER, "1", 0),
+                new Token(TokenId.PLUS, "+", 1),
+                new Token(TokenId.NUMBER, "2", 2))));
 
         // Then
         AdditionNode node = new AdditionNode(new ConstantNode(1.0), new ConstantNode(2.0));
@@ -33,11 +34,11 @@ public class ParserTest {
 
         // When
         ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
-                new Token(Token.NUMBER, "1", 0),
-                new Token(Token.PLUS, "+", 1),
-                new Token(Token.NUMBER, "2", 2),
-                new Token(Token.PLUS, "+", 3),
-                new Token(Token.NUMBER, "3", 4)
+                new Token(TokenId.NUMBER, "1", 0),
+                new Token(TokenId.PLUS, "+", 1),
+                new Token(TokenId.NUMBER, "2", 2),
+                new Token(TokenId.PLUS, "+", 3),
+                new Token(TokenId.NUMBER, "3", 4)
         )));
 
         // Then
@@ -53,9 +54,9 @@ public class ParserTest {
 
         // When
         ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
-                new Token(Token.NUMBER, "3", 0),
-                new Token(Token.MINUS, "-", 1),
-                new Token(Token.NUMBER, "1", 2))));
+                new Token(TokenId.NUMBER, "3", 0),
+                new Token(TokenId.MINUS, "-", 1),
+                new Token(TokenId.NUMBER, "1", 2))));
 
         // Then
         SubtractionNode node = new SubtractionNode(new ConstantNode(3.0), new ConstantNode(1.0));
@@ -69,11 +70,11 @@ public class ParserTest {
 
         // When
         ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
-                new Token(Token.NUMBER, "6", 0),
-                new Token(Token.MINUS, "-", 1),
-                new Token(Token.NUMBER, "2", 2),
-                new Token(Token.MINUS, "-", 3),
-                new Token(Token.NUMBER, "3", 4)
+                new Token(TokenId.NUMBER, "6", 0),
+                new Token(TokenId.MINUS, "-", 1),
+                new Token(TokenId.NUMBER, "2", 2),
+                new Token(TokenId.MINUS, "-", 3),
+                new Token(TokenId.NUMBER, "3", 4)
         )));
 
         // Then
@@ -90,20 +91,20 @@ public class ParserTest {
         // When
         // 6*(3+sin(3.1415/2))^5
         ExpressionNode tree = Parser.parse(new LinkedList<>(Arrays.asList(
-                new Token(Token.NUMBER, "6", 0),
-                new Token(Token.MULT, "*", 1),
-                new Token(Token.OPEN_BRACKET, "(", 2),
-                new Token(Token.NUMBER, "3", 3),
-                new Token(Token.PLUS, "+", 4),
-                new Token(Token.FUNCTION, "sin", 5),
-                new Token(Token.OPEN_BRACKET, "(", 8),
-                new Token(Token.NUMBER, Double.toString(Math.PI), 9),
-                new Token(Token.DIV, "/", 15),
-                new Token(Token.NUMBER, "2", 16),
-                new Token(Token.CLOSE_BRACKET, ")", 17),
-                new Token(Token.CLOSE_BRACKET, ")", 18),
-                new Token(Token.RAISED, "^", 19),
-                new Token(Token.NUMBER, "5", 20)
+                new Token(TokenId.NUMBER, "6", 0),
+                new Token(TokenId.MULT, "*", 1),
+                new Token(TokenId.OPEN_BRACKET, "(", 2),
+                new Token(TokenId.NUMBER, "3", 3),
+                new Token(TokenId.PLUS, "+", 4),
+                new Token(TokenId.FUNCTION, "sin", 5),
+                new Token(TokenId.OPEN_BRACKET, "(", 8),
+                new Token(TokenId.NUMBER, Double.toString(Math.PI), 9),
+                new Token(TokenId.DIV, "/", 15),
+                new Token(TokenId.NUMBER, "2", 16),
+                new Token(TokenId.CLOSE_BRACKET, ")", 17),
+                new Token(TokenId.CLOSE_BRACKET, ")", 18),
+                new Token(TokenId.RAISED, "^", 19),
+                new Token(TokenId.NUMBER, "5", 20)
         )));
 
         // Then

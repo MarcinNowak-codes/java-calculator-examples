@@ -46,53 +46,9 @@ import java.io.Serializable;
 public class Token implements Serializable {
     private static final long serialVersionUID = -1009747984332258567L;
     /**
-     * Token id for the epsilon terminal.
-     */
-    public static final int EPSILON = 0;
-    /**
-     * Token id for plus.
-     */
-    public static final int PLUS = 1;
-    /**
-     * Token id for multiplication.
-     */
-    public static final int MULT = 2;
-    /**
-     * Token id for the exponentiation symbol.
-     */
-    public static final int RAISED = 3;
-    /**
-     * Token id for function names.
-     */
-    public static final int FUNCTION = 4;
-    /**
-     * Token id for opening brackets.
-     */
-    public static final int OPEN_BRACKET = 5;
-    /**
-     * Token id for closing brackets.
-     */
-    public static final int CLOSE_BRACKET = 6;
-    /**
-     * Token id for numbers.
-     */
-    public static final int NUMBER = 7;
-    /**
-     * Token id for variable names.
-     */
-    public static final int VARIABLE = 8;
-    /**
-     * Token id for division.
-     */
-    public static final int DIV = 9;
-    /**
-     * Token id for minus.
-     */
-    public static final int MINUS = 10;
-    /**
      * The token identifier.
      */
-    private final int tokenId;
+    private final TokenId tokenId;
     /**
      * The string that the token was created from.
      */

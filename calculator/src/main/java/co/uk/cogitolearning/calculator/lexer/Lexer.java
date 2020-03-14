@@ -57,7 +57,7 @@ public final class Lexer {
         /**
          * The token id that the regular expression is linked to.
          */
-        private final int token;
+        private final TokenId token;
     }
 
     /**
@@ -107,19 +107,19 @@ public final class Lexer {
     private static Lexer create() {
         Lexer lexer = new Lexer();
 
-        lexer.add("[+]", Token.PLUS);
-        lexer.add("[-]", Token.MINUS);
-        lexer.add("[*]", Token.MULT);
-        lexer.add("[/]", Token.DIV);
-        lexer.add("\\^", Token.RAISED);
+        lexer.add("[+]", TokenId.PLUS);
+        lexer.add("[-]", TokenId.MINUS);
+        lexer.add("[*]", TokenId.MULT);
+        lexer.add("[/]", TokenId.DIV);
+        lexer.add("\\^", TokenId.RAISED);
 
         String funcs = FunctionNode.SIN_COS_TAN_ASIN_ACOS_ATAN_SQRT_EXP_LN_LOG_LOG_2;
-        lexer.add("(" + funcs + ")(?!\\w)", Token.FUNCTION);
+        lexer.add("(" + funcs + ")(?!\\w)", TokenId.FUNCTION);
 
-        lexer.add("\\(", Token.OPEN_BRACKET);
-        lexer.add("\\)", Token.CLOSE_BRACKET);
-        lexer.add("(?:\\d+\\.?|\\.\\d)\\d*(?:[Ee][-+]?\\d+)?", Token.NUMBER);
-        lexer.add("[a-zA-Z]\\w*", Token.VARIABLE);
+        lexer.add("\\(", TokenId.OPEN_BRACKET);
+        lexer.add("\\)", TokenId.CLOSE_BRACKET);
+        lexer.add("(?:\\d+\\.?|\\.\\d)\\d*(?:[Ee][-+]?\\d+)?", TokenId.NUMBER);
+        lexer.add("[a-zA-Z]\\w*", TokenId.VARIABLE);
 
         return lexer;
     }
@@ -130,7 +130,7 @@ public final class Lexer {
      * @param regex the regular expression to match against
      * @param token the token id that the regular expression is linked to
      */
-    public void add(final String regex, final int token) {
+    public void add(final String regex, final TokenId token) {
         tokenInfos.add(new TokenInfo(Pattern.compile("^(" + regex + ")"), token));
     }
 
