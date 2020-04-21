@@ -6,6 +6,7 @@ import co.uk.cogitolearning.calculator.tree.ConstantNode;
 import co.uk.cogitolearning.calculator.tree.DivNode;
 import co.uk.cogitolearning.calculator.tree.ExponentiationNode;
 import co.uk.cogitolearning.calculator.tree.ExpressionNodeVisitor;
+import co.uk.cogitolearning.calculator.tree.FunctionId;
 import co.uk.cogitolearning.calculator.tree.FunctionNode;
 import co.uk.cogitolearning.calculator.tree.MultiplicationNode;
 import co.uk.cogitolearning.calculator.tree.SubtractionNode;
@@ -14,18 +15,6 @@ import co.uk.cogitolearning.calculator.tree.VariableNode;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
-
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.ACOS;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.ASIN;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.ATAN;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.COS;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.EXP;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.LN;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.LOG;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.LOG2;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.SIN;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.SQRT;
-import static co.uk.cogitolearning.calculator.tree.FunctionNode.TAN;
 
 public final class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     private final Stack<Double> stack = new Stack<>();
@@ -53,12 +42,12 @@ public final class CalculationVisitor implements ExpressionNodeVisitor<Void> {
     @Override
     public Void visit(final FunctionNode node) {
         double operand1 = stack.pop();
-        stack.push(functionGetValue(node.getFunction(), operand1));
+        stack.push(calculateFunction(node.getFunctionId(), operand1));
         return null;
     }
 
-    private static double functionGetValue(final int function, final double argument) {
-        switch (function) {
+    private static double calculateFunction(final FunctionId functionId, final double argument) {
+        switch (functionId) {
             case SIN:
                 return Math.sin(argument);
             case COS:
@@ -82,7 +71,7 @@ public final class CalculationVisitor implements ExpressionNodeVisitor<Void> {
             case LOG2:
                 return Math.log10(argument) / Math.log10(2); // Change of base
             default:
-                throw new EvaluationException("Invalid function id " + function + "!");
+                throw new EvaluationException("Invalid function id " + functionId + "!");
 
         }
     }
