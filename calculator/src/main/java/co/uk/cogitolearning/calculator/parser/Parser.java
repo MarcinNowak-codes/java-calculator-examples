@@ -33,6 +33,8 @@ public class Parser {
                 case NUMBER:
                     nodes.push(new ConstantNode(Double.parseDouble(token.getSequence())));
                     break;
+                case EPSILON:
+                    break;
                 case PLUS:
                     ExpressionNode left = nodes.pop();
                     ExpressionNode right = parse(tokens);
@@ -118,31 +120,19 @@ public class Parser {
      * @return the id of the function
      */
     private static FunctionId stringToFunction(final String function) {
-        switch (function) {
-            case "sin":
-                return FunctionId.SIN;
-            case "cos":
-                return FunctionId.COS;
-            case "tan":
-                return FunctionId.TAN;
-            case "asin":
-                return FunctionId.ASIN;
-            case "acos":
-                return FunctionId.ACOS;
-            case "atan":
-                return FunctionId.ATAN;
-            case "sqrt":
-                return FunctionId.SQRT;
-            case "exp":
-                return FunctionId.EXP;
-            case "ln":
-                return FunctionId.LN;
-            case "log":
-                return FunctionId.LOG;
-            case "log2":
-                return FunctionId.LOG2;
-            default:
-                throw new ParserException("Unexpected Function " + function + " found");
-        }
+        return switch (function) {
+            case "sin" -> FunctionId.SIN;
+            case "cos" -> FunctionId.COS;
+            case "tan" -> FunctionId.TAN;
+            case "asin" -> FunctionId.ASIN;
+            case "acos" -> FunctionId.ACOS;
+            case "atan" -> FunctionId.ATAN;
+            case "sqrt" -> FunctionId.SQRT;
+            case "exp" -> FunctionId.EXP;
+            case "ln" -> FunctionId.LN;
+            case "log" -> FunctionId.LOG;
+            case "log2" -> FunctionId.LOG2;
+            default -> throw new ParserException("Unexpected Function " + function + " found");
+        };
     }
 }
