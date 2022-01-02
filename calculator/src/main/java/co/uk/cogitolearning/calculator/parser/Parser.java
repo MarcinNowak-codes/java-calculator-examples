@@ -29,9 +29,9 @@ public class Parser {
 
         while (!tokens.isEmpty()) {
             Token token = tokens.remove(0);
-            switch (token.getTokenId()) {
+            switch (token.tokenId()) {
                 case NUMBER:
-                    nodes.push(new ConstantNode(Double.parseDouble(token.getSequence())));
+                    nodes.push(new ConstantNode(Double.parseDouble(token.sequence())));
                     break;
                 case EPSILON:
                     break;
@@ -56,7 +56,7 @@ public class Parser {
                 case CLOSE_BRACKET:
                     break;
                 case FUNCTION:
-                    FunctionId function = stringToFunction(token.getSequence());
+                    FunctionId function = stringToFunction(token.sequence());
                     nodes.push(new FunctionNode(function, parse(tokens)));
                     break;
                 case DIV:
@@ -70,10 +70,10 @@ public class Parser {
                     nodes.push(new ExponentiationNode(expr, exponent));
                     break;
                 case VARIABLE:
-                    nodes.push(new VariableNode(token.getSequence()));
+                    nodes.push(new VariableNode(token.sequence()));
                     break;
                 default:
-                    throw new UnsupportedOperationException("Not supported: " + token.getTokenId());
+                    throw new UnsupportedOperationException("Not supported: " + token.tokenId());
             }
 
         }
@@ -83,7 +83,7 @@ public class Parser {
     private static ExpressionNode lookaheadMinus(final List<Token> tokens) {
         assert !tokens.isEmpty();
 
-        if (tokens.get(0).getTokenId() == TokenId.NUMBER) {
+        if (tokens.get(0).tokenId() == TokenId.NUMBER) {
             return parse(new LinkedList<>(Collections.singletonList(tokens.remove(0))));
         }
         return parse(tokens);
@@ -94,15 +94,15 @@ public class Parser {
         List<Token> internals = new LinkedList<>();
         while (!tokens.isEmpty()) {
             Token token = tokens.remove(0);
-            if (token.getTokenId() == TokenId.CLOSE_BRACKET && brackets == 0) {
+            if (token.tokenId() == TokenId.CLOSE_BRACKET && brackets == 0) {
                 return internals;
             }
 
-            if (token.getTokenId() == TokenId.CLOSE_BRACKET && brackets > 0) {
+            if (token.tokenId() == TokenId.CLOSE_BRACKET && brackets > 0) {
                 brackets--;
             }
 
-            if (token.getTokenId() == TokenId.OPEN_BRACKET) {
+            if (token.tokenId() == TokenId.OPEN_BRACKET) {
                 brackets++;
             }
 
