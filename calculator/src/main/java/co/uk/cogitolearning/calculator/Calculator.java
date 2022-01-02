@@ -56,7 +56,7 @@ public final class Calculator {
                     double operand2 = stack.pop();
                     stack.push(operand1 + operand2);
                 }
-                case ConstantNode no -> stack.push(no.getValue());
+                case ConstantNode no -> stack.push(no.value());
                 case DivNode no -> {
                     double operand1 = stack.pop();
                     double operand2 = stack.pop();
@@ -69,7 +69,7 @@ public final class Calculator {
                 }
                 case FunctionNode no -> {
                     double operand1 = stack.pop();
-                    stack.push(calculateFunction(no.getFunctionId(), operand1));
+                    stack.push(calculateFunction(no.functionId(), operand1));
                 }
                 case MultiplicationNode no -> {
                     double operand1 = stack.pop();
@@ -82,10 +82,10 @@ public final class Calculator {
                     stack.push(operand1 - operand2);
                 }
                 case VariableNode no -> {
-                    if (!variable.containsKey(no.getName())) {
-                        throw new EvaluationException("Variable '" + no.getName() + "' was not initialized.");
+                    if (!variable.containsKey(no.name())) {
+                        throw new EvaluationException("Variable '" + no.name() + "' was not initialized.");
                     }
-                    stack.push(variable.get(no.getName()));
+                    stack.push(variable.get(no.name()));
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + node);
             }
