@@ -50,46 +50,23 @@ public final class Calculator {
         final Stack<Double> stack = new Stack<>();
 
         for (ExpressionNode node : list) {
-            switch (node) {
-                case AdditionNode no -> {
-                    double operand1 = stack.pop();
-                    double operand2 = stack.pop();
-                    stack.push(operand1 + operand2);
-                }
+            var result = switch (node) {
+                case AdditionNode no -> stack.pop() + (double) stack.pop();
                 case ConstantNode no -> stack.push(no.value());
-                case DivNode no -> {
-                    double operand1 = stack.pop();
-                    double operand2 = stack.pop();
-                    stack.push(operand1 / operand2);
-                }
-                case ExponentiationNode no -> {
-                    double base = stack.pop();
-                    double exponent = stack.pop();
-                    stack.push(Math.pow(base, exponent));
-                }
-                case FunctionNode no -> {
-                    double operand1 = stack.pop();
-                    stack.push(calculateFunction(no.functionId(), operand1));
-                }
-                case MultiplicationNode no -> {
-                    double operand1 = stack.pop();
-                    double operand2 = stack.pop();
-                    stack.push(operand1 * operand2);
-                }
-                case SubtractionNode no -> {
-                    double operand1 = stack.pop();
-                    double operand2 = stack.pop();
-                    stack.push(operand1 - operand2);
-                }
+                case DivNode no -> stack.pop() / (double) stack.pop();
+                case ExponentiationNode no -> Math.pow(stack.pop(), stack.pop());
+                case FunctionNode no -> calculateFunction(no.functionId(), stack.pop());
+                case MultiplicationNode no -> stack.pop() * (double) stack.pop();
+                case SubtractionNode no -> stack.pop() - (double) stack.pop();
                 case VariableNode no -> {
                     if (!variable.containsKey(no.name())) {
                         throw new EvaluationException("Variable '" + no.name() + "' was not initialized.");
                     }
-                    stack.push(variable.get(no.name()));
+                    yield variable.get(no.name());
                 }
                 default -> throw new IllegalStateException("Unexpected value: " + node);
-            }
-
+            };
+            stack.push(result);
         }
 
         return stack.pop();
