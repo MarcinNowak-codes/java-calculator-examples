@@ -108,7 +108,6 @@ public final class Calculator {
             case LN -> Math.log(argument);
             case LOG -> Math.log10(argument);
             case LOG2 -> Math.log10(argument) / Math.log10(2); // Change of base
-            default -> throw new EvaluationException("Invalid function id " + functionId + "!");
         };
     }
 

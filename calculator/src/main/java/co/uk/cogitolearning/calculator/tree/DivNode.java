@@ -26,7 +26,7 @@ package co.uk.cogitolearning.calculator.tree;
 
 /**
  * An ExpressionNode that handles divisions. The node can hold
- * an two number of factors that are divided.
+ * two number of factors that are divided.
  */
 public record DivNode(ExpressionNode numerator,
                       ExpressionNode denominator) implements ExpressionNode {
