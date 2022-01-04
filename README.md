@@ -14,7 +14,11 @@ This project is example calculator implementation with:
 * Iterator
 * Visitor
 * Composite
-* Pattern matching in Java 17
+* Singleton
+* Records in Java 16
+* Sealed Classes in Java 17
+* Pattern Matching in Java 17 (preview)
+* Guarded Pattern in Java 17 (preview)
 
 ## Change added
 
