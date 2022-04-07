@@ -71,7 +71,7 @@ public class ParserException extends RuntimeException {
     public String getMessage() {
         String msg = super.getMessage();
         if (token != null) {
-            msg = msg.replace("%s", token.getSequence());
+            msg = msg.replace("%s", token.sequence());
         }
         return msg;
     }

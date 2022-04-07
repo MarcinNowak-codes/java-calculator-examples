@@ -7,14 +7,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
-public class CalculatorTest {
+class CalculatorTest {
     @Test
-    public void shouldCalculateSimpleOperation() {
+    void shouldCalculateSimpleOperation() {
         // (2+3)*4
         ConstantNode two = new ConstantNode(2);
         ConstantNode three = new ConstantNode(3);
@@ -23,12 +24,11 @@ public class CalculatorTest {
         AdditionNode sum = new AdditionNode(two, three);
         MultiplicationNode multi = new MultiplicationNode(sum, four);
 
-        CalculationVisitor visitor = new CalculationVisitor();
-        assertEquals(20.0, Calculator.calculateTree(multi, visitor), 0.1);
+        assertEquals(20.0, Calculator.calculateTree(multi, Map.of()), 0.1);
     }
 
     @Test
-    public void shouldCalculateExtendedCalculation() {
+    void shouldCalculateExtendedCalculation() {
 
         // String exprstr = "6*(3+sin(pi/2))^5"; //=6144
         ConstantNode five = new ConstantNode(6);
@@ -41,14 +41,12 @@ public class CalculatorTest {
         ExponentiationNode exponent = new ExponentiationNode(braces, new ConstantNode(5));
         MultiplicationNode root = new MultiplicationNode(five, exponent);
 
-        CalculationVisitor visitor = new CalculationVisitor();
-        visitor.addVariable("pi", Math.PI);
-        assertEquals(6144.0, Calculator.calculateTree(root, visitor), 0.1);
+        assertEquals(6144.0, Calculator.calculateTree(root, Map.of("pi", Math.PI)), 0.1);
     }
 
     @ParameterizedTest
     @MethodSource("stringIntAndListProvider")
-    public void shouldParse(String expresion, double expected) {
+    void shouldParse(String expresion, double expected) {
         // given
         Calculator calculator = new Calculator()
                 .withVariable("pi", Math.PI);
@@ -75,7 +73,7 @@ public class CalculatorTest {
 
     @Disabled
     @Test
-    public void shouldParseRump() {
+    void shouldParseRump() {
         // https://books.google.pl/books?id=fZsXBgAAQBAJ&pg=PA179&lpg=PA179&dq=floating+point+error+ibm+format&source=bl&ots=MI5qlHzp51&sig=ACfU3U1lp8FThhWkCmk3erU9ShJGavLl3Q&hl=en&sa=X&ved=2ahUKEwjdm8XH4JLoAhUwSBUIHUxsCiUQ6AEwEHoECAoQAQ#v=onepage&q&f=false
         // x=77617, y=33096
         // given

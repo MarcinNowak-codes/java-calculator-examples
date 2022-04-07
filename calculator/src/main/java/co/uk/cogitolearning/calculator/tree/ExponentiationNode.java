@@ -24,29 +24,12 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * An ExpressionNode that handles exponentiation. The node holds
- * a base and an exponent and calulates base^exponent
+ * a base and an exponent
  */
-@Getter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-public final class ExponentiationNode implements ExpressionNode {
-    /**
-     * The node containing the base.
-     */
-    private final ExpressionNode base;
-    /**
-     * The node containing the exponent.
-     */
-    private final ExpressionNode exponent;
-
+public record ExponentiationNode(ExpressionNode base,
+                                 ExpressionNode exponent) implements ExpressionNode {
     @Override
     public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);

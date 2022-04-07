@@ -24,36 +24,18 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * An ExpressionNode that handles mathematical functions.
  *
  * <p>Some pre-defined functions are handled, others can easily be added.
  */
-@Getter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-public final class FunctionNode implements ExpressionNode {
+public record FunctionNode(FunctionId functionId,
+                           ExpressionNode argument) implements ExpressionNode {
 
     /**
      * Consists a string with all the function names concatenated by a | symbol.
      */
     public static final String SIN_COS_TAN_ASIN_ACOS_ATAN_SQRT_EXP_LN_LOG_LOG_2 = "sin|cos|tan|asin|acos|atan|sqrt|exp|ln|log|log2";
-
-    /**
-     * The id of the function to apply to the argument.
-     */
-    private final FunctionId functionId;
-
-    /**
-     * The argument of the function.
-     */
-    private final ExpressionNode argument;
 
     @Override
     public void accept(final ExpressionNodeVisitor visitor) {

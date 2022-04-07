@@ -31,7 +31,9 @@ import java.util.Iterator;
  *
  * <p>Every concrete type of expression node has to implement this interface.
  */
-public interface ExpressionNode extends Iterable<ExpressionNode> {
+public sealed interface ExpressionNode extends Iterable<ExpressionNode>
+        permits AdditionNode, ConstantNode, DivNode, ExponentiationNode, FunctionNode,
+        MultiplicationNode, SubtractionNode, VariableNode {
     /**
      * Method needed for the visitor design pattern but not iterate on child node.
      *

@@ -24,24 +24,10 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * An ExpressionNode that stores a constant value.
  */
-@Getter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-public final class ConstantNode implements ExpressionNode {
-    /**
-     * The value of the constant.
-     */
-    private final double value;
-
+public record ConstantNode(double value) implements ExpressionNode {
     @Override
     public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);

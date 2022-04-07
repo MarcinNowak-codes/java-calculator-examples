@@ -26,44 +26,72 @@ package co.uk.cogitolearning.calculator;
 
 import co.uk.cogitolearning.calculator.lexer.Lexer;
 import co.uk.cogitolearning.calculator.parser.Parser;
-import co.uk.cogitolearning.calculator.tree.ExpressionNode;
+import co.uk.cogitolearning.calculator.tree.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 public final class Calculator {
 
-    private final CalculationVisitor visitor = new CalculationVisitor();
+    private final Map<String, Double> variables = new HashMap<>();
 
-    static double calculateTree(final ExpressionNode expr, final CalculationVisitor visitor) {
+    static double calculateTree(final ExpressionNode expr, Map<String, Double> variable) {
         ArrayList<ExpressionNode> polishNotationList = new ArrayList<>();
 
         for (ExpressionNode node : expr) {
             polishNotationList.add(node);
         }
-        return calculatePolishNotation(polishNotationList, visitor);
+        return calculatePolishNotation(polishNotationList, variable);
     }
 
-    private static double calculatePolishNotation(final ArrayList<ExpressionNode> list, final CalculationVisitor visitor) {
+    private static double calculatePolishNotation(final ArrayList<ExpressionNode> list, Map<String, Double> variable) {
         // https://en.wikipedia.org/wiki/Polish_notation
         Collections.reverse(list); // Scan the given prefix expression from right to left
 
+        final Stack<Double> stack = new Stack<>();
+
         for (ExpressionNode node : list) {
-            node.accept(visitor);
+            var result = switch (node) {
+                case AdditionNode no -> stack.pop() + (double) stack.pop();
+                case ConstantNode no -> stack.push(no.value()); //TODO: Looking forward for Deconstruction Pattern in Java
+                case DivNode no -> stack.pop() / (double) stack.pop();
+                case ExponentiationNode no -> Math.pow(stack.pop(), stack.pop());
+                case FunctionNode no -> calculateFunction(no.functionId(), stack.pop());
+                case MultiplicationNode no -> stack.pop() * (double) stack.pop();
+                case SubtractionNode no -> stack.pop() - (double) stack.pop();
+                case VariableNode no && variable.containsKey(no.name()) -> variable.get(no.name());
+                case VariableNode no -> throw new EvaluationException("Variable '%s' was not initialized.".formatted(no.name()));
+            };
+            stack.push(result);
         }
 
-        return visitor.getValue();
+        return stack.pop();
+    }
+
+    public static double calculateFunction(final FunctionId functionId, final double argument) {
+        return switch (functionId) {
+            case SIN -> Math.sin(argument);
+            case COS -> Math.cos(argument);
+            case TAN -> Math.tan(argument);
+            case ASIN -> Math.asin(argument);
+            case ACOS -> Math.acos(argument);
+            case ATAN -> Math.atan(argument);
+            case SQRT -> Math.sqrt(argument);
+            case EXP -> Math.exp(argument);
+            case LN -> Math.log(argument);
+            case LOG -> Math.log10(argument);
+            case LOG2 -> Math.log10(argument) / Math.log10(2); // Change of base
+        };
     }
 
     public double calculate(final String expresion) {
         Lexer lexer = Lexer.getInstance();
         lexer.tokenize(expresion);
         ExpressionNode expr = Parser.parse(lexer.getTokens());
-        return calculateTree(expr, visitor);
+        return calculateTree(expr, variables);
     }
 
     public Calculator withVariable(final String variable, final double value) {
-        visitor.addVariable(variable, value);
+        variables.put(variable, value);
         return this;
     }
 }

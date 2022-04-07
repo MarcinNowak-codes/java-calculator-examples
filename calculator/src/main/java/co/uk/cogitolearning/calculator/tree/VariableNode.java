@@ -24,24 +24,10 @@
 
 package co.uk.cogitolearning.calculator.tree;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
 /**
  * An ExpressionNode that stores a named variable.
  */
-@Getter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-public final class VariableNode implements ExpressionNode {
-    /**
-     * The name of the variable.
-     */
-    private final String name;
-
+public record VariableNode(String name) implements ExpressionNode {
     @Override
     public void accept(final ExpressionNodeVisitor visitor) {
         visitor.visit(this);

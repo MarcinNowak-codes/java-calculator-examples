@@ -48,47 +48,47 @@ final class ExpressionNodeIterator implements Iterator<ExpressionNode> {
         @Override
         public Void visit(final ExponentiationNode node) {
             list.add(node);
-            node.getBase().accept(this);
-            node.getExponent().accept(this);
+            node.base().accept(this);
+            node.exponent().accept(this);
             return null;
         }
 
         @Override
         public Void visit(final FunctionNode node) {
             list.add(node);
-            node.getArgument().accept(this);
+            node.argument().accept(this);
             return null;
         }
 
         @Override
         public Void visit(final AdditionNode node) {
             list.add(node);
-            node.getAddendLeft().accept(this);
-            node.getAddendRight().accept(this);
+            node.addendLeft().accept(this);
+            node.addendRight().accept(this);
             return null;
         }
 
         @Override
         public Void visit(final SubtractionNode node) {
             list.add(node);
-            node.getMinuend().accept(this);
-            node.getSubtrahend().accept(this);
+            node.minuend().accept(this);
+            node.subtrahend().accept(this);
             return null;
         }
 
         @Override
         public Void visit(final MultiplicationNode node) {
             list.add(node);
-            node.getMultiplicand().accept(this);
-            node.getMultiplier().accept(this);
+            node.multiplicand().accept(this);
+            node.multiplier().accept(this);
             return null;
         }
 
         @Override
         public Void visit(final DivNode node) {
             list.add(node);
-            node.getNumerator().accept(this);
-            node.getDenominator().accept(this);
+            node.numerator().accept(this);
+            node.denominator().accept(this);
             return null;
         }
     }

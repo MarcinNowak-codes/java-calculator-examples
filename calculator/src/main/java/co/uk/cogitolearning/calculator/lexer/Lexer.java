@@ -26,8 +26,6 @@ package co.uk.cogitolearning.calculator.lexer;
 
 import co.uk.cogitolearning.calculator.ParserException;
 import co.uk.cogitolearning.calculator.tree.FunctionNode;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -47,17 +45,7 @@ public final class Lexer {
     /**
      * Internal class holding the information about a token type.
      */
-    @Getter
-    @AllArgsConstructor
-    private static class TokenInfo {
-        /**
-         * The regular expression to match against.
-         */
-        private final Pattern regex;
-        /**
-         * The token id that the regular expression is linked to.
-         */
-        private final TokenId token;
+    private record TokenInfo(Pattern regex, TokenId token) {
     }
 
     /**
@@ -65,12 +53,12 @@ public final class Lexer {
      *
      * <p>Each token type corresponds to one entry in the list
      */
-    private LinkedList<TokenInfo> tokenInfos;
+    private final LinkedList<TokenInfo> tokenInfos;
 
     /**
      * The list of tokens produced when tokenizing the input.
      */
-    private LinkedList<Token> tokens;
+    private final LinkedList<Token> tokens;
 
     /**
      * A tokenizer that can handle mathematical expressions.

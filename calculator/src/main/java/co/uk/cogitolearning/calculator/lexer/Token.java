@@ -24,12 +24,6 @@
 
 package co.uk.cogitolearning.calculator.lexer;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
-
-import java.io.Serializable;
 
 /**
  * A token that is produced by Tokenizer and fed into Parser.parse
@@ -39,23 +33,5 @@ import java.io.Serializable;
  *
  * <p>The token id must be one of a number of pre-defined values
  */
-@Getter
-@ToString
-@EqualsAndHashCode
-@AllArgsConstructor
-public class Token implements Serializable {
-    private static final long serialVersionUID = -1009747984332258567L;
-    /**
-     * The token identifier.
-     */
-    private final TokenId tokenId;
-    /**
-     * The string that the token was created from.
-     */
-    private final String sequence;
-    /**
-     * The position of the token in the input string.
-     */
-    private final int pos;
-
+public record Token(TokenId tokenId, String sequence, int pos) {
 }

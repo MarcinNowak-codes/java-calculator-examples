@@ -15,9 +15,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <junit.jupiter.version>5.5.2</junit.jupiter.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <junit.jupiter.version>5.8.2</junit.jupiter.version>
 
     </properties>
 
@@ -29,15 +29,15 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.14.0</version>
+            <version>3.21.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
-      			<groupId>org.junit.jupiter</groupId>
-      			<artifactId>junit-jupiter</artifactId>
-      			<version>${junit.jupiter.version}</version>
-      			<scope>test</scope>
-      		</dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -47,13 +47,13 @@
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-runner</artifactId>
-            <version>1.5.2</version>
+            <version>1.8.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>1.18.22</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -73,11 +73,14 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.0</version>
+                    <version>3.8.1</version>
+                    <configuration>
+                        <compilerArgs>--enable-preview</compilerArgs>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.22.1</version>
+                    <version>3.0.0-M5</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>

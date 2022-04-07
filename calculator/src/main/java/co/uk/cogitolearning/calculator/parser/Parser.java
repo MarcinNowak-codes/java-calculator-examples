@@ -29,9 +29,11 @@ public class Parser {
 
         while (!tokens.isEmpty()) {
             Token token = tokens.remove(0);
-            switch (token.getTokenId()) {
+            switch (token.tokenId()) {
                 case NUMBER:
-                    nodes.push(new ConstantNode(Double.parseDouble(token.getSequence())));
+                    nodes.push(new ConstantNode(Double.parseDouble(token.sequence())));
+                    break;
+                case EPSILON:
                     break;
                 case PLUS:
                     ExpressionNode left = nodes.pop();
@@ -54,7 +56,7 @@ public class Parser {
                 case CLOSE_BRACKET:
                     break;
                 case FUNCTION:
-                    FunctionId function = stringToFunction(token.getSequence());
+                    FunctionId function = stringToFunction(token.sequence());
                     nodes.push(new FunctionNode(function, parse(tokens)));
                     break;
                 case DIV:
@@ -68,10 +70,10 @@ public class Parser {
                     nodes.push(new ExponentiationNode(expr, exponent));
                     break;
                 case VARIABLE:
-                    nodes.push(new VariableNode(token.getSequence()));
+                    nodes.push(new VariableNode(token.sequence()));
                     break;
                 default:
-                    throw new UnsupportedOperationException("Not supported: " + token.getTokenId());
+                    throw new UnsupportedOperationException("Not supported: " + token.tokenId());
             }
 
         }
@@ -81,7 +83,7 @@ public class Parser {
     private static ExpressionNode lookaheadMinus(final List<Token> tokens) {
         assert !tokens.isEmpty();
 
-        if (tokens.get(0).getTokenId() == TokenId.NUMBER) {
+        if (tokens.get(0).tokenId() == TokenId.NUMBER) {
             return parse(new LinkedList<>(Collections.singletonList(tokens.remove(0))));
         }
         return parse(tokens);
@@ -92,15 +94,15 @@ public class Parser {
         List<Token> internals = new LinkedList<>();
         while (!tokens.isEmpty()) {
             Token token = tokens.remove(0);
-            if (token.getTokenId() == TokenId.CLOSE_BRACKET && brackets == 0) {
+            if (token.tokenId() == TokenId.CLOSE_BRACKET && brackets == 0) {
                 return internals;
             }
 
-            if (token.getTokenId() == TokenId.CLOSE_BRACKET && brackets > 0) {
+            if (token.tokenId() == TokenId.CLOSE_BRACKET && brackets > 0) {
                 brackets--;
             }
 
-            if (token.getTokenId() == TokenId.OPEN_BRACKET) {
+            if (token.tokenId() == TokenId.OPEN_BRACKET) {
                 brackets++;
             }
 
@@ -118,31 +120,19 @@ public class Parser {
      * @return the id of the function
      */
     private static FunctionId stringToFunction(final String function) {
-        switch (function) {
-            case "sin":
-                return FunctionId.SIN;
-            case "cos":
-                return FunctionId.COS;
-            case "tan":
-                return FunctionId.TAN;
-            case "asin":
-                return FunctionId.ASIN;
-            case "acos":
-                return FunctionId.ACOS;
-            case "atan":
-                return FunctionId.ATAN;
-            case "sqrt":
-                return FunctionId.SQRT;
-            case "exp":
-                return FunctionId.EXP;
-            case "ln":
-                return FunctionId.LN;
-            case "log":
-                return FunctionId.LOG;
-            case "log2":
-                return FunctionId.LOG2;
-            default:
-                throw new ParserException("Unexpected Function " + function + " found");
-        }
+        return switch (function) {
+            case "sin" -> FunctionId.SIN;
+            case "cos" -> FunctionId.COS;
+            case "tan" -> FunctionId.TAN;
+            case "asin" -> FunctionId.ASIN;
+            case "acos" -> FunctionId.ACOS;
+            case "atan" -> FunctionId.ATAN;
+            case "sqrt" -> FunctionId.SQRT;
+            case "exp" -> FunctionId.EXP;
+            case "ln" -> FunctionId.LN;
+            case "log" -> FunctionId.LOG;
+            case "log2" -> FunctionId.LOG2;
+            default -> throw new ParserException("Unexpected Function " + function + " found");
+        };
     }
 }
