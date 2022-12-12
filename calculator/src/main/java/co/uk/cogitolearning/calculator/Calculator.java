@@ -52,14 +52,14 @@ public final class Calculator {
         for (ExpressionNode node : list) {
             var result = switch (node) {
                 case AdditionNode no -> stack.pop() + (double) stack.pop();
-                case ConstantNode no -> stack.push(no.value()); //TODO: Looking forward for Deconstruction Pattern in Java
+                case ConstantNode(double value) -> stack.push(value);
                 case DivNode no -> stack.pop() / (double) stack.pop();
                 case ExponentiationNode no -> Math.pow(stack.pop(), stack.pop());
-                case FunctionNode no -> calculateFunction(no.functionId(), stack.pop());
+                case FunctionNode(FunctionId functionId, ExpressionNode argument) -> calculateFunction(functionId, stack.pop());
                 case MultiplicationNode no -> stack.pop() * (double) stack.pop();
                 case SubtractionNode no -> stack.pop() - (double) stack.pop();
-                case VariableNode no && variable.containsKey(no.name()) -> variable.get(no.name());
-                case VariableNode no -> throw new EvaluationException("Variable '%s' was not initialized.".formatted(no.name()));
+                case VariableNode(String name) when variable.containsKey(name) -> variable.get(name);
+                case VariableNode(String name) -> throw new EvaluationException("Variable '%s' was not initialized.".formatted(name));
             };
             stack.push(result);
         }
