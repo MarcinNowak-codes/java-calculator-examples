@@ -1,19 +1,45 @@
 package co.uk.cogitolearning.calculator;
 
-import co.uk.cogitolearning.calculator.tree.*;
+import co.uk.cogitolearning.calculator.tree.AdditionNode;
+import co.uk.cogitolearning.calculator.tree.ConstantNode;
+import co.uk.cogitolearning.calculator.tree.DivNode;
+import co.uk.cogitolearning.calculator.tree.ExponentiationNode;
+import co.uk.cogitolearning.calculator.tree.FunctionId;
+import co.uk.cogitolearning.calculator.tree.FunctionNode;
+import co.uk.cogitolearning.calculator.tree.MultiplicationNode;
+import co.uk.cogitolearning.calculator.tree.VariableNode;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Map;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class CalculatorTest {
+    @Test
+    void shouldCalculateSumOperation() {
+        // (2+3)
+        ConstantNode two = new ConstantNode(2);
+        ConstantNode three = new ConstantNode(3);
+
+        AdditionNode sum = new AdditionNode(two, three);
+
+        assertEquals(5.0, Calculator.calculateTree(sum, Map.of()), 0.1);
+    }
+
+    @Test
+    void shouldCalculateMultiplicationOperation() {
+        // (2*3)
+        ConstantNode two = new ConstantNode(2);
+        ConstantNode three = new ConstantNode(3);
+
+        MultiplicationNode multi = new MultiplicationNode(two, three);
+
+        assertEquals(6.0, Calculator.calculateTree(multi, Map.of()), 0.1);
+    }
+
     @Test
     void shouldCalculateSimpleOperation() {
         // (2+3)*4
@@ -45,30 +71,27 @@ class CalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("stringIntAndListProvider")
-    void shouldParse(String expresion, double expected) {
+    @CsvSource({
+            //         expression,            expected
+            "   2*(1+sin(pi/2))^2,                 8.0",
+            "                 3-1,                 2.0",
+            "               4-1-2,                 1.0",
+            "         4-sin(pi/2),                 3.0",
+            "       4-1-sin(pi/2),                 2.0",
+            "                4-pi,  0.8584073464102069",
+            "              5-1-pi,  0.8584073464102069",
+            "             log2(2),                 1.0",
+            "             log(10),                 1.0",
+            "               1+2+3,                 6.0",
+    })
+    void shouldParse(String expression, double expected) {
         // given
         Calculator calculator = new Calculator()
                 .withVariable("pi", Math.PI);
         // when
-        double value = calculator.calculate(expresion);
+        double value = calculator.calculate(expression);
         // then
         assertEquals(expected, value, 0.00001);
-    }
-
-    static Stream<Arguments> stringIntAndListProvider() {
-        return Stream.of(
-                arguments("2*(1+sin(pi/2))^2", 8),
-                arguments("3-1", 3 - 1),
-                arguments("4-1-2", 4 - 1 - 2),
-                arguments("4-sin(pi/2)", 4 - Math.sin(Math.PI / 2)),
-                arguments("4-1-sin(pi/2)", 4 - 1 - Math.sin(Math.PI / 2)),
-                arguments("4-pi", 4 - Math.PI),
-                arguments("5-1-pi", 5 - 1 - Math.PI),
-                arguments("log2(2)", 1.0),
-                arguments("log(10)", 1.0),
-                arguments("1+2+3", 1.0 + 2.0 + 3.0)
-        );
     }
 
     @Disabled

@@ -3,17 +3,17 @@ package co.uk.cogitolearning.calculator.parser;
 import co.uk.cogitolearning.calculator.lexer.Token;
 import co.uk.cogitolearning.calculator.lexer.TokenId;
 import co.uk.cogitolearning.calculator.tree.*;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ParserTest {
+class ParserTest {
 
     @Test
-    public void shouldParseAdd2() {
+    void shouldParseAdd2() {
         // Given
 
         // When
@@ -29,7 +29,7 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldParseAdd3() {
+    void shouldParseAdd3() {
         // Given
 
         // When
@@ -49,7 +49,7 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldParseSub2() {
+    void shouldParseSub2() {
         // Given
 
         // When
@@ -65,7 +65,7 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldParseSub3() {
+    void shouldParseSub3() {
         // Given
 
         // When
@@ -85,7 +85,7 @@ public class ParserTest {
     }
 
     @Test
-    public void shouldParseExtended() {
+    void shouldParseExtended() {
         // Given
 
         // When

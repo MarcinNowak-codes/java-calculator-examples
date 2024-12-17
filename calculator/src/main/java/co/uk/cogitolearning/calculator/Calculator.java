@@ -51,13 +51,13 @@ public final class Calculator {
 
         for (ExpressionNode node : list) {
             var result = switch (node) {
-                case AdditionNode no -> stack.pop() + (double) stack.pop();
-                case ConstantNode(double value) -> stack.push(value);
-                case DivNode no -> stack.pop() / (double) stack.pop();
-                case ExponentiationNode no -> Math.pow(stack.pop(), stack.pop());
-                case FunctionNode(FunctionId functionId, ExpressionNode argument) -> calculateFunction(functionId, stack.pop());
-                case MultiplicationNode no -> stack.pop() * (double) stack.pop();
-                case SubtractionNode no -> stack.pop() - (double) stack.pop();
+                case AdditionNode _ -> stack.pop() + stack.pop();
+                case ConstantNode(double value) -> value;
+                case DivNode _ -> stack.pop() / stack.pop();
+                case ExponentiationNode _ -> Math.pow(stack.pop(), stack.pop());
+                case FunctionNode(FunctionId functionId, ExpressionNode _) -> calculateFunction(functionId, stack.pop());
+                case MultiplicationNode _ -> stack.pop() * stack.pop();
+                case SubtractionNode _ -> stack.pop() - stack.pop();
                 case VariableNode(String name) when variable.containsKey(name) -> variable.get(name);
                 case VariableNode(String name) -> throw new EvaluationException("Variable '%s' was not initialized.".formatted(name));
             };
@@ -67,7 +67,7 @@ public final class Calculator {
         return stack.pop();
     }
 
-    public static double calculateFunction(final FunctionId functionId, final double argument) {
+    private static double calculateFunction(final FunctionId functionId, final double argument) {
         return switch (functionId) {
             case SIN -> Math.sin(argument);
             case COS -> Math.cos(argument);
@@ -83,9 +83,9 @@ public final class Calculator {
         };
     }
 
-    public double calculate(final String expresion) {
+    public double calculate(final String expression) {
         Lexer lexer = Lexer.getInstance();
-        lexer.tokenize(expresion);
+        lexer.tokenize(expression);
         ExpressionNode expr = Parser.parse(lexer.getTokens());
         return calculateTree(expr, variables);
     }

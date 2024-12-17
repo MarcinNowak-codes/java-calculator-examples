@@ -1,13 +1,14 @@
 package co.uk.cogitolearning.calculator.lexer;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LexerTest {
+class LexerTest {
 
     @Test
-    public void tokenizeAdd() {
+    void tokenizeAdd() {
         // Given
         Lexer lexer = Lexer.getInstance();
         // When
@@ -20,7 +21,7 @@ public class LexerTest {
     }
 
     @Test
-    public void tokenizeAdd3() {
+    void tokenizeAdd3() {
         // Given
         Lexer lexer = Lexer.getInstance();
         // When
@@ -35,7 +36,7 @@ public class LexerTest {
     }
 
     @Test
-    public void tokenizeSub3() {
+    void tokenizeSub3() {
         // Given
         Lexer lexer = Lexer.getInstance();
         // When
@@ -50,7 +51,7 @@ public class LexerTest {
     }
 
     @Test
-    public void tokenizeExtended() {
+    void tokenizeExtended() {
         // Given
         Lexer lexer = Lexer.getInstance();
         // When
@@ -75,7 +76,7 @@ public class LexerTest {
     }
 
     @Test
-    public void tokenizeExtendedVariable() {
+    void tokenizeExtendedVariable() {
         // Given
         Lexer lexer = Lexer.getInstance();
         // When
